@@ -65,7 +65,7 @@ function create() {
 
     for (var i = 0; i < 12; i++)
     {
-        var star = stars.create(i * 70, 0, 'star');
+        var star = stars.create(Math.random()*game.world.width, Math.random()*game.world.height, 'star');
         star.body.gravity.y = 100;
         star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
