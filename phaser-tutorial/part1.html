@@ -87,10 +87,14 @@ function create() {
 function updateCounter() {
 	if (timeLeft > 0) {
 		timeLeft += -1;
-		timeLeftText.text = 'Time left: ' + timeLeft + ' seconds';
+		updateTextDisplay(timeLeftText);
 	} else {
 		player.kill();
 	}
+}
+
+function updateTextDisplay(timeLeftText) {
+	timeLeftText.text = 'Time left: ' + timeLeft + ' seconds';
 }
 
 function collectStar (player, star) {
@@ -100,6 +104,7 @@ function collectStar (player, star) {
     scoreText.text = 'Score: ' + score;
     
     timeLeft += 1;
+    updateTextDisplay(timeLeftText);
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
