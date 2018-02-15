@@ -81,7 +81,7 @@ function create() {
     timer.loop(1000, updateCounter, this);
     timer.start();
     timeLeft = 10;
-    timeLeftText = game.add.text(game.world.width - 100, 16, 'Time left: 0 seconds', { fontSize: '32px', fill: '#000' });
+    timeLeftText = game.add.text(game.world.width - 400, 16, 'Time left: 0 seconds', { fontSize: '32px', fill: '#000' });
 }
 
 function updateCounter() {
@@ -99,7 +99,7 @@ function collectStar (player, star) {
     score += 10;
     scoreText.text = 'Score: ' + score;
     
-    timeLeft += 10;
+    timeLeft += 1;
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
