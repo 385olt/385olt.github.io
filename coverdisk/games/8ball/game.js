@@ -119,7 +119,7 @@ Pool.Game.prototype = {
 
         this.physics.p2.enable(this.table, Pool.showDebug);
 
-        this.table.body.static = false;
+        this.table.body.static = true;
         this.table.body.clearShapes();
         this.table.body.loadPolygon('table', 'pool-table-physics-shape');
 
