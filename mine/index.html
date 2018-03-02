@@ -12,6 +12,10 @@
 </head>
 <body>
 
+
+<div id="block" style="border: 3px solid gray;"></div>
+
+
 <script type="text/javascript">
 
 function precisionRound(number, precision) {
@@ -19,7 +23,7 @@ function precisionRound(number, precision) {
   return Math.round(number * factor) / factor;
 }
 
-var game = new Phaser.Game(960, 540, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(960, 540, Phaser.AUTO, 'block', { preload: preload, create: create, update: update });
 
 function preload() {
 	game.load.image('sky', 'assets/sky.png');
