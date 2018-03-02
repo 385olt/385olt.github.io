@@ -118,6 +118,8 @@ function collectStar (player, star) {
     timeDelta += -0.01;
     timeDelta = precisionRound(timeDelta, 2);
     
+    console.log(timeDelta);
+    
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
     star.body.bounce.y = 0.7 + Math.random() * 0.2;
