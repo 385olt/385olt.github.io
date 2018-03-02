@@ -103,22 +103,20 @@ function updateCounter() {
 }
 
 function updateTextDisplay(timeLeftText) {
-	timeLeftText.text = 'Time left: ' + timeLeft + ' seconds';
+	timeLeftText.text = 'Time left: ' + precisionRound(timeLeft, 2) + ' seconds';
 }
 
 function collectStar (player, star) {
     star.kill();
     
     score += 10 * timeDelta;
-    scoreText.text = 'Score: ' + score;
+    scoreText.text = 'Score: ' + precisionRound(score, 2);
     
     timeLeft += timeDelta;
     updateTextDisplay(timeLeftText);
     
     timeDelta += -0.01;
     timeDelta = precisionRound(timeDelta, 2);
-    
-    console.log(timeDelta);
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
