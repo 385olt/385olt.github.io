@@ -14,6 +14,11 @@
 
 <script type="text/javascript">
 
+function precisionRound(number, precision) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
+}
+
 var game = new Phaser.Game(960, 540, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
@@ -104,10 +109,10 @@ function updateTextDisplay(timeLeftText) {
 function collectStar (player, star) {
     star.kill();
     
-    score += 10 * timeDelta;
+    score += precisionRound(10 * timeDelta, 2);
     scoreText.text = 'Score: ' + score;
     
-    timeLeft += timeDelta;
+    timeLeft += precisionRoundtimeDelta, 2);
     updateTextDisplay(timeLeftText);
     
     timeDelta += -0.01;
