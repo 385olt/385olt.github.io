@@ -77,6 +77,8 @@ function create() {
 	
 	// ------- timer
 	
+	timeDelta = 1;
+	
 	timer = game.time.create(false);
     timer.loop(1000, updateCounter, this);
     timer.start();
@@ -100,11 +102,15 @@ function updateTextDisplay(timeLeftText) {
 function collectStar (player, star) {
     star.kill();
     
-    score += 10;
+    score += 10 * timeDelta;
     scoreText.text = 'Score: ' + score;
     
-    timeLeft += 1;
+    timeLeft += timeDelta;
     updateTextDisplay(timeLeftText);
+    
+    var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
+    star.body.gravity.y = 100;
+    star.body.bounce.y = 0.7 + Math.random() * 0.2;
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
