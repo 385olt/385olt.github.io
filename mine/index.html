@@ -130,7 +130,7 @@ function collectStar (player, star) {
     timeLeft += timeDelta;
     updateTextDisplay(timeLeftText);
     
-    timeDelta += -0.01;
+    timeDelta += -0.01 * timeDelta;
     timeDelta = precisionRound(timeDelta, 2);
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
