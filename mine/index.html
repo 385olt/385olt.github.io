@@ -95,7 +95,7 @@ function create() {
 
 function updateCounter() {
 	if (timeLeft > 0) {
-		timeLeft += -1;
+		timeLeft += (timeLeft < 1 ? -timeLeft : -1);
 		updateTextDisplay(timeLeftText);
 	} else {
 		player.kill();
