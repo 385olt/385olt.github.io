@@ -77,7 +77,7 @@ function create() {
     stars = game.add.group();
     stars.enableBody = true;
 
-    for (var i = 0; i < 20; i++)
+    for (var i = 0; i < 1; i++)
     {
         var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 80), 'star');
         star.body.gravity.y = 100;
@@ -137,7 +137,7 @@ function collectStar (player, star) {
     star.body.gravity.y = 100;
     star.body.bounce.y = 0.7 + Math.random() * 0.2;
     
-    if (score > nextStar * 25) {
+    if (score > nextStar * 50 * (1 - timeDelta)) {
 		nextStar += 1;
 		var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
 		star.body.gravity.y = 100;
