@@ -77,6 +77,8 @@ function create() {
 	
 	// ------- timer
 	
+	nextHundred = 1;
+	
 	timeDelta = 1;
 	
 	timer = game.time.create(false);
@@ -108,13 +110,18 @@ function collectStar (player, star) {
     timeLeft += timeDelta;
     updateTextDisplay(timeLeftText);
     
-    var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
-    star.body.gravity.y = 100;
-    star.body.bounce.y = 0.7 + Math.random() * 0.2;
+    timeDelta += -0.01;
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
     star.body.bounce.y = 0.7 + Math.random() * 0.2;
+    
+    if (score > nextHundred * 100) {
+		nextHundred += 1;
+		var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
+		star.body.gravity.y = 100;
+		star.body.bounce.y = 0.7 + Math.random() * 0.2;
+	}
 }
 
 function update() {
