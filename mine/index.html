@@ -96,7 +96,7 @@ function create() {
 	timeDelta = 1;
 	
 	timer = game.time.create(false);
-    timer.loop(10, updateCounter, this);
+    timer.loop(100, updateCounter, this);
     timer.start();
     timeLeft = 10;
     timeLeftText = game.add.text(game.world.width - 400, 16, 'Time left: 0 seconds', { fontSize: '32px', fill: '#000' });
@@ -104,7 +104,7 @@ function create() {
 
 function updateCounter() {
 	if (timeLeft > 0) {
-		timeLeft += -0.01;
+		timeLeft += -0.1;
 		timeLeft = precisionRound(timeLeft, 2);
 		
 		if (timeLeft < 0) {
