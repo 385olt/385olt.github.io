@@ -40,8 +40,10 @@ function create() {
     ground.body.immovable = true;
     ground = platforms.create(400, game.world.height - 32, 'ground');
     ground.body.immovable = true;
+    ground = platforms.create(800, game.world.height - 32, 'ground');
+    ground.body.immovable = true;
     
-    var ledge = platforms.create(400, 450, 'ground');
+    var ledge = platforms.create(350, 650, 'ground');
     ledge.body.immovable = true;
     ledge = platforms.create(-150, 350, 'ground');
     ledge.body.immovable = true;    
@@ -49,7 +51,7 @@ function create() {
     ledge.body.immovable = true;
     ledge = platforms.create(-50, 150, 'ground');
     ledge.body.immovable = true;
-    ledge = platforms.create(game.world.width - 100, 150, 'ground');
+    ledge = platforms.create(game.world.width - 200, 150, 'ground');
     ledge.body.immovable = true;
     
     // ------ player
