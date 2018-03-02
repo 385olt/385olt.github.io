@@ -109,13 +109,14 @@ function updateTextDisplay(timeLeftText) {
 function collectStar (player, star) {
     star.kill();
     
-    score += precisionRound(10 * timeDelta, 2);
+    score += 10 * timeDelta;
     scoreText.text = 'Score: ' + score;
     
-    timeLeft += precisionRound(timeDelta, 2);
+    timeLeft += timeDelta;
     updateTextDisplay(timeLeftText);
     
     timeDelta += -0.01;
+    timeDelta = precisionRound(timeDelta, 2);
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
