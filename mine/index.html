@@ -137,7 +137,7 @@ function collectStar (player, star) {
     star.body.gravity.y = 100;
     star.body.bounce.y = 0.7 + Math.random() * 0.2;
     
-    if (score > nextStar * 50) {
+    if (score > nextStar * 25) {
 		nextStar += 1;
 		var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
 		star.body.gravity.y = 100;
