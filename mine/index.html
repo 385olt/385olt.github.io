@@ -47,7 +47,9 @@ function create() {
     ledge.body.immovable = true;
     ledge = platforms.create(-150, 400, 'ground');
     ledge.body.immovable = true;    
-    ledge = platforms.create(300, 250, 'ground');
+    ledge = platforms.create(game.world.width - 150, 400, 'ground');
+    ledge.body.immovable = true;   
+    ledge = platforms.create(300, 300, 'ground');
     ledge.body.immovable = true;
     ledge = platforms.create(-50, 150, 'ground');
     ledge.body.immovable = true;
@@ -71,7 +73,7 @@ function create() {
     stars = game.add.group();
     stars.enableBody = true;
 
-    for (var i = 0; i < 12; i++)
+    for (var i = 0; i < 20; i++)
     {
         var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 80), 'star');
         star.body.gravity.y = 100;
@@ -85,7 +87,7 @@ function create() {
 	
 	// ------- timer
 	
-	nextHundred = 1;
+	nextStar = 1;
 	
 	timeDelta = 1;
 	
@@ -125,8 +127,8 @@ function collectStar (player, star) {
     star.body.gravity.y = 100;
     star.body.bounce.y = 0.7 + Math.random() * 0.2;
     
-    if (score > nextHundred * 100) {
-		nextHundred += 1;
+    if (score > nextStar * 50) {
+		nextStar += 1;
 		var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
 		star.body.gravity.y = 100;
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
