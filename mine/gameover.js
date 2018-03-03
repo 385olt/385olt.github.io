@@ -10,8 +10,10 @@ Donate.GameOver.prototype = {
 	
 		this.add.sprite(0, 0, 'sky');
 		
-		this.add.text(this.world.width/2 - 100, this.world.height/2 - 64, 'Your score is', { font: '32pt Arial', fill: '#000' });
-		this.add.text(this.world.width/2 - 50, this.world.height/2, this.score.toString(), { font: '64pt Arial', fill: '#000' });
+		var scoreString = this.score.toString();
+		
+		this.add.text(this.world.width/2 - 120, this.world.height/2 - 64, 'Your score is', { font: '32pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 32 * scoreString.length, this.world.height/2, scoreString, { font: '64pt Arial', fill: '#000' });
 		
 	},
 	
