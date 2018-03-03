@@ -129,13 +129,13 @@ Donate.Game.prototype = {
 		this.timeLeft += this.timeDelta;
 		this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 		
-		this.timeDelta += -0.01 * this.timeDelta;
-		
 		var star = this.stars.create(Math.random()*this.world.width, Math.random()*(this.world.height - 100), 'star');
 		star.body.gravity.y = 100;
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
 		
 		if (this.score > this.nextStar * 50 * (1 - this.timeDelta)) {
+			this.timeDelta += -0.01 * this.timeDelta;	
+			
 			this.nextStar += 1;
 			var star = this.stars.create(Math.random()*this.world.width, Math.random()*(this.world.height - 100), 'star');
 			star.body.gravity.y = 100;
