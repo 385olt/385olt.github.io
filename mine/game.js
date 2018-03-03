@@ -1,9 +1,3 @@
-
-function precisionRound(number, precision) {
-  var factor = Math.pow(10, precision);
-  return Math.round(number * factor) / factor;
-}
-
 Donate.Game = function() {};
 
 Donate.Game.prototype = {
@@ -120,14 +114,10 @@ Donate.Game.prototype = {
 				this.timeLeft = 0;
 			}
 			
-			this.updateTextDisplay(this.timeLeftText);
+			this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 		} else {
-			this.player.kill();
+			this.state.start('Donate.GameOver', false, false);
 		}
-	},
-
-	updateTextDisplay: function() {
-		this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 	},
 
 	collectStar: function(player, star) {
@@ -137,7 +127,7 @@ Donate.Game.prototype = {
 		this.scoreText.text = 'Score: ' + precisionRound(this.score, 2);
 		
 		this.timeLeft += this.timeDelta;
-		this.updateTextDisplay();
+		this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 		
 		this.timeDelta += -0.01 * this.timeDelta;
 		
