@@ -17,7 +17,7 @@ Donate.Boot.prototype = {
     	this.load.image('star', 'assets/star.png');
     	this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
     
-	}
+	},
 	
 	create: function() {
 		this.state.start('Donate.Game');
