@@ -15,8 +15,8 @@ Donate.GameOver.prototype = {
 		var scoreString = precisionRound(this.score, 2).toString();
 		this.add.text(this.world.width/2 - 20 * scoreString.length, this.world.height/2 - 10, scoreString, { font: '64pt Arial', fill: '#000' });
 		
-		var restartString = "Click to restart!";
-		this.add.text(this.world.width/2 - 6 * restartString.length, this.world.height - 100, restartString, { font: '20pt Arial', fill: '#000' });
+		var restartString = "Click to restart";
+		this.add.text(this.world.width/2 - 5 * restartString.length, this.world.height - 100, restartString, { font: '20pt Arial', fill: '#000' });
 	},
 	
 	update: function() {
