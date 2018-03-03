@@ -11,7 +11,7 @@ Donate.GameOver.prototype = {
 		this.add.sprite(0, 0, 'sky');
 		
 		this.add.text(this.world.width/2 - 100, this.world.height/2 - 64, 'Your score is', { fontSize: '32px', fill: '#000' });
-		this.add.text(this.world.width/2, this.world.height/2, this.score, { fontSize: '64px', fill: '#000' });
+		this.add.text(this.world.width/2 - 50, this.world.height/2, this.score, { fontSize: '64px', fill: '#000' });
 		
 	},
 	
