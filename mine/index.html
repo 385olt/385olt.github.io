@@ -41,6 +41,8 @@
 
 var game = new Phaser.Game(960, 540, Phaser.AUTO, 'block');
 
+game.stage.backgroundColor = "#d3d3d3";
+
 game.state.add('Donate.Boot', Donate.Boot);
 game.state.add('Donate.Game', Donate.Game);
 game.state.add('Donate.GameOver', Donate.GameOver);
