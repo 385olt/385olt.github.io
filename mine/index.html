@@ -4,6 +4,11 @@
 	<meta charset="UTF-8" />
 	<title>Собираем на жену</title>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    
+    <script src="boot.js"></script>
+    <script src="game.js"></script>
+    <script src="gameover.js"></script>
+    
     <style type="text/css">
         body {
             margin: 0;
@@ -32,164 +37,13 @@
 
 <script type="text/javascript">
 
-function precisionRound(number, precision) {
-  var factor = Math.pow(10, precision);
-  return Math.round(number * factor) / factor;
-}
+var game = new Phaser.Game(960, 540, Phaser.AUTO, 'block');
 
-var game = new Phaser.Game(960, 540, Phaser.AUTO, 'block', { preload: preload, create: create, update: update });
+game.state.add('Donate.Boot', Donate.Boot);
+game.state.add('Donate.Game', Donate.Game);
+game.state.add('Donate.GameOver', Donate.GameOver);
 
-function preload() {
-	game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
-}
-
-function create() {
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    game.add.sprite(0, 0, 'sky');
-
-    platforms = game.add.group();
-    platforms.enableBody = true;
-
-    var ground = platforms.create(0, game.world.height - 32, 'ground');
-    ground.body.immovable = true;
-    ground = platforms.create(400, game.world.height - 32, 'ground');
-    ground.body.immovable = true;
-    ground = platforms.create(800, game.world.height - 32, 'ground');
-    ground.body.immovable = true;
-    
-    var ledge = platforms.create(350, 650, 'ground');
-    ledge.body.immovable = true;
-    ledge = platforms.create(-150, 400, 'ground');
-    ledge.body.immovable = true;    
-    ledge = platforms.create(game.world.width - 150, 400, 'ground');
-    ledge.body.immovable = true;   
-    ledge = platforms.create(300, 280, 'ground');
-    ledge.body.immovable = true;
-    ledge = platforms.create(-50, 150, 'ground');
-    ledge.body.immovable = true;
-    ledge = platforms.create(game.world.width - 200, 150, 'ground');
-    ledge.body.immovable = true;
-    
-    // ------ player
-    
-    player = game.add.sprite(32, game.world.height - 150, 'dude');
-
-    game.physics.arcade.enable(player);
-
-    player.body.gravity.y = 300;
-    player.body.collideWorldBounds = true;
-
-    player.animations.add('left', [0, 1, 2, 3], 10, true);
-    player.animations.add('right', [5, 6, 7, 8], 10, true);
-    
-    // ------ stars
-    
-    stars = game.add.group();
-    stars.enableBody = true;
-
-    for (var i = 0; i < 1; i++)
-    {
-        var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 80), 'star');
-        star.body.gravity.y = 100;
-        star.body.bounce.y = 0.7 + Math.random() * 0.2;
-    }
-    
-    // ------- score
-    
-    score = 0;
-	scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-	
-	// ------- timer
-	
-	nextStar = 1;
-	
-	timeDelta = 1;
-	
-	timer = game.time.create(false);
-    timer.loop(100, updateCounter, this);
-    timer.start();
-    timeLeft = 10;
-    timeLeftText = game.add.text(game.world.width - 400, 16, 'Time left: 0 seconds', { fontSize: '32px', fill: '#000' });
-}
-
-function updateCounter() {
-	if (timeLeft > 0) {
-		timeLeft += -0.1;
-		
-		if (timeLeft < 0) {
-			timeLeft = 0;
-		}
-		
-		updateTextDisplay(timeLeftText);
-	} else {
-		player.kill();
-	}
-}
-
-function updateTextDisplay(timeLeftText) {
-	timeLeftText.text = 'Time left: ' + precisionRound(timeLeft, 2) + ' seconds';
-}
-
-function collectStar (player, star) {
-    star.kill();
-    
-    score += 10 * timeDelta;
-    scoreText.text = 'Score: ' + precisionRound(score, 2);
-    
-    timeLeft += timeDelta;
-    updateTextDisplay(timeLeftText);
-    
-    timeDelta += -0.01 * timeDelta;
-    
-    var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
-    star.body.gravity.y = 100;
-    star.body.bounce.y = 0.7 + Math.random() * 0.2;
-    
-    if (score > nextStar * 50 * (1 - timeDelta)) {
-		nextStar += 1;
-		var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
-		star.body.gravity.y = 100;
-		star.body.bounce.y = 0.7 + Math.random() * 0.2;
-	}
-}
-
-function update() {
-    var hitPlatform = game.physics.arcade.collide(player, platforms);
-    game.physics.arcade.collide(stars, platforms);
-    game.physics.arcade.overlap(player, stars, collectStar, null, this);
-    
-    cursors = game.input.keyboard.createCursorKeys();
-    
-    player.body.velocity.x = 0;
-
-    if (cursors.left.isDown)
-    {
-        player.body.velocity.x = -150;
-
-        player.animations.play('left');
-    }
-    else if (cursors.right.isDown)
-    {
-        player.body.velocity.x = 150;
-
-        player.animations.play('right');
-    }
-    else
-    {
-        player.animations.stop();
-
-        player.frame = 4;
-    }
-
-    if (cursors.up.isDown && player.body.touching.down && hitPlatform)
-    {
-        player.body.velocity.y = -300;
-    }
-}
+game.state.start('Donate.Boot');
 
 </script>
 
