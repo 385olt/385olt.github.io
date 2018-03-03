@@ -39,7 +39,7 @@ Donate.Game.prototype = {
 		
 		this.player = this.add.sprite(32, this.world.height - 150, 'dude');
 
-		this.physics.arcade.enable(player);
+		this.physics.arcade.enable(this.player);
 
 		this.player.body.gravity.y = 300;
 		this.player.body.collideWorldBounds = true;
