@@ -127,14 +127,14 @@ Donate.Game.prototype = {
 	},
 
 	updateTextDisplay: function() {
-		this.timeLeftText.text = 'Time left: ' + this.precisionRound(this.timeLeft, 2) + ' seconds';
+		this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 	},
 
 	collectStar: function(star) {
 		star.kill();
 		
 		this.score += 10 * this.timeDelta;
-		this.scoreText.text = 'Score: ' + this.precisionRound(this.score, 2);
+		this.scoreText.text = 'Score: ' + precisionRound(this.score, 2);
 		
 		this.timeLeft += this.timeDelta;
 		this.updateTextDisplay();
