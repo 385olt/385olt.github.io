@@ -2,19 +2,32 @@
 <html lang="en"> 
 <head> 
 	<meta charset="UTF-8" />
-	<title>Phaser - Making your first game, part 1</title>
+	<title>Собираем на жену</title>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
     <style type="text/css">
         body {
             margin: 0;
+            background-color: #d3d3d3;
+        }
+        
+        #block {
+        	border: 3px solid gray; 
+        	width: 960px; 
+        	height: 540px; 
+        	margin: auto; 
+        	background-color: #d3d3d3;
+        }
+        
+        h1 {
+        	text-align: center;
         }
     </style>
 </head>
-<body style="background-color: #d3d3d3">
+<body>
 
-<h1 style="text-align: center;">Соберите как можно больше донатов на жену!</h1>
+<h1>Соберите как можно больше донатов на жену!</h1>
 
-<div id="block" style="border: 3px solid gray; width: 960px; height: 540px; margin: auto; background-color: #d3d3d3"></div>
+<div id="block"></div>
 
 
 <script type="text/javascript">
@@ -106,7 +119,6 @@ function create() {
 function updateCounter() {
 	if (timeLeft > 0) {
 		timeLeft += -0.1;
-		timeLeft = precisionRound(timeLeft, 2);
 		
 		if (timeLeft < 0) {
 			timeLeft = 0;
@@ -132,9 +144,6 @@ function collectStar (player, star) {
     updateTextDisplay(timeLeftText);
     
     timeDelta += -0.01 * timeDelta;
-    timeDelta = precisionRound(timeDelta, 2);
-    
-    console.log(timeDelta);
     
     var star = stars.create(Math.random()*game.world.width, Math.random()*(game.world.height - 100), 'star');
     star.body.gravity.y = 100;
