@@ -13,7 +13,7 @@ Donate.GameOver.prototype = {
 		var scoreString = this.score.toString();
 		
 		this.add.text(this.world.width/2 - 130, this.world.height/2 - 64, 'Your score is', { font: '32pt Arial', fill: '#000' });
-		this.add.text(this.world.width/2 - 16 * scoreString.length, this.world.height/2, scoreString, { font: '64pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 20 * scoreString.length, this.world.height/2, scoreString, { font: '64pt Arial', fill: '#000' });
 		
 	},
 	
