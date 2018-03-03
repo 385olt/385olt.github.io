@@ -130,7 +130,7 @@ Donate.Game.prototype = {
 		this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 	},
 
-	collectStar: function(star) {
+	collectStar: function(player, star) {
 		star.kill();
 		
 		this.score += 10 * this.timeDelta;
