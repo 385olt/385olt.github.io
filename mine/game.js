@@ -116,7 +116,7 @@ Donate.Game.prototype = {
 			
 			this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 		} else {
-			this.state.start('Donate.GameOver', false, false);
+			this.state.start('Donate.GameOver');
 		}
 	},
 
