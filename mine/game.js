@@ -116,7 +116,7 @@ Donate.Game.prototype = {
 			
 			this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 		} else {
-			this.state.start('Donate.GameOver');
+			this.state.start('Donate.GameOver', true, false, this.score);
 		}
 	},
 
@@ -134,7 +134,7 @@ Donate.Game.prototype = {
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
 		
 		if (this.score > this.nextStar * 50 * (1 - this.timeDelta)) {
-			this.timeDelta += -0.01 * this.timeDelta;	
+			this.timeDelta += -0.01;	
 			
 			this.nextStar += 1;
 			var star = this.stars.create(Math.random()*this.world.width, Math.random()*(this.world.height - 100), 'star');
