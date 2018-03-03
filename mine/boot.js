@@ -5,7 +5,7 @@ Donate.Boot = function() {};
 Donate.Boot.prototype = {
 	
 	init: function() {
-		
+		console.log('INIT FUNCTION');
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 		
 	},
