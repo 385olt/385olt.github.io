@@ -10,6 +10,8 @@ Donate.Boot.prototype = {
 	},
 	
 	preload: function() {
+		
+		game.stage.backgroundColor = "#d3d3d3";
 	
 		this.load.image('sky', 'assets/sky.png');
     	this.load.image('ground', 'assets/platform.png');
