@@ -46,12 +46,9 @@ Donate.Game.prototype = {
 		this.stars = this.add.group();
 		this.stars.enableBody = true;
 
-		for (var i = 0; i < 1; i++)
-		{
-		    var star = this.stars.create(Math.random()*this.world.width, Math.random()*(this.world.height - 80), 'star');
-		    star.body.gravity.y = 100;
-		    star.body.bounce.y = 0.7 + Math.random() * 0.2;
-		}
+		var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'star');
+		star.body.gravity.y = 100;
+		star.body.bounce.y = 0.7 + Math.random() * 0.2;
 		
 		// ------- score
 		
@@ -129,7 +126,7 @@ Donate.Game.prototype = {
 		this.timeLeft += this.timeDelta;
 		this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
 		
-		var star = this.stars.create(Math.random()*this.world.width, Math.random()*(this.world.height - 100), 'star');
+		var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
 		star.body.gravity.y = 100;
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
 		
@@ -137,7 +134,7 @@ Donate.Game.prototype = {
 			this.timeDelta += -0.01;	
 			
 			this.nextStar += 1;
-			var star = this.stars.create(Math.random()*this.world.width, Math.random()*(this.world.height - 100), 'star');
+			var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
 			star.body.gravity.y = 100;
 			star.body.bounce.y = 0.7 + Math.random() * 0.2;
 		}
