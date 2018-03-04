@@ -50,6 +50,7 @@ Donate.Game.prototype = {
 			var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'star');
 			star.body.gravity.y = 100;
 			star.body.bounce.y = 0.7 + Math.random() * 0.2;
+			star.body.collideWorldBounds = true;
 		}
 		
 		// ------- enemies
@@ -218,6 +219,7 @@ Donate.Game.prototype = {
 		var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
 		star.body.gravity.y = 100;
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
+		star.body.collideWorldBounds = true;
 		
 		if (this.score > this.nextEnemy * 1000) {
 			this.nextEnemy += 1;
@@ -240,6 +242,7 @@ Donate.Game.prototype = {
 			var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
 			star.body.gravity.y = 100;
 			star.body.bounce.y = 0.7 + Math.random() * 0.2;
+			star.body.collideWorldBounds = true;
 		}
 	}
 	
