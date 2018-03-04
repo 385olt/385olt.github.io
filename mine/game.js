@@ -104,15 +104,19 @@ Donate.Game.prototype = {
 					item.myDirection = 'stop';
 				}
 			}
+			
+			if (item.body.touching.left || item.body.touching.right) {
+				item.myDirection = item.myDirection == 'left' ? 'right' : 'left';
+			}
 						
 			if (item.myDirection == 'left') {
 			
-				item.body.velocity.x = -150;
+				item.body.velocity.x = -50;
 		    	item.animations.play('left');
 			
 			} if (item.myDirection == 'right') {
 			
-				item.body.velocity.x = 150;
+				item.body.velocity.x = 50;
 		    	item.animations.play('right');
 			
 			} else {
@@ -129,13 +133,13 @@ Donate.Game.prototype = {
 
 		if (cursors.left.isDown) {
 		
-		    this.player.body.velocity.x = -50;
+		    this.player.body.velocity.x = -150;
 
 		    this.player.animations.play('left');
 		    
 		} else if (cursors.right.isDown) {
 		
-		    this.player.body.velocity.x = 50;
+		    this.player.body.velocity.x = 150;
 
 		    this.player.animations.play('right');
 		    
