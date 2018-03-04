@@ -71,7 +71,7 @@ Donate.Game.prototype = {
 		// ------- score
 		
 		this.score = 0;
-		this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { fontSize: '32px', fill: '#000' });
 		
 		// ------- timer
 		
@@ -83,7 +83,7 @@ Donate.Game.prototype = {
 		this.timer.loop(100, this.updateCounter, this);
 		this.timer.start();
 		this.timeLeft = 10;
-		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Time left: 0 seconds', { fontSize: '32px', fill: '#000' });
+		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { fontSize: '32px', fill: '#000' });
 		
 	},
 	
@@ -190,7 +190,7 @@ Donate.Game.prototype = {
 				this.timeLeft = 0;
 			}
 			
-			this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
+			this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
 		} else {
 			this.state.start('Donate.GameOver', true, false, this.score);
 		}
@@ -200,10 +200,10 @@ Donate.Game.prototype = {
 		star.kill();
 		
 		this.score += 10 * this.timeDelta;
-		this.scoreText.text = 'Score: ' + precisionRound(this.score, 2);
+		this.scoreText.text = 'Собрано: ' + precisionRound(this.score, 2) + ' рублей';
 		
 		this.timeLeft += this.timeDelta;
-		this.timeLeftText.text = 'Time left: ' + precisionRound(this.timeLeft, 2) + ' seconds';
+		this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
 		
 		var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
 		star.body.gravity.y = 100;

@@ -10,12 +10,16 @@ Donate.GameOver.prototype = {
 	
 		this.add.sprite(0, 0, 'sky');
 		
-		this.add.text(this.world.width/2 - 125, this.world.height/2 - 80, 'Your score is', { font: '32pt Arial', fill: '#000' });
+		var scoredString = 'Собрано донатов';
+		this.add.text(this.world.width/2 - 7 * scoredString.length, this.world.height/2 - 80, scoredString, { font: '32pt Arial', fill: '#000' });
 		
 		var scoreString = precisionRound(this.score, 2).toString();
 		this.add.text(this.world.width/2 - 20 * scoreString.length, this.world.height/2 - 30, scoreString, { font: '64pt Arial', fill: '#000' });
 		
-		var restartString = "Click to restart";
+		var rubString = 'рублей';
+		this.add.text(this.world.width/2 - 7 * rubString.length, this.world.height/2, rubString, { font: '32pt Arial', fill: '#000' });
+		
+		var restartString = "Кликните или нажмите пробел чтобы начать заново";
 		this.add.text(this.world.width/2 - 5 * restartString.length, this.world.height - 100, restartString, { font: '20pt Arial', fill: '#000' });
 	},
 	
