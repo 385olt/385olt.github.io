@@ -93,7 +93,7 @@ Donate.Game.prototype = {
 		this.physics.arcade.collide(this.stars, this.platforms);
 		this.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
 		this.physics.arcade.overlap(this.player, this.enemies, this.overlapEnemy, null, this);
-		this.physics.arcade.overlap(this.enemies, this.stars, this.overlapEnemyStar, null, this);
+		this.physics.arcade.collide(this.enemies, this.stars, this.collideEnemyStar, null, this);
 		
 		this.enemies.forEach(function(item) { item.goodDirection = false; });
 		
@@ -160,7 +160,7 @@ Donate.Game.prototype = {
 		}
 	},
 	
-	overlapEnemyStar: function(enemy, star) {
+	collideEnemyStar: function(enemy, star) {
 		
 		var rnd = this.rnd.frac();
 		console.log(rnd);
