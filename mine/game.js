@@ -76,6 +76,7 @@ Donate.Game.prototype = {
 		// ------- timer
 		
 		this.nextStar = 1;
+		this.nextEnemy = 1;
 		
 		this.timeDelta = 1;
 		
@@ -208,6 +209,20 @@ Donate.Game.prototype = {
 		var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
 		star.body.gravity.y = 100;
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
+		
+		if (this.score > this.nextEnemy * 1000) {
+			this.nextEnemy += 1;
+			
+			var enemy = this.enemies.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'fem');
+			enemy.body.gravity.y = 300;
+			enemy.body.collideWorldBounds = true;
+			
+			enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+			enemy.goodDirection = true;
+			
+			enemy.animations.add('left', [0, 1, 2, 3], 10, true);
+			enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+		}
 		
 		if (this.score > this.nextStar * 50 * (1 - this.timeDelta)) {
 			this.timeDelta += -0.01;	
