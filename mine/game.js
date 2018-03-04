@@ -47,10 +47,7 @@ Donate.Game.prototype = {
 		this.stars.enableBody = true;
 		
 		for (var i = 0; i < 3; i++) {
-			var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'star');
-			star.body.gravity.y = 100;
-			star.body.bounce.y = 0.7 + Math.random() * 0.2;
-			star.body.collideWorldBounds = true;
+			this.makeStar();
 		}
 		
 		// ------- enemies
@@ -59,15 +56,7 @@ Donate.Game.prototype = {
 		this.enemies.enableBody = true;
 		
 		for (var i = 0; i < 3; i++) {
-			var enemy = this.enemies.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'fem');
-			enemy.body.gravity.y = 300;
-			enemy.body.collideWorldBounds = true;
-			
-			enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
-			enemy.goodDirection = true;
-			
-			enemy.animations.add('left', [0, 1, 2, 3], 10, true);
-			enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+			this.makeEnemy();
 		}
 		// ------- score
 		
@@ -216,34 +205,48 @@ Donate.Game.prototype = {
 		this.timeLeft += this.timeDelta;
 		this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
 		
-		var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
-		star.body.gravity.y = 100;
-		star.body.bounce.y = 0.7 + Math.random() * 0.2;
-		star.body.collideWorldBounds = true;
+		this.makeStar();
 		
-		if (this.score > this.nextEnemy * 1000) {
+		if (this.score > this.nextEnemy * 500) {
 			this.nextEnemy += 1;
-			
-			var enemy = this.enemies.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'fem');
-			enemy.body.gravity.y = 300;
-			enemy.body.collideWorldBounds = true;
-			
-			enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
-			enemy.goodDirection = true;
-			
-			enemy.animations.add('left', [0, 1, 2, 3], 10, true);
-			enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+			this.makeEnemy();
 		}
 		
 		if (this.score > this.nextStar * 50 * (1 - this.timeDelta)) {
 			this.timeDelta += -0.01;	
-			
 			this.nextStar += 1;
-			var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 100), 'star');
-			star.body.gravity.y = 100;
-			star.body.bounce.y = 0.7 + Math.random() * 0.2;
-			star.body.collideWorldBounds = true;
+			this.makeStar();
 		}
+	},
+	
+	makeStar: function(x = false, y = false) {
+		if (!x) { x = Math.random()*(this.world.width - 16); }		
+		if (!y) { y = Math.random()*(this.world.height - 100); }
+		
+		var star = this.stars.create(x, y, 'star');
+		star.body.gravity.y = 100;
+		star.body.bounce.y = 0.7 + Math.random() * 0.2;
+		star.body.collideWorldBounds = true;
+		star.body.friction = new Phaser.Point(1, 1);
+		
+		return star;
+	},
+	
+	makeEnemy: function(x = false, y = false) {
+		if (!x) { x = Math.random()*(this.world.width - 16); }		
+		if (!y) { y = Math.random()*(this.world.height - 100); }
+		
+		var enemy = this.enemies.create(x, y, 'fem');
+		enemy.body.gravity.y = 300;
+		enemy.body.collideWorldBounds = true;
+		
+		enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+		enemy.goodDirection = true;
+		
+		enemy.animations.add('left', [0, 1, 2, 3], 10, true);
+		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+	
+		return enemy;
 	}
 	
 };
