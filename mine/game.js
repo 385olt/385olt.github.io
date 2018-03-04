@@ -162,9 +162,7 @@ Donate.Game.prototype = {
 	
 	collideEnemyStar: function(enemy, star) {
 		
-		var rndaa = this.rnd.frac();
-		console.log(rndaa + ' collide');
-		if (rndaa < 0.2) {
+		if (this.rnd.frac() < 0.01) {
 			star.kill();
 		}
 		
