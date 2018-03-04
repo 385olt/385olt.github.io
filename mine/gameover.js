@@ -23,7 +23,7 @@ Donate.GameOver.prototype = {
 		
 		this.input.onDown.addOnce(this.start, this);
 		
-		if (this.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
+		if (this.input.keyboard.isDown(this.input.KeyCode.SPACEBAR)) {
 			this.start();
 		}
 		
