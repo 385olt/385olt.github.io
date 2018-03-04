@@ -31,7 +31,7 @@ Donate.Game.prototype = {
 		
 		// ------ player
 		
-		this.player = this.add.sprite(32, this.world.height - 150, 'fem');
+		this.player = this.add.sprite(32, this.world.height - 150, 'dude');
 
 		this.physics.arcade.enable(this.player);
 
