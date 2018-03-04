@@ -11,16 +11,16 @@ Donate.GameOver.prototype = {
 		this.add.sprite(0, 0, 'sky');
 		
 		var scoredString = 'Собрано';
-		this.add.text(this.world.width/2 - 8 * scoredString.length, this.world.height/2 - 80, scoredString, { font: '32pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 9 * scoredString.length, this.world.height/2 - 80, scoredString, { font: '32pt Arial', fill: '#000' });
 		
 		var scoreString = precisionRound(this.score, 2).toString();
-		this.add.text(this.world.width/2 - 20 * scoreString.length, this.world.height/2 - 40, scoreString, { font: '64pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 24 * scoreString.length, this.world.height/2 - 40, scoreString, { font: '72pt Arial', fill: '#000' });
 		
 		var rubString = 'рублей';
-		this.add.text(this.world.width/2 - 8 * rubString.length, this.world.height/2 + 20, rubString, { font: '32pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 9 * rubString.length, this.world.height/2 + 30, rubString, { font: '32pt Arial', fill: '#000' });
 		
 		var restartString = "Кликните или нажмите пробел чтобы начать заново";
-		this.add.text(this.world.width/2 - 6 * restartString.length, this.world.height - 100, restartString, { font: '20pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 7 * restartString.length, this.world.height - 100, restartString, { font: '20pt Arial', fill: '#000' });
 	},
 	
 	update: function() {
