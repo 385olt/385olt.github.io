@@ -98,7 +98,7 @@ Donate.Game.prototype = {
 		this.enemies.forEach(function(item) {
 		
 			if (!item.goodDirection) {
-				if(item.onFloor()) {
+				if(item.body.onFloor()) {
 					item.myDirection = item.myDirection == 'left' ? 'right' : 'left';
 				} else {
 					item.myDirection = 'stop';
