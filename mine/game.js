@@ -129,13 +129,13 @@ Donate.Game.prototype = {
 
 		if (cursors.left.isDown) {
 		
-		    this.player.body.velocity.x = -150;
+		    this.player.body.velocity.x = -50;
 
 		    this.player.animations.play('left');
 		    
 		} else if (cursors.right.isDown) {
 		
-		    this.player.body.velocity.x = 150;
+		    this.player.body.velocity.x = 50;
 
 		    this.player.animations.play('right');
 		    
