@@ -162,7 +162,9 @@ Donate.Game.prototype = {
 	
 	overlapEnemyStar: function(enemy, star) {
 		
-		if (this.rnd.frac() < 0.2) {
+		var rnd = this.rnd.frac();
+		console.log(rnd);
+		if (rnd < 0.2) {
 			star.kill();
 		}
 		
