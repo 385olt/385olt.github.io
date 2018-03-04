@@ -114,7 +114,7 @@ Donate.Game.prototype = {
 				item.body.velocity.x = -50;
 		    	item.animations.play('left');
 			
-			} if (item.myDirection == 'right') {
+			} else if (item.myDirection == 'right') {
 			
 				item.body.velocity.x = 50;
 		    	item.animations.play('right');
