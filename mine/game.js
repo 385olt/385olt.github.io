@@ -50,6 +50,22 @@ Donate.Game.prototype = {
 		star.body.gravity.y = 100;
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
 		
+		// ------- enemies
+		
+		this.enemies = this.add.group();
+		this.enemies.enableBody = true;
+		
+		for (var i = 0; i < 3; i++) {
+			var enemy = this.enemies.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'fem');
+			enemy.body.gravity.y = 300;
+			enemy.body.collideWorldBounds = true;
+			
+			enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+			enemy.goodDirection = true;
+			
+			enemy.animations.add('left', [0, 1, 2, 3], 10, true);
+			enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+		}
 		// ------- score
 		
 		this.score = 0;
@@ -73,7 +89,40 @@ Donate.Game.prototype = {
 		var hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
 		this.physics.arcade.collide(this.stars, this.platforms);
 		this.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
+		this.physics.arcade.overlap(this.player, this.enemies, this.overlapEnemy, null, this);
 		
+		this.enemies.forEach(function(item) { item.goodDirection = false; });
+		
+		this.physics.arcade.collide(this.enemies, this.platforms, this.collideEnemyPlatform);
+		
+		this.enemies.forEach(function(item) {
+		
+			if (!item.goodDirection) {
+				if(item.onFloor()) {
+					item.myDirection = item.myDirection == 'left' ? 'right' : 'left';
+				} else {
+					item.myDirection = 'stop';
+				}
+			}
+						
+			if (item.myDirection == 'left') {
+			
+				item.body.velocity.x = -150;
+		    	item.animations.play('left');
+			
+			} if (item.myDirection == 'right') {
+			
+				item.body.velocity.x = 150;
+		    	item.animations.play('right');
+			
+			} else {
+				item.animations.stop();
+		    	item.frame = 4;
+			}
+			
+		});
+		
+		// ----- player controls
 		var cursors = this.input.keyboard.createCursorKeys();
 		
 		this.player.body.velocity.x = 0;
@@ -101,6 +150,30 @@ Donate.Game.prototype = {
 		if (cursors.up.isDown && this.player.body.touching.down && hitPlatform) {
 		    this.player.body.velocity.y = -300;
 		}
+	},
+	
+	collideEnemyPlatform: function(enemy, platform) {
+		if (enemy.body.touching.down && platform.body.touching.up) {
+			
+			if (['left', 'right'].indexOf(enemy.myDirection) == -1) {
+				enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+			}
+			
+			if (enemy.myDirection == 'left') {
+				if (platform.body.hitTest(enemy.x - 10, enemy.y + enemy.height + 10)) {
+					enemy.goodDirection = true;
+				}
+			} else if (enemy.myDirection == 'right') {
+				if (platform.body.hitTest(enemy.x + enemy.width + 10, enemy.y + enemy.height + 10)) {
+					enemy.goodDirection = true;
+				}
+			}
+			
+		}
+	},
+	
+	overlapEnemy: function() {
+		this.state.start('Donate.GameOver', true, false, this.score);
 	},
 
 	updateCounter: function() {
