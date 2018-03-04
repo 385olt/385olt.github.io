@@ -45,10 +45,12 @@ Donate.Game.prototype = {
 		
 		this.stars = this.add.group();
 		this.stars.enableBody = true;
-
-		var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'star');
-		star.body.gravity.y = 100;
-		star.body.bounce.y = 0.7 + Math.random() * 0.2;
+		
+		for (var i = 0; i < 10; i++) {
+			var star = this.stars.create(Math.random()*(this.world.width - 16), Math.random()*(this.world.height - 80), 'star');
+			star.body.gravity.y = 100;
+			star.body.bounce.y = 0.7 + Math.random() * 0.2;
+		}
 		
 		// ------- enemies
 		
