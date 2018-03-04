@@ -105,7 +105,7 @@ Donate.Game.prototype = {
 				}
 			}
 			
-			if (item.body.touching.left || item.body.touching.right) {
+			if (item.body.onWall()) {
 				item.myDirection = item.myDirection == 'left' ? 'right' : 'left';
 			}
 						
