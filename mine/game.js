@@ -93,6 +93,7 @@ Donate.Game.prototype = {
 		this.physics.arcade.collide(this.stars, this.platforms);
 		this.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
 		this.physics.arcade.overlap(this.player, this.enemies, this.overlapEnemy, null, this);
+		this.physics.arcade.overlap(this.enemies, this.stars, this.overlapEnemyStar, null, this);
 		
 		this.enemies.forEach(function(item) { item.goodDirection = false; });
 		
@@ -157,6 +158,14 @@ Donate.Game.prototype = {
 		if (cursors.up.isDown && this.player.body.touching.down && hitPlatform) {
 		    this.player.body.velocity.y = -300;
 		}
+	},
+	
+	overlapEnemyStar: function(enemy, star) {
+		
+		if (this.rnd.frac() < 0.2) {
+			star.kill();
+		}
+		
 	},
 	
 	collideEnemyPlatform: function(enemy, platform) {
