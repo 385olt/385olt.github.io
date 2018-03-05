@@ -11,6 +11,8 @@ Donate.MainMenu.prototype = {
 		
 		this.player = this.add.sprite(this.world.width/2 - 16, this.world.height - 48, 'dude');
 		
+		this.player.scale.setTo(2, 2);
+		
 		this.physics.arcade.enable(this.player);
 
 		this.player.body.gravity.y = 300;
@@ -30,7 +32,7 @@ Donate.MainMenu.prototype = {
 		this.add.text(this.world.width/2 - 20 * subtitleString.length - 10, this.world.height/2 - 115, subtitleString, { font: '58pt Arial', fill: '#000' });
 	
 		var startString = "Кликните или нажмите пробел чтобы начать";
-		this.add.text(this.world.width/2 - 7 * startString.length, this.world.height - 100, startString, { font: '20pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 7 * startString.length, this.world.height - 200, startString, { font: '20pt Arial', fill: '#000' });
 	},
 	
 	update: function() {
