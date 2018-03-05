@@ -24,7 +24,7 @@ Donate.MainMenu.prototype = {
 		// ------- texts
 		
 		var titleString = 'ХРАБРОВ';
-		this.add.text(this.world.width/2 - 46 * titleString.length, this.world.height/2 - 200, titleString, { font: '92pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 45 * titleString.length, this.world.height/2 - 200, titleString, { font: '92pt Arial', fill: '#000' });
 		
 		var subtitleString = 'в поисках жены';
 		this.add.text(this.world.width/2 - 21 * subtitleString.length, this.world.height/2 - 120, subtitleString, { font: '58pt Arial', fill: '#000' });
