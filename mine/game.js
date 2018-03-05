@@ -227,7 +227,7 @@ Donate.Game.prototype = {
 		star.body.gravity.y = 100;
 		star.body.bounce.y = 0.7 + Math.random() * 0.2;
 		star.body.collideWorldBounds = true;
-		star.body.drag.x = 100;
+		star.body.drag.x = 50;
 		
 		return star;
 	},
