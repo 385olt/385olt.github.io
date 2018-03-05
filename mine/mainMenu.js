@@ -24,10 +24,10 @@ Donate.MainMenu.prototype = {
 		// ------- texts
 		
 		var titleString = 'ХРАБРОВ';
-		this.add.text(this.world.width/2 - 30 * titleString.length, this.world.height/2 - 200, titleString, { font: '90pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 36 * titleString.length, this.world.height/2 - 200, titleString, { font: '90pt Arial', fill: '#000' });
 		
 		var subtitleString = 'в поисках жены';
-		this.add.text(this.world.width/2 - 10 * subtitleString.length, this.world.height/2 - 120, subtitleString, { font: '60pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 20 * subtitleString.length, this.world.height/2 - 120, subtitleString, { font: '60pt Arial', fill: '#000' });
 	
 		var startString = "Кликните или нажмите пробел чтобы начать";
 		this.add.text(this.world.width/2 - 7 * startString.length, this.world.height - 100, startString, { font: '20pt Arial', fill: '#000' });
@@ -35,8 +35,8 @@ Donate.MainMenu.prototype = {
 	
 	update: function() {
 		
-		if (this.player.x < 128) 				   { this.player.myDirection = 1; }
-		if (this.player.x > this.world.width - 128) { this.player.myDirection = -1; }
+		if (this.player.x < 256) 				   { this.player.myDirection = 1; }
+		if (this.player.x > this.world.width - 256) { this.player.myDirection = -1; }
 		
 		this.player.body.velocity.x = 0;
 		
