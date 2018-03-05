@@ -50,7 +50,7 @@ Donate.MainMenu.prototype = {
 					this.player.myDirection != 0) {
 					
 			this.player.myDirection = 0;
-			this.time.events.add(Phaser.Timer.SECOND * 4, 
+			this.time.events.add(Phaser.Timer.SECOND * 2, 
 				function() { this.player.myDirection = Phaser.ArrayUtils.getRandomItem([1, -1]); }, 
 				this);
 				
