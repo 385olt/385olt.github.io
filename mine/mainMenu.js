@@ -11,7 +11,7 @@ Donate.MainMenu.prototype = {
 		
 		this.player = this.add.sprite(this.world.width/2 - 16, this.world.height - 48, 'dude');
 		
-		this.player.scale.setTo(2, 2);
+		this.player.scale.setTo(3, 3);
 		
 		this.physics.arcade.enable(this.player);
 
@@ -49,7 +49,7 @@ Donate.MainMenu.prototype = {
 		    
 		} else {
 		
-			this.player.body.velocity.x = 150 * this.player.myDirection;
+			this.player.body.velocity.x = 450 * this.player.myDirection;
 		    this.player.animations.play(this.player.myDirection == 1 ? 'right' : 'left');
 		    
 		}
