@@ -24,10 +24,10 @@ Donate.MainMenu.prototype = {
 		// ------- texts
 		
 		var titleString = 'ХРАБРОВ';
-		this.add.text(this.world.width/2 - 38 * titleString.length, this.world.height/2 - 200, titleString, { font: '90pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 40 * titleString.length, this.world.height/2 - 200, titleString, { font: '90pt Arial', fill: '#000' });
 		
 		var subtitleString = 'в поисках жены';
-		this.add.text(this.world.width/2 - 19 * subtitleString.length, this.world.height/2 - 120, subtitleString, { font: '58pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 21 * subtitleString.length, this.world.height/2 - 120, subtitleString, { font: '58pt Arial', fill: '#000' });
 	
 		var startString = "Кликните или нажмите пробел чтобы начать";
 		this.add.text(this.world.width/2 - 7 * startString.length, this.world.height - 100, startString, { font: '20pt Arial', fill: '#000' });
