@@ -70,7 +70,7 @@ Donate.Game.prototype = {
 		
 		this.timeDelta = 1;
 		
-		this.timer = game.time.create(false);
+		this.timer = this.time.create(false);
 		this.timer.loop(100, this.updateCounter, this);
 		this.timer.start();
 		this.timeLeft = 10;

@@ -37,8 +37,16 @@ Donate.MainMenu.prototype = {
 	
 	update: function() {
 		
-		if (this.player.x < 256) 				   { this.player.myDirection = 1; }
-		if (this.player.x > this.world.width - 256 - this.player.width) { this.player.myDirection = -1; }
+		if (this.player.x < 256) { 
+			this.player.myDirection = 1; 
+		} else if (this.player.x > this.world.width - 256 - this.player.width) { 
+			this.player.myDirection = -1; 
+		} else if (Math.abs(this.player.x - this.world.width/2) < 10) {
+			this.player.myDirection = 0;
+			this.time.events.add(Phaser.Timer.SECOND * 4, 
+				function() { this.player.myDirection = Phaser.ArrayUtils.getRandomItem([1, -1]); }, 
+				this);
+		}
 		
 		this.player.body.velocity.x = 0;
 		
