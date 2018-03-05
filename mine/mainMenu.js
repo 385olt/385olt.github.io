@@ -27,7 +27,7 @@ Donate.MainMenu.prototype = {
 		this.add.text(this.world.width/2 - 42 * titleString.length, this.world.height/2 - 200, titleString, { font: '92pt Arial', fill: '#000' });
 		
 		var subtitleString = 'в поисках жены';
-		this.add.text(this.world.width/2 - 21 * subtitleString.length, this.world.height/2 - 120, subtitleString, { font: '58pt Arial', fill: '#000' });
+		this.add.text(this.world.width/2 - 20 * subtitleString.length, this.world.height/2 - 110, subtitleString, { font: '58pt Arial', fill: '#000' });
 	
 		var startString = "Кликните или нажмите пробел чтобы начать";
 		this.add.text(this.world.width/2 - 7 * startString.length, this.world.height - 100, startString, { font: '20pt Arial', fill: '#000' });
