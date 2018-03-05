@@ -22,7 +22,7 @@ Donate.Boot.prototype = {
 	},
 	
 	create: function() {
-		this.state.start('Donate.Game');
+		this.state.start('Donate.MainMenu');
 	}
 	
 	

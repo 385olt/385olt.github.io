@@ -61,7 +61,7 @@ Donate.Game.prototype = {
 		// ------- score
 		
 		this.score = 0;
-		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { fontSize: '32px', fill: '#000' });
+		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { font: '32pt Arial', fill: '#000' });
 		
 		// ------- timer
 		
@@ -74,7 +74,7 @@ Donate.Game.prototype = {
 		this.timer.loop(100, this.updateCounter, this);
 		this.timer.start();
 		this.timeLeft = 10;
-		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { fontSize: '32px', fill: '#000' });
+		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { font: '32pt Arial', fill: '#000' });
 		
 	},
 	
