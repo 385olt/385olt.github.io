@@ -38,7 +38,7 @@ Donate.MainMenu.prototype = {
 	update: function() {
 		
 		if (this.player.x < 256) 				   { this.player.myDirection = 1; }
-		if (this.player.x > this.world.width - 256 - 16) { this.player.myDirection = -1; }
+		if (this.player.x > this.world.width - 256 - this.player.width) { this.player.myDirection = -1; }
 		
 		this.player.body.velocity.x = 0;
 		
