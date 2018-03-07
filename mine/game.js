@@ -181,6 +181,11 @@ Donate.Game.prototype = {
 	
 	collideEnemy: function(player, enemy) {
 		if (player.body.touching.down && enemy.body.touching.up) {
+			
+			if (enemy.starsKilled <= 0) {
+				return;
+			}
+			
 			var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
 			var star = this.makeStar(enemy.x + enemy.width/2 + rndDirection, enemy.y + enemy.height/2)
 			star.body.velocity.y = -100 * this.rnd.frac();
@@ -191,8 +196,8 @@ Donate.Game.prototype = {
 				star.body.velocity.x = -100 * this.rnd.frac();
 			}
 			
-			player.body.velocity.y = -100 * this.rnd.frac();
-			player.body.velocity.x = 20 * (this.rnd.frac() - 0.5);
+			player.body.velocity.y = -200 * this.rnd.frac();
+			player.body.velocity.x = 60 * (this.rnd.frac() - 0.5);
 			
 			enemy.starsKilled -= 1;
 		} else {
