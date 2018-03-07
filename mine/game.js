@@ -190,7 +190,8 @@ Donate.Game.prototype = {
 			player.body.velocity.y = -playerBounceY * this.rnd.frac();
 			player.body.velocity.x = playerBounceX * (this.rnd.frac() - 0.5);
 			
-			for (var i = 0; i < enemy.starsKilled; i++) {
+			var starsNumber = Math.min(5, enemy.starsKilled);
+			for (var i = 0; i < starsNumber; i++) {
 				var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
 				var star = this.makeStar(enemy.x + enemy.width/2 + rndDirection, enemy.y + enemy.height/2)
 				star.body.velocity.y = -starBounceY * this.rnd.frac();
@@ -202,7 +203,7 @@ Donate.Game.prototype = {
 				}
 			}
 			
-			enemy.starsKilled = 0;
+			enemy.starsKilled -= starsNumber;
 		} else {
 			this.state.start('Donate.GameOver', true, false, this.score);
 		}
