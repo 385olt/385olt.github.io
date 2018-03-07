@@ -180,8 +180,8 @@ Donate.Game.prototype = {
 	},
 	
 	collideEnemy: function(player, enemy) {
-		var playerBounceX = 200;
-		var playerBounceY = 400;
+		var playerBounceX = 400;
+		var playerBounceY = 300;
 		var starBounceX = 300;
 		var starBounceY = 300;
 		
