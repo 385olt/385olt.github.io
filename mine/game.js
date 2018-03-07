@@ -246,8 +246,21 @@ Donate.Game.prototype = {
 	},
 	
 	makeStar: function(x = false, y = false) {
-		if (!x) { x = Math.random()*(this.world.width - 16); }		
-		if (!y) { y = Math.random()*(this.world.height - 100); }
+		if (!x) { 
+			if (this.stars.length < 10) {
+				x = this.player.x + this.rnd.frac() * 200;
+			} else {
+				x = this.rnd.frac()*(this.world.width - 16);
+			}
+		}		
+		
+		if (!y) {
+			if (this.stars.length < 10) {
+				y = this.player.y + this.rnd.frac() * 150;
+			} else {
+				y = this.rnd.frac()*(this.world.height - 100); 
+			}
+		}
 		
 		var star = this.stars.create(x, y, 'star');
 		star.body.gravity.y = 100;
