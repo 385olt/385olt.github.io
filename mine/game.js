@@ -82,7 +82,7 @@ Donate.Game.prototype = {
 		var hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
 		this.physics.arcade.collide(this.stars, this.platforms);
 		this.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
-		this.physics.arcade.overlap(this.player, this.enemies, this.overlapEnemy, null, this);
+		this.physics.arcade.collide(this.player, this.enemies, this.collideEnemy, null, this);
 		this.physics.arcade.collide(this.enemies, this.stars, this.collideEnemyStar, null, this);
 		
 		this.enemies.forEach(function(item) { item.goodDirection = false; });
@@ -154,6 +154,7 @@ Donate.Game.prototype = {
 		
 		if (this.rnd.frac() < 0.01) {
 			star.kill();
+			enemy.starsKilled += 1;
 		}
 		
 	},
@@ -178,8 +179,25 @@ Donate.Game.prototype = {
 		}
 	},
 	
-	overlapEnemy: function() {
-		this.state.start('Donate.GameOver', true, false, this.score);
+	collideEnemy: function(player, enemy) {
+		if (player.body.touching.down && enemy.body.touching.up) {
+			var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
+			var star = this.makeStar(enemy.x + enemy.width/2 + rndDirection, enemy.y + enemy.height/2)
+			star.body.velocity.y = -100 * this.rnd.frac();
+			
+			if (rndDirection > 0) {
+				star.body.velocity.x = 100 * this.rnd.frac();
+			} else {
+				star.body.velocity.x = -100 * this.rnd.frac();
+			}
+			
+			player.body.velocity.y = -100 * this.rnd.frac();
+			player.body.velocity.x = 20 * (this.rnd.frac() - 0.5);
+			
+			enemy.starsKilled -= 1;
+		} else {
+			this.state.start('Donate.GameOver', true, false, this.score);
+		}
 	},
 
 	updateCounter: function() {
@@ -242,6 +260,7 @@ Donate.Game.prototype = {
 		
 		enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
 		enemy.goodDirection = true;
+		enemy.starsKilled = 0;
 		
 		enemy.animations.add('left', [0, 1, 2, 3], 10, true);
 		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
