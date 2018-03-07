@@ -182,7 +182,7 @@ Donate.Game.prototype = {
 	collideEnemy: function(player, enemy) {
 		var playerBounceX = 400;
 		var playerBounceY = 300;
-		var starBounceX = 300;
+		var starBounceX = 200;
 		var starBounceY = 300;
 		
 		if (player.body.touching.down && enemy.body.touching.up) {
