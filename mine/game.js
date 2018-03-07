@@ -248,7 +248,9 @@ Donate.Game.prototype = {
 	makeStar: function(x = false, y = false) {
 		if (!x) { 
 			if (this.stars.length < 10) {
-				x = this.player.x + this.rnd.frac() * 200;
+				x = this.player.x + (this.rnd.frac() - 0.5) * 400;
+				if (x < 0) x = 0;
+				if (x > this.world.width - 16) x = this.world.width - 16;
 			} else {
 				x = this.rnd.frac()*(this.world.width - 16);
 			}
@@ -256,7 +258,9 @@ Donate.Game.prototype = {
 		
 		if (!y) {
 			if (this.stars.length < 10) {
-				y = this.player.y + this.rnd.frac() * 150;
+				y = this.player.y + (this.rnd.frac() - 0.5) * 300;
+				if (y < 0) y = 0;
+				if (y > this.world.height - 16) y = this.world.height - 16;
 			} else {
 				y = this.rnd.frac()*(this.world.height - 100); 
 			}
