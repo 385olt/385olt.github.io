@@ -188,23 +188,23 @@ Donate.Game.prototype = {
 		if (player.body.touching.down && enemy.body.touching.up) {
 			
 			if (enemy.starsKilled <= 0) {
-				player.body.velocity.y = -playerBounceY * this.rnd.frac();
-				player.body.velocity.x = playerBounceX * (this.rnd.frac() - 0.5);
+				player.body.acceleration.y = -playerBounceY * this.rnd.frac();
+				player.body.acceleration.x = playerBounceX * (this.rnd.frac() - 0.5);
 				return;
 			}
 			
 			var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
 			var star = this.makeStar(enemy.x + enemy.width/2 + rndDirection, enemy.y + enemy.height/2)
-			star.body.velocity.y = -starBounceY * this.rnd.frac();
+			star.body.acceleration.y = -starBounceY * this.rnd.frac();
 			
 			if (rndDirection > 0) {
-				star.body.velocity.x = starBounceX * this.rnd.frac();
+				star.body.acceleration.x = starBounceX * this.rnd.frac();
 			} else {
-				star.body.velocity.x = -starBounceX * this.rnd.frac();
+				star.body.acceleration.x = -starBounceX * this.rnd.frac();
 			}
 			
-			player.body.velocity.y = -playerBounceY * this.rnd.frac();
-			player.body.velocity.x = playerBounceX * (this.rnd.frac() - 0.5);
+			player.body.acceleration.y = -playerBounceY * this.rnd.frac();
+			player.body.acceleration.x = playerBounceX * (this.rnd.frac() - 0.5);
 			
 			enemy.starsKilled -= 1;
 		} else {
