@@ -260,9 +260,9 @@ Donate.Game.prototype = {
 			if (this.stars.length < 10) {
 				y = this.player.y + (this.rnd.frac() - 0.5) * 300;
 				if (y < 0) y = 0;
-				if (y > this.world.height - 16) y = this.world.height - 16;
+				if (y > this.world.height - 50) y = this.world.height - 50;
 			} else {
-				y = this.rnd.frac()*(this.world.height - 100); 
+				y = this.rnd.frac()*(this.world.height - 50); 
 			}
 		}
 		
