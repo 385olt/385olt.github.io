@@ -181,15 +181,15 @@ Donate.Game.prototype = {
 	
 	collideEnemy: function(player, enemy) {
 		var playerBounceX = 200;
-		var playerBounceY = 60;
-		var starBounceX = 100;
-		var starBounceY = 100;
+		var playerBounceY = 400;
+		var starBounceX = 300;
+		var starBounceY = 300;
 		
 		if (player.body.touching.down && enemy.body.touching.up) {
 			
 			if (enemy.starsKilled <= 0) {
-				player.body.velocity.y = -playerBounceX * this.rnd.frac();
-				player.body.velocity.x = playerBounceY * (this.rnd.frac() - 0.5);
+				player.body.velocity.y = -playerBounceY * this.rnd.frac();
+				player.body.velocity.x = playerBounceX * (this.rnd.frac() - 0.5);
 				return;
 			}
 			
@@ -203,8 +203,8 @@ Donate.Game.prototype = {
 				star.body.velocity.x = -starBounceX * this.rnd.frac();
 			}
 			
-			player.body.velocity.y = -playerBounceX * this.rnd.frac();
-			player.body.velocity.x = playerBounceY * (this.rnd.frac() - 0.5);
+			player.body.velocity.y = -playerBounceY * this.rnd.frac();
+			player.body.velocity.x = playerBounceX * (this.rnd.frac() - 0.5);
 			
 			enemy.starsKilled -= 1;
 		} else {
