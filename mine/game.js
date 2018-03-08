@@ -1,45 +1,25 @@
-Hrabrov.Game = function() {};
+Hrabrov.Game = LevelBuilder.newLevel();
 
 Hrabrov.Game.prototype = {
 	
 	create: function() {
+	    LevelBuilder.setLevel(this);
+	    
+	    LevelBuilder.setPlayer(this.world.width/2 - 16, this.world.heigh - 64);
 		
 		this.add.sprite(0, 0, 'sky');
 
-		this.platforms = this.add.group();
-		this.platforms.enableBody = true;
-
-		var ground = this.platforms.create(0, this.world.height - 32, 'ground');
-		ground.body.immovable = true;
-		ground = this.platforms.create(400, this.world.height - 32, 'ground');
-		ground.body.immovable = true;
-		ground = this.platforms.create(800, this.world.height - 32, 'ground');
-		ground.body.immovable = true;
+		var platforms = [{x: 0, y: this.world.height - 32}, 
+		                {x: 400, y: this.world.height - 32},
+		                {x: 800, y: this.world.height - 32}, 
+		                {x: 350, y: 650},
+		                {x: -150, y: 400},
+		                {x: this.world.width - 150, y: 400},
+		                {x: 300, y: 280},
+		                {x: -50, y: 150},
+		                {x: this.world.width - 200, y: 150}];
 		
-		var ledge = this.platforms.create(350, 650, 'ground');
-		ledge.body.immovable = true;
-		ledge = this.platforms.create(-150, 400, 'ground');
-		ledge.body.immovable = true;    
-		ledge = this.platforms.create(this.world.width - 150, 400, 'ground');
-		ledge.body.immovable = true;   
-		ledge = this.platforms.create(300, 280, 'ground');
-		ledge.body.immovable = true;
-		ledge = this.platforms.create(-50, 150, 'ground');
-		ledge.body.immovable = true;
-		ledge = this.platforms.create(this.world.width - 200, 150, 'ground');
-		ledge.body.immovable = true;
-		
-		// ------ player
-		
-		this.player = this.add.sprite(32, this.world.height - 150, 'dude');
-
-		this.physics.arcade.enable(this.player);
-
-		this.player.body.gravity.y = 300;
-		this.player.body.collideWorldBounds = true;
-
-		this.player.animations.add('left', [0, 1, 2, 3], 10, true);
-		this.player.animations.add('right', [5, 6, 7, 8], 10, true);
+		LevelBuilder.createPlatform(platforms);
 		
 		// ------ stars
 		

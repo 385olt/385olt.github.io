@@ -8,6 +8,7 @@
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
 
     <script src="utils.js"></script>
+    <script src="levelBuilder.js"></script>
 
     <script src="boot.js"></script>
     <script src="mainMenu.js"></script>
@@ -43,6 +44,8 @@
 <script type="text/javascript">
 
 var game = new Phaser.Game(960, 540, Phaser.AUTO, 'block');
+
+LevelBuilder(game);
 
 game.state.add('Hrabrov.Boot', Hrabrov.Boot);
 game.state.add('Hrabrov.MainMenu', Hrabrov.MainMenu);
