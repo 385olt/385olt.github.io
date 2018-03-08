@@ -1,7 +1,7 @@
 
-Donate.MainMenu = function() {};
+Hrabrov.MainMenu = function() {};
 
-Donate.MainMenu.prototype = {
+Hrabrov.MainMenu.prototype = {
 	
 	create: function() {
 		
@@ -81,7 +81,7 @@ Donate.MainMenu.prototype = {
 	},
 	
 	start: function() {
-		this.state.start('Donate.Game');
+		this.state.start('Hrabrov.Game');
 	}
 	
 };

@@ -1,6 +1,6 @@
-Donate.Game = function() {};
+Hrabrov.Game = function() {};
 
-Donate.Game.prototype = {
+Hrabrov.Game.prototype = {
 	
 	create: function() {
 		
@@ -205,7 +205,7 @@ Donate.Game.prototype = {
 			
 			enemy.starsKilled -= starsNumber;
 		} else {
-			this.state.start('Donate.GameOver', true, false, this.score);
+			this.state.start('Hrabrov.GameOver', true, false, this.score);
 		}
 	},
 
@@ -219,7 +219,7 @@ Donate.Game.prototype = {
 			
 			this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
 		} else {
-			this.state.start('Donate.GameOver', true, false, this.score);
+			this.state.start('Hrabrov.GameOver', true, false, this.score);
 		}
 	},
 

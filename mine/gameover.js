@@ -1,7 +1,7 @@
 
-Donate.GameOver = function() {};
+Hrabrov.GameOver = function() {};
 
-Donate.GameOver.prototype = {
+Hrabrov.GameOver.prototype = {
 	init: function(score) {
 		this.score = score;
 	},
@@ -34,6 +34,6 @@ Donate.GameOver.prototype = {
 	},
 	
 	start: function() {
-		this.state.start('Donate.Game');
+		this.state.start('Hrabrov.Game');
 	}
 };

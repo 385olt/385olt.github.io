@@ -1,8 +1,8 @@
-var Donate = {};
+var Hrabrov = {};
 
-Donate.Boot = function() {};
+Hrabrov.Boot = function() {};
 
-Donate.Boot.prototype = {
+Hrabrov.Boot.prototype = {
 	
 	init: function() {
 		this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -22,7 +22,7 @@ Donate.Boot.prototype = {
 	},
 	
 	create: function() {
-		this.state.start('Donate.MainMenu');
+		this.state.start('Hrabrov.MainMenu');
 	}
 	
 	
