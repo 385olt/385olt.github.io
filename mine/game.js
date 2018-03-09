@@ -1,4 +1,4 @@
-Hrabrov.Game = levelBuilder.newLevel();
+Hrabrov.Game = levelBuilder.newLevel(game);
 
 Hrabrov.Game.prototype = {
 	

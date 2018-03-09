@@ -13,10 +13,10 @@ LevelBuilder.prototype = {
         this.level = level;
     },
     
-    newLevel: function() {        
+    newLevel: function(game) {        
         var level = function() {};
         
-        level.platforms = this.game.add.group();
+        level.platforms = game.add.group();
 		level.platforms.enableBody = true;
         
         return level;
