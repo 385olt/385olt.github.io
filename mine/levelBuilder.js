@@ -20,6 +20,12 @@ LevelBuilder.prototype = {
         
         this.level.platforms = this.level.add.group();
 		this.level.platforms.enableBody = true;
+		
+		this.level.stars = this.level.add.group();
+		this.level.stars.enableBody = true;
+		
+		this.level.enemies = this.level.add.group();
+		this.level.enemies.enableBody = true;
     },
     
     // props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]

@@ -24,24 +24,16 @@ Hrabrov.Game.prototype = {
 		levelBuilder.createPlatform(platforms);
 		
 		// ------ stars
-		
-		this.stars = this.add.group();
-		this.stars.enableBody = true;
-		
 		for (var i = 0; i < 3; i++) {
 			levelBuilder.makeStar();
 		}
 		
 		// ------- enemies
-		
-		this.enemies = this.add.group();
-		this.enemies.enableBody = true;
-		
 		for (var i = 0; i < 3; i++) {
 			levelBuilder.makeEnemy();
 		}
-		// ------- score
 		
+		// ------- score
 		this.score = 0;
 		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { font: '16pt Arial', fill: '#000' });
 		
