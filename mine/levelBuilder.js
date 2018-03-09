@@ -8,21 +8,23 @@ LevelBuilder = function(game) {
     this.platformImage = 'ground';
 };
 
-LevelBuilder.newLevel = function() {        
+LevelBuilder.prototype = {
+    
+    newLevel: function() {        
         var level = function() {};
         
         level.platforms = this.game.add.group();
 		level.platforms.enableBody = true;
         
         return level;
-    };
+    },
     
-LevelBuilder.setLevel = function(level) {
+    setLevel: function(level) {
         this.level = level;
-    };
+    },
     
-// props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]
-LevelBuilder.createPlatform = function(props) {
+    // props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]
+    createPlatform: function(props) {
         if (this.level === null) return false;
         
         if (props instanceof Array) {
@@ -43,9 +45,9 @@ LevelBuilder.createPlatform = function(props) {
 		}
 		
 		return res;        
-    };
+    },
     
-LevelBuilder.setPlayer = function(x, y) {
+    setPlayer: function(x, y) {
         if (this.level === null) return false;
         
         var player = this.level.add.sprite(x, y, this.playerImage);
@@ -59,4 +61,6 @@ LevelBuilder.setPlayer = function(x, y) {
 		player.animations.add('right', [5, 6, 7, 8], 10, true);
 		
 		this.level.player = player;
-    };
+    }
+    
+};

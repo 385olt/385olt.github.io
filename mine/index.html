@@ -43,7 +43,7 @@
 
 var game = new Phaser.Game(960, 540, Phaser.AUTO, 'block');
 
-LevelBuilder(game);
+var levelBuilder = new LevelBuilder(game);
 
 game.state.add('Hrabrov.Boot', Hrabrov.Boot);
 game.state.add('Hrabrov.MainMenu', Hrabrov.MainMenu);
