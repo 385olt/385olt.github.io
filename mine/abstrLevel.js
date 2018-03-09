@@ -6,7 +6,7 @@ AbstrLevel = {
         this.playerImage = 'dude';
         this.platformImage = 'ground';
         
-        this.platforms = game.add.group();
+        this.platforms = this.add.group();
 		this.platforms.enableBody = true;
     },
     

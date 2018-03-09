@@ -2,9 +2,7 @@ Hrabrov.Game = function() {};
 
 prototype = {
 	
-	create: function() {
-	    //levelBuilder.setLevel(this);
-	    
+	create: function() {	    
 	    this.init();
 	    
 	    this.setPlayer(this.world.width/2 - 16, this.world.heigh - 64);
