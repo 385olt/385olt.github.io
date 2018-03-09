@@ -19,7 +19,10 @@ prototype = {
 		                {x: -50, y: 150},
 		                {x: this.world.width - 200, y: 150}];
 		
-		this.createPlatform(platforms);
+		platforms.forEach(function(item) {
+                var platform = this.platforms.create(item.x, item.y, 'ground');
+		        platform.body.immovable = true;
+            }, this);
 		
 		// ------ stars
 		
