@@ -5,11 +5,9 @@ Hrabrov.Game.prototype = {
 	create: function() {
 	    this.add.sprite(0, 0, 'sky');
 	    
-	    levelBuilder.setLevel(this);
+	    this.levelBuilder = new LevelBuilder(this);
 	    
-	    levelBuilder.init();
-	    
-	    levelBuilder.setPlayer(this.world.width/2 - 16, 100);
+	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 
 		var platforms = [{x: 0, y: this.world.height - 32}, 
 		                {x: 400, y: this.world.height - 32},
@@ -21,14 +19,14 @@ Hrabrov.Game.prototype = {
 		                {x: -50, y: 150},
 		                {x: this.world.width - 200, y: 150}];
 		
-		levelBuilder.createPlatform(platforms);
+		this.levelBuilder.createPlatform(platforms);
 		
 		for (var i = 0; i < 3; i++) {
-			levelBuilder.makeStar();
+			this.levelBuilder.makeStar();
 		}
 		
 		for (var i = 0; i < 3; i++) {
-			levelBuilder.makeEnemy();
+			this.levelBuilder.makeEnemy();
 		}
 		
 		// ------- score
@@ -50,7 +48,8 @@ Hrabrov.Game.prototype = {
 	},
 	
 	update: function() {
-		levelBuilder.updateControlsAndCollisions();
+		this.levelBuilder.updateCollisions();
+		this.levelBuilder.updateControls();
 		
 		this.enemies.forEach(function(item) { item.goodDirection = false; });
 		
@@ -131,7 +130,8 @@ Hrabrov.Game.prototype = {
 			var starsNumber = Math.min(5, enemy.starsKilled);
 			for (var i = 0; i < starsNumber; i++) {
 				var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
-				var star = levelBuilder.makeStar(enemy.x + enemy.width/2 + rndDirection, enemy.y + enemy.height/2)
+				
+				var star = this.levelBuilder.makeStar(enemy.x + enemy.width/2 + rndDirection, enemy.y + enemy.height/2)
 				star.body.velocity.y = -starBounceY * this.rnd.frac();
 				
 				if (rndDirection > 0) {
@@ -174,13 +174,13 @@ Hrabrov.Game.prototype = {
 		
 		if (this.score > this.nextEnemy * 500) {
 			this.nextEnemy += 1;
-			levelBuilder.makeEnemy();
+			this.levelBuilder.makeEnemy();
 		}
 		
 		if (this.score > this.nextStar * 50 * (1 - this.timeDelta)) {
 			this.timeDelta += -0.01;	
 			this.nextStar += 1;
-			levelBuilder.makeStar();
+			this.levelBuilder.makeStar();
 		}
 	}
 	

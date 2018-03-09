@@ -1,5 +1,5 @@
-LevelBuilder = function() {
-    this.level = null;
+var LevelBuilder = function(level) {
+    this.level = level;
     
     this.gravityConstant = 300;
     
@@ -7,26 +7,18 @@ LevelBuilder = function() {
     this.platformImage = 'ground';
     this.starImage = 'star';
     this.enemyImage = 'fem';
+    
+    level.platforms = level.add.group();
+	level.platforms.enableBody = true;
+		
+	level.stars = level.add.group();
+	level.stars.enableBody = true;
+		
+	level.enemies = level.add.group();
+	level.enemies.enableBody = true;
 };
 
 LevelBuilder.prototype = {
-
-    setLevel: function(level) {
-        this.level = level;
-    },
-    
-    init: function() {        
-        if (this.level === null) return false;
-        
-        this.level.platforms = this.level.add.group();
-		this.level.platforms.enableBody = true;
-		
-		this.level.stars = this.level.add.group();
-		this.level.stars.enableBody = true;
-		
-		this.level.enemies = this.level.add.group();
-		this.level.enemies.enableBody = true;
-    },
     
     // props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]
     createPlatform: function(props) {
@@ -120,14 +112,20 @@ LevelBuilder.prototype = {
 		return enemy;
 	},
 	
-	updateControlsAndCollisions: function() {
+	updateCollisions: function() {
 	    if (this.level === null) return false;
 	    
-	    var hitPlatform = this.level.physics.arcade.collide(this.level.player, this.level.platforms);
+	    this.level.physics.arcade.collide(this.level.player, this.level.platforms);
 		this.level.physics.arcade.collide(this.level.stars, this.level.platforms);
-		this.level.physics.arcade.overlap(this.level.player, this.level.stars, this.level.overlapPlayerStar, null, this.level);
-		this.level.physics.arcade.collide(this.level.player, this.level.enemies, this.level.collidePlayerEnemy, null, this.level);
-		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, this.level.collideEnemyStar, null, this.level);
+		this.level.physics.arcade.overlap(this.level.player, this.level.stars, 
+		            this.level.overlapPlayerStar, null, this.level);
+		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
+		            this.level.collidePlayerEnemy, null, this.level);
+		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, 
+		            this.level.collideEnemyStar, null, this.level);
+	},
+	
+	updateControls: function() {
 		
 		var cursors = this.level.input.keyboard.createCursorKeys();
 		
@@ -153,11 +151,9 @@ LevelBuilder.prototype = {
 		    
 		}
 
-		if (cursors.up.isDown && this.level.player.body.touching.down && hitPlatform) {
+		if (cursors.up.isDown && this.level.player.body.touching.down) {
 		    this.level.player.body.velocity.y = -300;
 		}
 	}
     
 };
-
-var levelBuilder = new LevelBuilder();
