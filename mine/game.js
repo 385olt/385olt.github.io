@@ -23,8 +23,6 @@ Hrabrov.Game.prototype = {
 		
 		levelBuilder.createPlatform(platforms);
 		
-		console.log(this.player.x);
-		
 		// ------ stars
 		
 		this.stars = this.add.group();
@@ -132,6 +130,8 @@ Hrabrov.Game.prototype = {
 		if (cursors.up.isDown && this.player.body.touching.down && hitPlatform) {
 		    this.player.body.velocity.y = -300;
 		}
+		
+		console.log(this.player.x);
 	},
 	
 	collideEnemyStar: function(enemy, star) {
