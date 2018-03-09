@@ -55,5 +55,3 @@ AbstrLevel.init = function() {
 //		
 //		return res;        
 //    }
-    
-};
