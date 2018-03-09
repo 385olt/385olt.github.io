@@ -25,7 +25,7 @@ LevelBuilder.prototype = {
     setPlayer: function(x, y) {
         if (this.level === null) return false;
         
-        var player = this.level.add.sprite(x, y, this.playerImage);
+        var player = this.level.add.sprite.call(this.level, x, y, this.playerImage);
 
 		this.level.physics.arcade.enable(player);
 
@@ -46,7 +46,7 @@ LevelBuilder.prototype = {
             this.temp = [];
             
             props.forEach(function(item) {
-                var platform = this.level.platforms.create(item.x, item.y, this.platformImage);
+                var platform = this.level.platforms.create.call(this.level, item.x, item.y, this.platformImage);
 		        platform.body.immovable = true;
 		        
 		        this.temp.push(platform);
@@ -55,7 +55,7 @@ LevelBuilder.prototype = {
             var res = this.temp;
             this.temp = null;
         } else {
-            var res = this.level.platforms.create(props.x, props.y, this.platformImage);
+            var res = this.level.platforms.create.call(this.level, props.x, props.y, this.platformImage);
 		    res.body.immovable = true;
 		}
 		
