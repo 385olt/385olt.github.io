@@ -17,7 +17,7 @@ LevelBuilder.newLevel = function() {
         return level;
     };
     
-    LevelBuilder.setLevel: function(level) {
+LevelBuilder.setLevel = function(level) {
         this.level = level;
     };
     
