@@ -6,6 +6,7 @@ Hrabrov.Game.prototype = {
 	    this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
+	    this.AI = new AI(this);
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 
@@ -51,40 +52,21 @@ Hrabrov.Game.prototype = {
 		this.levelBuilder.updateCollisions();
 		this.levelBuilder.updateControls();
 		
-		this.enemies.forEach(function(item) { item.goodDirection = false; });
-		
-		this.physics.arcade.collide(this.enemies, this.platforms, this.collideEnemyPlatform);
-		
-		this.enemies.forEach(function(item) {
-		
-			if (!item.goodDirection) {
-				if(item.body.onFloor()) {
-					item.myDirection = item.myDirection == 'left' ? 'right' : 'left';
-				} else {
-					item.myDirection = 'stop';
-				}
+		this.AI.update();
+	},
+	
+	updateCounter: function() {
+		if (this.timeLeft > 0) {
+			this.timeLeft += -0.1;
+			
+			if (this.timeLeft < 0) {
+				this.timeLeft = 0;
 			}
 			
-			if (item.body.onWall()) {
-				item.myDirection = item.myDirection == 'left' ? 'right' : 'left';
-			}
-						
-			if (item.myDirection == 'left') {
-			
-				item.body.velocity.x = -50;
-		    	item.animations.play('left');
-			
-			} else if (item.myDirection == 'right') {
-			
-				item.body.velocity.x = 50;
-		    	item.animations.play('right');
-			
-			} else {
-				item.animations.stop();
-		    	item.frame = 4;
-			}
-			
-		});
+			this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
+		} else {
+			this.state.start('Hrabrov.GameOver', true, false, this.score);
+		}
 	},
 	
 	collideEnemyStar: function(enemy, star) {
@@ -94,26 +76,6 @@ Hrabrov.Game.prototype = {
 			enemy.starsKilled += 1;
 		}
 		
-	},
-	
-	collideEnemyPlatform: function(enemy, platform) {
-		if (enemy.body.touching.down && platform.body.touching.up) {
-			
-			if (['left', 'right'].indexOf(enemy.myDirection) == -1) {
-				enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
-			}
-			
-			if (enemy.myDirection == 'left') {
-				if (platform.body.hitTest(enemy.x - 10, enemy.y + enemy.height + 10)) {
-					enemy.goodDirection = true;
-				}
-			} else if (enemy.myDirection == 'right') {
-				if (platform.body.hitTest(enemy.x + enemy.width + 10, enemy.y + enemy.height + 10)) {
-					enemy.goodDirection = true;
-				}
-			}
-			
-		}
 	},
 	
 	collidePlayerEnemy: function(player, enemy) {
@@ -142,20 +104,6 @@ Hrabrov.Game.prototype = {
 			}
 			
 			enemy.starsKilled -= starsNumber;
-		} else {
-			this.state.start('Hrabrov.GameOver', true, false, this.score);
-		}
-	},
-
-	updateCounter: function() {
-		if (this.timeLeft > 0) {
-			this.timeLeft += -0.1;
-			
-			if (this.timeLeft < 0) {
-				this.timeLeft = 0;
-			}
-			
-			this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
 		} else {
 			this.state.start('Hrabrov.GameOver', true, false, this.score);
 		}
