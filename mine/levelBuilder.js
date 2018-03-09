@@ -22,6 +22,22 @@ LevelBuilder.prototype = {
 		
     },
     
+    setPlayer: function(x, y) {
+        if (this.level === null) return false;
+        
+        var player = this.level.add.sprite(x, y, this.playerImage);
+
+		this.level.physics.arcade.enable(player);
+
+		player.body.gravity.y = this.gravityConstant;
+		player.body.collideWorldBounds = true;
+
+		player.animations.add('left', [0, 1, 2, 3], 10, true);
+		player.animations.add('right', [5, 6, 7, 8], 10, true);
+		
+		this.level.player = player;
+    },
+    
     // props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]
     createPlatform: function(props) {
         if (this.level === null) return false;
@@ -44,22 +60,6 @@ LevelBuilder.prototype = {
 		}
 		
 		return res;        
-    },
-    
-    setPlayer: function(x, y) {
-        if (this.level === null) return false;
-        
-        var player = this.level.add.sprite(x, y, this.playerImage);
-
-		this.level.physics.arcade.enable(player);
-
-		player.body.gravity.y = this.gravityConstant;
-		player.body.collideWorldBounds = true;
-
-		player.animations.add('left', [0, 1, 2, 3], 10, true);
-		player.animations.add('right', [5, 6, 7, 8], 10, true);
-		
-		this.level.player = player;
     }
     
 };

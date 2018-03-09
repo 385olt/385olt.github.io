@@ -23,6 +23,8 @@ Hrabrov.Game.prototype = {
 		
 		levelBuilder.createPlatform(platforms);
 		
+		console.log(this.player.x);
+		
 		// ------ stars
 		
 		this.stars = this.add.group();
