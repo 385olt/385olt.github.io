@@ -1,4 +1,4 @@
-Hrabrov.Game = new AbstrLevel();
+Hrabrov.Game = Object.create(AbstrLevel);
 
 Hrabrov.Game.create = function() {
 	    //levelBuilder.setLevel(this);
