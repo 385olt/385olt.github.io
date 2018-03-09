@@ -48,6 +48,24 @@ AbstrLevel = {
 		}
 		
 		return res;        
-    }
+    },
+	
+	makeEnemy: function(x = false, y = false) {
+		if (!x) { x = Math.random()*(this.world.width - 16); }		
+		if (!y) { y = Math.random()*(this.world.height - 100); }
+		
+		var enemy = this.enemies.create(x, y, 'fem');
+		enemy.body.gravity.y = 300;
+		enemy.body.collideWorldBounds = true;
+		
+		enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+		enemy.goodDirection = true;
+		enemy.starsKilled = 0;
+		
+		enemy.animations.add('left', [0, 1, 2, 3], 10, true);
+		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+	
+		return enemy;
+	}
     
 };
