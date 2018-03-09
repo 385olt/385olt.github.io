@@ -63,3 +63,5 @@ LevelBuilder.prototype = {
     }
     
 };
+
+var levelBuilder = new LevelBuilder();
