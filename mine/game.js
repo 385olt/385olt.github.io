@@ -23,12 +23,10 @@ Hrabrov.Game.prototype = {
 		
 		levelBuilder.createPlatform(platforms);
 		
-		// ------ stars
 		for (var i = 0; i < 3; i++) {
 			levelBuilder.makeStar();
 		}
 		
-		// ------- enemies
 		for (var i = 0; i < 3; i++) {
 			levelBuilder.makeEnemy();
 		}
@@ -37,8 +35,7 @@ Hrabrov.Game.prototype = {
 		this.score = 0;
 		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { font: '16pt Arial', fill: '#000' });
 		
-		// ------- timer
-		
+		// ------- timer		
 		this.nextStar = 1;
 		this.nextEnemy = 1;
 		
@@ -53,11 +50,7 @@ Hrabrov.Game.prototype = {
 	},
 	
 	update: function() {
-		var hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
-		this.physics.arcade.collide(this.stars, this.platforms);
-		this.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
-		this.physics.arcade.collide(this.player, this.enemies, this.collideEnemy, null, this);
-		this.physics.arcade.collide(this.enemies, this.stars, this.collideEnemyStar, null, this);
+		levelBuilder.updateControlsAndCollisions();
 		
 		this.enemies.forEach(function(item) { item.goodDirection = false; });
 		
@@ -93,35 +86,6 @@ Hrabrov.Game.prototype = {
 			}
 			
 		});
-		
-		// ----- player controls
-		var cursors = this.input.keyboard.createCursorKeys();
-		
-		this.player.body.velocity.x = 0;
-
-		if (cursors.left.isDown) {
-		
-		    this.player.body.velocity.x = -150;
-
-		    this.player.animations.play('left');
-		    
-		} else if (cursors.right.isDown) {
-		
-		    this.player.body.velocity.x = 150;
-
-		    this.player.animations.play('right');
-		    
-		} else {
-		
-		    this.player.animations.stop();
-
-		    this.player.frame = 4;
-		    
-		}
-
-		if (cursors.up.isDown && this.player.body.touching.down && hitPlatform) {
-		    this.player.body.velocity.y = -300;
-		}
 	},
 	
 	collideEnemyStar: function(enemy, star) {
@@ -153,7 +117,7 @@ Hrabrov.Game.prototype = {
 		}
 	},
 	
-	collideEnemy: function(player, enemy) {
+	collidePlayerEnemy: function(player, enemy) {
 		var playerBounceX = 400;
 		var playerBounceY = 300;
 		var starBounceX = 200;
@@ -197,7 +161,7 @@ Hrabrov.Game.prototype = {
 		}
 	},
 
-	collectStar: function(player, star) {
+	overlapPlayerStar: function(player, star) {
 		star.kill();
 		
 		this.score += 10 * this.timeDelta;

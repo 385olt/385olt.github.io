@@ -69,6 +69,8 @@ LevelBuilder.prototype = {
     },
 	
 	makeStar: function(x = false, y = false) {
+	    if (this.level === null) return false;
+	
 		if (!x) { 
 			if (this.level.stars.length < 10) {
 				x = this.level.player.x + (this.level.rnd.frac() - 0.5) * 400;
@@ -99,6 +101,8 @@ LevelBuilder.prototype = {
 	},
 	
 	makeEnemy: function(x = false, y = false) {
+	    if (this.level === null) return false;
+	    
 		if (!x) { x = Math.random()*(this.level.world.width - 16); }		
 		if (!y) { y = Math.random()*(this.level.world.height - 100); }
 		
@@ -114,6 +118,44 @@ LevelBuilder.prototype = {
 		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
 	
 		return enemy;
+	},
+	
+	updateControlsAndCollisions: function() {
+	    if (this.level === null) return false;
+	    
+	    var hitPlatform = this.level.physics.arcade.collide(this.level.player, this.level.platforms);
+		this.level.physics.arcade.collide(this.level.stars, this.level.platforms);
+		this.level.physics.arcade.overlap(this.level.player, this.level.stars, this.level.overlapPlayerStar, null, level);
+		this.level.physics.arcade.collide(this.level.player, this.level.enemies, this.level.collidePlayerEnemy, null, level);
+		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, this.level.collideEnemyStar, null, level);
+		
+		var cursors = this.level.input.keyboard.createCursorKeys();
+		
+		this.level.player.body.velocity.x = 0;
+
+		if (cursors.left.isDown) {
+		
+		    this.level.player.body.velocity.x = -150;
+
+		    this.level.player.animations.play('left');
+		    
+		} else if (cursors.right.isDown) {
+		
+		    this.level.player.body.velocity.x = 150;
+
+		    this.level.player.animations.play('right');
+		    
+		} else {
+		
+		    this.level.player.animations.stop();
+
+		    this.level.player.frame = 4;
+		    
+		}
+
+		if (cursors.up.isDown && this.level.player.body.touching.down && hitPlatform) {
+		    this.level.player.body.velocity.y = -300;
+		}
 	}
     
 };
