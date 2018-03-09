@@ -1,6 +1,6 @@
 Hrabrov.Game = new AbstrLevel();
 
-Hrabrov.Game.prototype.create = function() {
+Hrabrov.Game.create = function() {
 	    //levelBuilder.setLevel(this);
 	    
 	    this.init();
@@ -58,7 +58,7 @@ Hrabrov.Game.prototype.create = function() {
 		
 	};
 	
-Hrabrov.Game.prototype.update = function() {
+Hrabrov.Game.update = function() {
 		var hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
 		this.physics.arcade.collide(this.stars, this.platforms);
 		this.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
@@ -130,7 +130,7 @@ Hrabrov.Game.prototype.update = function() {
 		}
 	};
 	
-Hrabrov.Game.prototype.collideEnemyStar = function(enemy, star) {
+Hrabrov.Game.collideEnemyStar = function(enemy, star) {
 		
 		if (this.rnd.frac() < 0.01) {
 			star.kill();
@@ -139,7 +139,7 @@ Hrabrov.Game.prototype.collideEnemyStar = function(enemy, star) {
 		
 	};
 	
-Hrabrov.Game.prototype.collideEnemyPlatform = function(enemy, platform) {
+Hrabrov.Game.collideEnemyPlatform = function(enemy, platform) {
 		if (enemy.body.touching.down && platform.body.touching.up) {
 			
 			if (['left', 'right'].indexOf(enemy.myDirection) == -1) {
@@ -159,7 +159,7 @@ Hrabrov.Game.prototype.collideEnemyPlatform = function(enemy, platform) {
 		}
 	};
 	
-Hrabrov.Game.prototype.collideEnemy = function(player, enemy) {
+Hrabrov.Game.collideEnemy = function(player, enemy) {
 		var playerBounceX = 400;
 		var playerBounceY = 300;
 		var starBounceX = 200;
@@ -189,7 +189,7 @@ Hrabrov.Game.prototype.collideEnemy = function(player, enemy) {
 		}
 	};
 
-Hrabrov.Game.prototype.updateCounter = function() {
+Hrabrov.Game.updateCounter = function() {
 		if (this.timeLeft > 0) {
 			this.timeLeft += -0.1;
 			
@@ -203,7 +203,7 @@ Hrabrov.Game.prototype.updateCounter = function() {
 		}
 	};
 
-Hrabrov.Game.prototype.collectStar = function(player, star) {
+Hrabrov.Game.collectStar = function(player, star) {
 		star.kill();
 		
 		this.score += 10 * this.timeDelta;
@@ -226,7 +226,7 @@ Hrabrov.Game.prototype.collectStar = function(player, star) {
 		}
 	};
 	
-Hrabrov.Game.prototype.makeStar = function(x = false, y = false) {
+Hrabrov.Game.makeStar = function(x = false, y = false) {
 		if (!x) { 
 			if (this.stars.length < 10) {
 				x = this.player.x + (this.rnd.frac() - 0.5) * 400;
@@ -256,7 +256,7 @@ Hrabrov.Game.prototype.makeStar = function(x = false, y = false) {
 		return star;
 	};
 	
-Hrabrov.Game.prototype.makeEnemy = function(x = false, y = false) {
+Hrabrov.Game.makeEnemy = function(x = false, y = false) {
 		if (!x) { x = Math.random()*(this.world.width - 16); }		
 		if (!y) { y = Math.random()*(this.world.height - 100); }
 		
