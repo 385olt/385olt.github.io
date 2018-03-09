@@ -43,7 +43,7 @@ AbstrLevel = {
             var res = this.temp;
             this.temp = null;
         } else {
-            var res = this.level.platforms.create.call(this.level, props.x, props.y, this.platformImage);
+            var res = this.platforms.create(props.x, props.y, this.platformImage);
 		    res.body.immovable = true;
 		}
 		
