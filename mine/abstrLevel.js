@@ -11,9 +11,8 @@ AbstrLevel = {
     },
     
     setPlayer: function(x, y) {
-        //if (this.level === null) return false;
         
-        var player = this.add.sprite(x, y, this.playerImage);
+        var player = this.add.sprite(x, y, 'dude');
 
 		this.physics.arcade.enable(player);
 
@@ -28,8 +27,7 @@ AbstrLevel = {
     
     // props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]
     createPlatform: function(props) {
-        //if (this.level === null) return false;
-        
+            
         if (props instanceof Array) {
             this.temp = [];
             
