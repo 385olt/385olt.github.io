@@ -133,7 +133,7 @@ LevelBuilder.prototype = {
 	updateControls: function() {
 		
 		var cursors = this.level.input.keyboard.createCursorKeys();
-		var player = this.level.player.
+		var player = this.level.player;
 		
 		player.body.velocity.x = 0;
 
