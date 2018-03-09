@@ -1,13 +1,13 @@
-Hrabrov.Game = function() {};
+Hrabrov.Game = new AbstrLevel();
 
 Hrabrov.Game.prototype = {
 	
 	create: function() {
-	    levelBuilder.setLevel(this);
+	    //levelBuilder.setLevel(this);
 	    
-	    levelBuilder.init();
+	    this.init();
 	    
-	    levelBuilder.setPlayer(this.world.width/2 - 16, this.world.heigh - 64);
+	    this.setPlayer(this.world.width/2 - 16, this.world.heigh - 64);
 		
 		this.add.sprite(0, 0, 'sky');
 
@@ -21,7 +21,7 @@ Hrabrov.Game.prototype = {
 		                {x: -50, y: 150},
 		                {x: this.world.width - 200, y: 150}];
 		
-		levelBuilder.createPlatform(platforms);
+		this.createPlatform(platforms);
 		
 		// ------ stars
 		
@@ -130,8 +130,6 @@ Hrabrov.Game.prototype = {
 		if (cursors.up.isDown && this.player.body.touching.down && hitPlatform) {
 		    this.player.body.velocity.y = -300;
 		}
-		
-		console.log(this.player.x);
 	},
 	
 	collideEnemyStar: function(enemy, star) {
