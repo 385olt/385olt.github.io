@@ -1,6 +1,8 @@
-Hrabrov.Game = Object.create(AbstrLevel);
+Hrabrov.Game = new AbstrLevel();
 
-Hrabrov.Game.create = function() {
+prototype = {
+	
+	create: function() {
 	    //levelBuilder.setLevel(this);
 	    
 	    this.init();
@@ -56,9 +58,9 @@ Hrabrov.Game.create = function() {
 		this.timeLeft = 10;
 		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { font: '16pt Arial', fill: '#000' });
 		
-	};
+	},
 	
-Hrabrov.Game.update = function() {
+	update: function() {
 		var hitPlatform = this.physics.arcade.collide(this.player, this.platforms);
 		this.physics.arcade.collide(this.stars, this.platforms);
 		this.physics.arcade.overlap(this.player, this.stars, this.collectStar, null, this);
@@ -128,18 +130,18 @@ Hrabrov.Game.update = function() {
 		if (cursors.up.isDown && this.player.body.touching.down && hitPlatform) {
 		    this.player.body.velocity.y = -300;
 		}
-	};
+	},
 	
-Hrabrov.Game.collideEnemyStar = function(enemy, star) {
+	collideEnemyStar: function(enemy, star) {
 		
 		if (this.rnd.frac() < 0.01) {
 			star.kill();
 			enemy.starsKilled += 1;
 		}
 		
-	};
+	},
 	
-Hrabrov.Game.collideEnemyPlatform = function(enemy, platform) {
+	collideEnemyPlatform: function(enemy, platform) {
 		if (enemy.body.touching.down && platform.body.touching.up) {
 			
 			if (['left', 'right'].indexOf(enemy.myDirection) == -1) {
@@ -157,9 +159,9 @@ Hrabrov.Game.collideEnemyPlatform = function(enemy, platform) {
 			}
 			
 		}
-	};
+	},
 	
-Hrabrov.Game.collideEnemy = function(player, enemy) {
+	collideEnemy: function(player, enemy) {
 		var playerBounceX = 400;
 		var playerBounceY = 300;
 		var starBounceX = 200;
@@ -187,9 +189,9 @@ Hrabrov.Game.collideEnemy = function(player, enemy) {
 		} else {
 			this.state.start('Hrabrov.GameOver', true, false, this.score);
 		}
-	};
+	},
 
-Hrabrov.Game.updateCounter = function() {
+	updateCounter: function() {
 		if (this.timeLeft > 0) {
 			this.timeLeft += -0.1;
 			
@@ -201,9 +203,9 @@ Hrabrov.Game.updateCounter = function() {
 		} else {
 			this.state.start('Hrabrov.GameOver', true, false, this.score);
 		}
-	};
+	},
 
-Hrabrov.Game.collectStar = function(player, star) {
+	collectStar: function(player, star) {
 		star.kill();
 		
 		this.score += 10 * this.timeDelta;
@@ -224,9 +226,9 @@ Hrabrov.Game.collectStar = function(player, star) {
 			this.nextStar += 1;
 			this.makeStar();
 		}
-	};
+	},
 	
-Hrabrov.Game.makeStar = function(x = false, y = false) {
+	makeStar: function(x = false, y = false) {
 		if (!x) { 
 			if (this.stars.length < 10) {
 				x = this.player.x + (this.rnd.frac() - 0.5) * 400;
@@ -254,9 +256,9 @@ Hrabrov.Game.makeStar = function(x = false, y = false) {
 		star.body.drag.x = 10;
 		
 		return star;
-	};
+	},
 	
-Hrabrov.Game.makeEnemy = function(x = false, y = false) {
+	makeEnemy: function(x = false, y = false) {
 		if (!x) { x = Math.random()*(this.world.width - 16); }		
 		if (!y) { y = Math.random()*(this.world.height - 100); }
 		
@@ -272,43 +274,8 @@ Hrabrov.Game.makeEnemy = function(x = false, y = false) {
 		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
 	
 		return enemy;
-	};
+	}
 	
-Hrabrov.Game.createPlatform = function(props) {
-        //if (this.level === null) return false;
-        
-        if (props instanceof Array) {
-            this.temp = [];
-            
-            props.forEach(function(item) {
-                var platform = this.platforms.create(item.x, item.y, this.platformImage);
-		        platform.body.immovable = true;
-		        
-		        this.temp.push(platform);
-            }, this); 
-            
-            var res = this.temp;
-            this.temp = null;
-        } else {
-            var res = this.level.platforms.create.call(this.level, props.x, props.y, this.platformImage);
-		    res.body.immovable = true;
-		}
-		
-		return res;        
-    };
-    
-Hrabrov.Game.setPlayer = function(x, y) {
-        //if (this.level === null) return false;
-        
-        var player = this.add.sprite(x, y, this.playerImage);
+};
 
-		this.physics.arcade.enable(player);
-
-		player.body.gravity.y = this.gravityConstant;
-		player.body.collideWorldBounds = true;
-
-		player.animations.add('left', [0, 1, 2, 3], 10, true);
-		player.animations.add('right', [5, 6, 7, 8], 10, true);
-		
-		this.player = player;
-    };
+Hrabrov.Game.prototype = Object.assign({}, AbstrLevel, prototype);
