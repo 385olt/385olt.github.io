@@ -57,6 +57,8 @@ LevelBuilder.prototype = {
 		player.animations.add('left', [0, 1, 2, 3], 10, true);
 		player.animations.add('right', [5, 6, 7, 8], 10, true);
 		
+		player.hitPlatform = false;
+		
 		this.level.player = player;
     },
 	
@@ -115,44 +117,48 @@ LevelBuilder.prototype = {
 	updateCollisions: function() {
 	    if (this.level === null) return false;
 	    
-	    this.level.physics.arcade.collide(this.level.player, this.level.platforms);
+	    this.level.player.hitPlatform = this.level.physics.arcade.collide(
+	                this.level.player, this.level.platforms);
+	                
 		this.level.physics.arcade.collide(this.level.stars, this.level.platforms);
+		
 		this.level.physics.arcade.overlap(this.level.player, this.level.stars, 
 		            this.level.overlapPlayerStar, null, this.level);
+		            
 		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
 		            this.level.collidePlayerEnemy, null, this.level);
-		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, 
-		            this.level.collideEnemyStar, null, this.level);
+		
 	},
 	
 	updateControls: function() {
 		
 		var cursors = this.level.input.keyboard.createCursorKeys();
+		var player = this.level.player.
 		
-		this.level.player.body.velocity.x = 0;
+		player.body.velocity.x = 0;
 
 		if (cursors.left.isDown) {
 		
-		    this.level.player.body.velocity.x = -150;
+		    player.body.velocity.x = -150;
 
-		    this.level.player.animations.play('left');
+		    player.animations.play('left');
 		    
 		} else if (cursors.right.isDown) {
 		
-		    this.level.player.body.velocity.x = 150;
+		    player.body.velocity.x = 150;
 
-		    this.level.player.animations.play('right');
+		    player.animations.play('right');
 		    
 		} else {
 		
-		    this.level.player.animations.stop();
+		    player.animations.stop();
 
-		    this.level.player.frame = 4;
+		    player.frame = 4;
 		    
 		}
 
-		if (cursors.up.isDown && this.level.player.body.touching.down) {
-		    this.level.player.body.velocity.y = -300;
+		if (cursors.up.isDown && player.body.touching.down && player.hitPlatform) {
+		    player.body.velocity.y = -300;
 		}
 	}
     

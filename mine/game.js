@@ -69,15 +69,6 @@ Hrabrov.Game.prototype = {
 		}
 	},
 	
-	collideEnemyStar: function(enemy, star) {
-		
-		if (this.rnd.frac() < 0.01) {
-			star.kill();
-			enemy.starsKilled += 1;
-		}
-		
-	},
-	
 	collidePlayerEnemy: function(player, enemy) {
 		var playerBounceX = 400;
 		var playerBounceY = 300;

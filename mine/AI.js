@@ -9,7 +9,11 @@ AI.prototype = {
         
         this.level.enemies.forEach(function(item) { item.goodDirection = false; });
 		
-		this.level.physics.arcade.collide(this.level.enemies, this.level.platforms, this.collideEnemyPlatform);
+		this.level.physics.arcade.collide(this.level.enemies, this.level.platforms, 
+		            this.collideEnemyPlatform);
+		            
+		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, 
+		            this.collideEnemyStar, null, this.level);
 		
 		this.level.enemies.forEach(function(item) {
 		
@@ -61,6 +65,15 @@ AI.prototype = {
 			}
 			
 		}
+	},
+	
+	collideEnemyStar: function(enemy, star) {
+		
+		if (this.rnd.frac() < 0.01) {
+			star.kill();
+			enemy.starsKilled += 1;
+		}
+		
 	}
     
 };
