@@ -2,12 +2,12 @@ Hrabrov.Game = function() {};
 
 prototype = {
 	
-	create: function() {	    
+	create: function() {
+	    this.add.sprite(0, 0, 'sky');
+	        
 	    this.init();
 	    
 	    this.setPlayer(this.world.width/2 - 16, this.world.heigh - 64);
-		
-		this.add.sprite(0, 0, 'sky');
 
 		var platforms = [{x: 0, y: this.world.height - 32}, 
 		                {x: 400, y: this.world.height - 32},
@@ -19,10 +19,7 @@ prototype = {
 		                {x: -50, y: 150},
 		                {x: this.world.width - 200, y: 150}];
 		
-		platforms.forEach(function(item) {
-                var platform = this.platforms.create(item.x, item.y, 'ground');
-		        platform.body.immovable = true;
-            }, this);
+		this.createPlatform(platforms);
 		
 		// ------ stars
 		
