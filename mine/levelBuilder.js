@@ -125,9 +125,9 @@ LevelBuilder.prototype = {
 	    
 	    var hitPlatform = this.level.physics.arcade.collide(this.level.player, this.level.platforms);
 		this.level.physics.arcade.collide(this.level.stars, this.level.platforms);
-		this.level.physics.arcade.overlap(this.level.player, this.level.stars, this.level.overlapPlayerStar, null, level);
-		this.level.physics.arcade.collide(this.level.player, this.level.enemies, this.level.collidePlayerEnemy, null, level);
-		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, this.level.collideEnemyStar, null, level);
+		this.level.physics.arcade.overlap(this.level.player, this.level.stars, this.level.overlapPlayerStar, null, this.level);
+		this.level.physics.arcade.collide(this.level.player, this.level.enemies, this.level.collidePlayerEnemy, null, this.level);
+		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, this.level.collideEnemyStar, null, this.level);
 		
 		var cursors = this.level.input.keyboard.createCursorKeys();
 		
