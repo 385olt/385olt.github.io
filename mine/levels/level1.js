@@ -1,6 +1,6 @@
-Hrabrov.Game = function() {};
+Hrabrov.Level1 = function() {};
 
-Hrabrov.Game.prototype = {
+Hrabrov.Level1.prototype = {
 	
 	create: function() {
 	    this.add.sprite(0, 0, 'sky');

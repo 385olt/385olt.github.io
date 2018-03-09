@@ -81,7 +81,7 @@ Hrabrov.MainMenu.prototype = {
 	},
 	
 	start: function() {
-		this.state.start('Hrabrov.Game');
+		this.state.start('Hrabrov.Level1');
 	}
 	
 };
