@@ -1,4 +1,4 @@
-Hrabrov.Game = new AbstrLevel();
+Hrabrov.Game = function() {};
 
 prototype = {
 	
