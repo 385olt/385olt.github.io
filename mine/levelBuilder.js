@@ -46,7 +46,7 @@ LevelBuilder.prototype = {
             this.temp = [];
             
             props.forEach(function(item) {
-                var platform = this.level.platforms.create.call(this.level, item.x, item.y, this.platformImage);
+                var platform = this.call.apply(this.level, [this.level.platforms.create, [item.x, item.y, this.platformImage]]);
 		        platform.body.immovable = true;
 		        
 		        this.temp.push(platform);
@@ -60,6 +60,10 @@ LevelBuilder.prototype = {
 		}
 		
 		return res;        
+    },
+    
+    call: function(func, args) {
+        return func.apply(this, args);
     }
     
 };
