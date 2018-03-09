@@ -7,20 +7,14 @@ AbstrLevel = function() {
     this.platformImage = 'ground';
 };
 
-AbstrLevel.prototype = {
-    
-    setLevel: function(level) {
-        this.level = level;
-    },
-    
-    init: function() {   
+AbstrLevel.init = function() {   
         //if (this.level === null) return false;
         
         this.platforms = game.add.group();
 		this.platforms.enableBody = true;
 		
 		
-    },
+    };
     
 //    setPlayer: function(x, y) {
 //        //if (this.level === null) return false;
