@@ -1,5 +1,4 @@
-LevelBuilder = function(game) {
-    this.game = game;
+LevelBuilder = function() {
     this.level = null;
     
     this.gravityConstant = 300;
@@ -10,6 +9,10 @@ LevelBuilder = function(game) {
 
 LevelBuilder.prototype = {
     
+    setLevel: function(level) {
+        this.level = level;
+    },
+    
     newLevel: function() {        
         var level = function() {};
         
@@ -17,10 +20,6 @@ LevelBuilder.prototype = {
 		level.platforms.enableBody = true;
         
         return level;
-    },
-    
-    setLevel: function(level) {
-        this.level = level;
     },
     
     // props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]
@@ -64,3 +63,5 @@ LevelBuilder.prototype = {
     }
     
 };
+
+var levelBuilder = new LevelBuilder();
