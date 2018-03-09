@@ -1,13 +1,13 @@
-Hrabrov.Game = function() {};
+Hrabrov.Game = LevelBuilder.newLevel();
 
-prototype = {
+Hrabrov.Game.prototype = {
 	
 	create: function() {
 	    this.add.sprite(0, 0, 'sky');
-	        
-	    this.init();
 	    
-	    this.setPlayer(this.world.width/2 - 16, this.world.heigh - 64);
+	    LevelBuilder.setLevel(this);
+	    
+	    LevelBuilder.setPlayer(this.world.width/2 - 16, this.world.height - 64);
 
 		var platforms = [{x: 0, y: this.world.height - 32}, 
 		                {x: 400, y: this.world.height - 32},
@@ -19,7 +19,7 @@ prototype = {
 		                {x: -50, y: 150},
 		                {x: this.world.width - 200, y: 150}];
 		
-		this.createPlatform(platforms);
+		LevelBuilder.createPlatform(platforms);
 		
 		// ------ stars
 		
@@ -254,8 +254,24 @@ prototype = {
 		star.body.drag.x = 10;
 		
 		return star;
+	},
+	
+	makeEnemy: function(x = false, y = false) {
+		if (!x) { x = Math.random()*(this.world.width - 16); }		
+		if (!y) { y = Math.random()*(this.world.height - 100); }
+		
+		var enemy = this.enemies.create(x, y, 'fem');
+		enemy.body.gravity.y = 300;
+		enemy.body.collideWorldBounds = true;
+		
+		enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+		enemy.goodDirection = true;
+		enemy.starsKilled = 0;
+		
+		enemy.animations.add('left', [0, 1, 2, 3], 10, true);
+		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+	
+		return enemy;
 	}
 	
 };
-
-Hrabrov.Game.prototype = Object.assign({}, AbstrLevel, prototype);
