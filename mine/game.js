@@ -170,7 +170,7 @@ Hrabrov.Game.prototype = {
 		this.timeLeft += this.timeDelta;
 		this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
 		
-		levelBuilder.makeStar();
+		this.levelBuilder.makeStar();
 		
 		if (this.score > this.nextEnemy * 500) {
 			this.nextEnemy += 1;
