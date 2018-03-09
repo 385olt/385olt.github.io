@@ -9,7 +9,7 @@ Hrabrov.Game.prototype = {
 	    
 	    levelBuilder.init();
 	    
-	    levelBuilder.setPlayer(this.world.width/2 - 16, this.world.height - 64);
+	    levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 
 		var platforms = [{x: 0, y: this.world.height - 32}, 
 		                {x: 400, y: this.world.height - 32},
