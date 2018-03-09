@@ -1,4 +1,4 @@
-Hrabrov.Game = levelBuilder.newLevel(game);
+Hrabrov.Game = function() {};
 
 Hrabrov.Game.prototype = {
 	
@@ -6,6 +6,8 @@ Hrabrov.Game.prototype = {
 	    this.add.sprite(0, 0, 'sky');
 	    
 	    levelBuilder.setLevel(this);
+	    
+	    levelBuilder.init();
 	    
 	    levelBuilder.setPlayer(this.world.width/2 - 16, this.world.height - 64);
 

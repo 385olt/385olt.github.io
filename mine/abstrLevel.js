@@ -13,13 +13,11 @@ LevelBuilder.prototype = {
         this.level = level;
     },
     
-    newLevel: function(game) {        
-        var level = function() {};
+    init: function() {        
+        if (this.level === null) return false;
         
-        level.platforms = game.add.group();
-		level.platforms.enableBody = true;
-        
-        return level;
+        this.level.platforms = this.level.add.group();
+		this.level.platforms.enableBody = true;
     },
     
     // props: {x: NUMBER, y: NUMBER} or [{x: NUMBER, y: NUMBER}, ...]
