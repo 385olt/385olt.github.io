@@ -48,7 +48,7 @@ Hrabrov.Level2.prototype = {
 		    bullet.body.velocity.x = -150;
 		    
 		    this.Apressed = true;
-		} else this.A.pressed = false;
+		} else this.Apressed = false;
         
         // ----- std updates
         this.levelBuilder.updateCollisions();
