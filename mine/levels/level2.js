@@ -37,14 +37,16 @@ Hrabrov.Level2.prototype = {
         
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
-        if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
+        if (!this.Apressed && this.input.keyboard.isDown(Phaser.Keyboard.A)) {
 		    let bullet = this.add.sprite(this.player.x - 32, 
 		                                 this.player.y + this.player.height/2, 
 		                                 'star');
 		    bullet.scale.setTo(.5, .5);
 		    this.physics.arcade.enable(bullet);
-		    bullet.body.velocity.x = -50;
-		}
+		    bullet.body.velocity.x = -150;
+		    
+		    this.Apressed = true;
+		} else this.A.pressed = false;
         
         // ----- std updates
         this.levelBuilder.updateCollisions();
