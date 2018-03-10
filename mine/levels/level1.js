@@ -27,8 +27,6 @@ Hrabrov.Level1.prototype = {
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
-		console.log('hello3');
-		
 		// ------- score
 		this.score = 0;
 		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { font: '16pt Arial', fill: '#000' });
