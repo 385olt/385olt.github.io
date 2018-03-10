@@ -64,12 +64,12 @@ Hrabrov.Level2.prototype = {
         for (let i = 0; i < this.lines.length; i++) {
             let p = this.player.rightLine.intersects(this.lines[i]);
             if (p !== null) {
-                console.log(p.x + ' ' + p.y);
+                console.log('RIGHT: ' + p.x + ' ' + p.y);
             }
             
             p = this.player.leftLine.intersects(this.lines[i]);
             if (p !== null) {
-                console.log(p.x + ' ' + p.y);
+                console.log('LEFT: ' + p.x + ' ' + p.y);
             }
         }
         
