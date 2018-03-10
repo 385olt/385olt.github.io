@@ -30,6 +30,8 @@ Hrabrov.Level2.prototype = {
         for (let i = 0; i < 5; i++) {
             this.AI.makeEnemy(false, 120 + this.rnd.frac() * (this.world.height - 200));
         }
+        
+        this.Apressed = false;
     },
     
     update: function() {
