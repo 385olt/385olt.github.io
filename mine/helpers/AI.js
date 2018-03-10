@@ -14,7 +14,7 @@ AI.prototype = {
         
         this.level.enemies.forEach(function(item) {
             
-            if (this.difficulty == 1 && this.level.rnd.frac() < 1 - this.walkRandomness) {
+            if (this.difficulty == 1 && this.level.rnd.frac() < this.walkRandomness) {
                 item.goodDirectionBlock = this.level.time.totalElapsedSeconds() + 1; 
             } else if (this.difficulty == 1 && item.goodDirectionBlock == undefined) {
                 item.goodDirectionBlock = 0;
