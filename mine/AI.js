@@ -20,6 +20,7 @@ var AI = function(level, difficulty = 'patrol') {
         }, this);
         
         this.level.enemies.forEach(function(item) {
+            console.log('add myAiLines to enemies');
             item.myAiLines = {};
             
             item.myAiLines.right = new Phaser.Line(this.player.x + this.player.width/2, 
