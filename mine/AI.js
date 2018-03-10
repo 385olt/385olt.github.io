@@ -78,13 +78,15 @@ AI.prototype = {
                     var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
                     if (p !== null) {
                         enemy.body.velocity.y = -300;
-                        enemy.body.velocity.x = 50;
+                        enemy.body.velocity.x = 100;
+                        console.log(enemy.hitPlatform);
                     }
                     
                     p = enemy.myAiLines.left.intersects(platform.myAiLines.right);
                     if (p !== null) {
                         enemy.body.velocity.y = -300;
-                        enemy.body.velocity.x = -50;
+                        enemy.body.velocity.x = -100;
+                        console.log(enemy.hitPlatform);
                     }
                 }, this);
 		    }, this);
