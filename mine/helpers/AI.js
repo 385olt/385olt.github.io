@@ -1,7 +1,7 @@
 var AI = function(level, difficulty = 'patrol') {
     let DIFFICULTIES = ['patrol', 'walk'];
     
-    this.walkRandomness = 0.1;
+    this.walkRandomness = 0.001;
     
     this.level = level;    
     this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
@@ -13,7 +13,7 @@ AI.prototype = {
         if (this.level === null) return false;
         
         this.level.enemies.forEach(function(item) { 
-            item.goodDirection = false; 
+            //item.goodDirection = false; 
             item.hitPlatform = false; 
         });
 		
