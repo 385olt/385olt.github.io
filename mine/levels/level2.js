@@ -7,7 +7,7 @@ Hrabrov.Level2.prototype = {
         this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
-	    this.AI = new AI(this);
+	    this.AI = new AI(this, 'walk');
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 	    
@@ -28,55 +28,12 @@ Hrabrov.Level2.prototype = {
         this.levelBuilder.createPlatform(platforms);
         
         for (let i = 0; i < 5; i++) this.levelBuilder.makeEnemy();
-        
-        this.lines = [];
-        this.platforms.forEach(function(item) {
-            var line = new Phaser.Line(item.x, item.y, 
-                                       item.x + 64, item.y);
-            line.platformSide = 'left';
-            this.lines.push(line);
-            
-            line = new Phaser.Line(item.x + item.width - 64, item.y, 
-                                       item.x + item.width, item.y);
-            line.platformSide = 'right';
-            this.lines.push(line);
-        }, this);
-        
-        this.player.rightLine = new Phaser.Line(this.player.x + this.player.width/2, 
-                                            this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 + 200,
-                                            this.player.y + this.player.height/2 - 128);
-        this.player.leftLine = new Phaser.Line(this.player.x + this.player.width/2, 
-                                            this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 - 200,
-                                            this.player.y + this.player.height/2 - 128);
     },
     
     update: function() {
         this.updateSakramar();
         
-        this.player.rightLine.setTo(this.player.x + this.player.width/2, 
-                                    this.player.y + this.player.height/2,
-                                    this.player.x + this.player.width/2 + 200,
-                                    this.player.y + this.player.height/2 - 128);
-        this.player.leftLine.setTo(this.player.x + this.player.width/2, 
-                                    this.player.y + this.player.height/2,
-                                    this.player.x + this.player.width/2 - 200,
-                                    this.player.y + this.player.height/2 - 128);
-        
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
-        
-        for (let i = 0; i < this.lines.length; i++) {
-            let p = this.player.rightLine.intersects(this.lines[i]);
-            if (p !== null && this.lines[i].platformSide == 'left') {
-                console.log('RIGHT: ' + p.x + ' ' + p.y);
-            }
-            
-            p = this.player.leftLine.intersects(this.lines[i]);
-            if (p !== null && this.lines[i].platformSide == 'right') {
-                console.log('LEFT: ' + p.x + ' ' + p.y);
-            }
-        }
         
         // ----- std updates
         this.levelBuilder.updateCollisions();

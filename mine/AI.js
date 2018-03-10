@@ -1,5 +1,37 @@
-var AI = function(level) {
-    this.level = level;
+var AI = function(level, difficulty = 'patrol') {
+    let DIFFICULTIES = ['patrol', 'walk'];
+    
+    this.level = level;    
+    this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
+    
+    if (this.difficulty == 1) {
+        this.level.platforms.forEach(function(item) {
+            item.myAiLines = {};
+            
+            item.myAiLines.left = new Phaser.Line(item.x, 
+                                                  item.y, 
+                                                  item.x + 64, 
+                                                  item.y);
+                                                      
+            item.myAiLines.right = new Phaser.Line(item.x + item.width - 64, 
+                                                   item.y, 
+                                                   item.x + item.width, 
+                                                   item.y);
+        }, this);
+        
+        this.level.enemies.forEach(function(item) {
+            item.myAiLines = {};
+            
+            item.myAiLines.right = new Phaser.Line(this.player.x + this.player.width/2, 
+                                            this.player.y + this.player.height/2,
+                                            this.player.x + this.player.width/2 + 200,
+                                            this.player.y + this.player.height/2 - 128);
+            item.myAiLines.left = new Phaser.Line(this.player.x + this.player.width/2, 
+                                            this.player.y + this.player.height/2,
+                                            this.player.x + this.player.width/2 - 200,
+                                            this.player.y + this.player.height/2 - 128);         
+        });
+    }
 };
 
 AI.prototype = {
@@ -45,6 +77,34 @@ AI.prototype = {
 			}
 			
 		});
+		
+		// dificulty 1
+		if (this.difficulty == 1) {
+		    this.level.enemies.forEach(function(enemy) {
+		        enemy.myAiLines.right.setTo(enemy.x + enemy.width/2, 
+                                           enemy.y + enemy.height/2,
+                                           enemy.x + enemy.width/2 + 200,
+                                           enemy.y + enemy.height/2 - 128);
+                enemy.myAiLines.left.setTo(enemy.x + enemy.width/2, 
+                                           enemy.y + enemy.height/2,
+                                           enemy.x + enemy.width/2 - 200,
+                                           enemy.y + enemy.height/2 - 128);
+                
+                this.level.platforms.forEach(function(platform) {
+                    var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
+                    if (p !== null) {
+                        enemy.body.velocity.y = -300;
+                        enemy.body.velocity.x = 150;
+                    }
+                    
+                    p = enemy.myAiLines.left.intersects(platform.myAiLines.right);
+                    if (p !== null) {
+                        enemy.body.velocity.y = -300;
+                        enemy.body.velocity.x = -150;
+                    }
+                });
+		    });
+        }
     },
 	
 	collideEnemyPlatform: function(enemy, platform) {
