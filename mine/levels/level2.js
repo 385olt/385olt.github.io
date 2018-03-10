@@ -41,7 +41,7 @@ Hrabrov.Level2.prototype = {
         }
         
         var myDr = (sakramar.myDirection == 'right' ? 1 : -1);
-        sakramar.body.velocity.x = myDr * 150;
+        sakramar.body.velocity.x = myDr * 300;
         sakramar.animations.play(myDr == 1 ? 'right' : 'left');
         
         // ----- std updates
