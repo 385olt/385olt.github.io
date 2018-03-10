@@ -37,10 +37,14 @@ Hrabrov.Level2.prototype = {
         
         console.log(this.lines.length);
         
-        this.player.line = new Phaser.Line(this.player.x + this.player.width/2, 
+        this.player.rightLine = new Phaser.Line(this.player.x + this.player.width/2, 
                                             this.player.y + this.player.height/2,
                                             this.player.x + this.player.width/2 + 64,
-                                            this.player.y + this.player.height/2 + 64);
+                                            this.player.y + this.player.height/2 - 64);
+        this.player.leftLine = new Phaser.Line(this.player.x + this.player.width/2, 
+                                            this.player.y + this.player.height/2,
+                                            this.player.x + this.player.width/2 - 64,
+                                            this.player.y + this.player.height/2 - 64);
     },
     
     update: function() {
@@ -49,7 +53,12 @@ Hrabrov.Level2.prototype = {
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
         for (let i = 0; i < this.lines.length; i++) {
-            let p = this.player.line.intersects(this.lines[i]);
+            let p = this.player.rightLine.intersects(this.lines[i]);
+            if (p !== null) {
+                console.log(p)
+            }
+            
+            p = this.player.leftLine.intersects(this.lines[i]);
             if (p !== null) {
                 console.log(p)
             }
