@@ -76,13 +76,13 @@ AI.prototype = {
 		            }
                     
                     var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
-                    if (p !== null && this.level.rnd.frac() < 0.1) {
+                    if (p !== null && this.level.rnd.frac() < 0.01) {
                         enemy.body.velocity.y = -300;
                         enemy.body.velocity.x = 100;
                     }
                     
                     p = enemy.myAiLines.left.intersects(platform.myAiLines.right);
-                    if (p !== null && this.level.rnd.frac() < 0.1) {
+                    if (p !== null && this.level.rnd.frac() < 0.01) {
                         enemy.body.velocity.y = -300;
                         enemy.body.velocity.x = -100;
                     }
