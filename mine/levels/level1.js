@@ -10,9 +10,9 @@ Hrabrov.Level1.prototype = {
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 
-		var platforms = [{x: 0, y: this.world.height - 32}, 
-		                {x: 400, y: this.world.height - 32},
-		                {x: 800, y: this.world.height - 32}, 
+		var platforms = [{x: -120, y: this.world.height - 32}, 
+		                {x: 280, y: this.world.height - 32},
+		                {x: 680, y: this.world.height - 32}, 
 		                {x: 350, y: 650},
 		                {x: -150, y: 400},
 		                {x: this.world.width - 150, y: 400},
