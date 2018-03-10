@@ -37,7 +37,7 @@ Hrabrov.Level2.prototype = {
     },
     
     setSakramar: function(x, y) {        
-        var sakramar = this.level.add.sprite(x, y, 'sakramar');
+        var sakramar = this.add.sprite(x, y, 'sakramar');
 
 		this.physics.arcade.enable(sakramar);
 
