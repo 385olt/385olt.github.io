@@ -29,10 +29,12 @@ Hrabrov.Level2.prototype = {
         
         for (let i = 0; i < 5; i++) this.levelBuilder.makeEnemy();
         
+        this.lines = [];
         this.platforms.forEach(function(item) {
-            new Phaser.Line(item.x, item.y, item.x + 32, item.y);
+            this.lines.push(new Phaser.Line(item.x, item.y, item.x + 32, item.y));
         }, this);
-            
+        
+        console.log(this.lines.length);
     },
     
     update: function() {
