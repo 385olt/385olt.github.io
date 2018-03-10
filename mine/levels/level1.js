@@ -6,7 +6,7 @@ Hrabrov.Level1.prototype = {
 	    this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
-	    this.AI = new AI(this, 'walk');
+	    this.AI = new AI(this);
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 
@@ -24,7 +24,7 @@ Hrabrov.Level1.prototype = {
 		
 		for (var i = 0; i < 3; i++) this.levelBuilder.makeStar();
 		
-		for (var i = 0; i < 3; i++) this.levelBuilder.makeEnemy();
+		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
 		// ------- score
 		this.score = 0;
@@ -109,7 +109,7 @@ Hrabrov.Level1.prototype = {
 		
 		if (this.score > this.nextEnemy * 500) {
 			this.nextEnemy += 1;
-			this.levelBuilder.makeEnemy();
+			this.AI.makeEnemy();
 		}
 		
 		if (this.score > this.nextStar * 50 * (1 - this.timeDelta)) {

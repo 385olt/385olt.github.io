@@ -1,10 +1,7 @@
-var AI = function(level, difficulty = 'patrol') {
-    let DIFFICULTIES = ['patrol', 'walk'];
-    
+var AI = function(level, difficulty = 'patrol') {    
     this.walkRandomness = 0.001;
     
-    this.level = level;    
-    this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
+    this.level = level;
 };
 
 AI.prototype = {
@@ -14,14 +11,9 @@ AI.prototype = {
         
         this.level.enemies.forEach(function(item) {
             
-            if (this.difficulty == 1 && this.level.rnd.frac() < this.walkRandomness) {
+            if (this.level.rnd.frac() < this.walkRandomness) {
                 item.goodDirectionBlock = this.level.time.totalElapsedSeconds() + 3; 
-            } else if (this.difficulty == 1 && item.goodDirectionBlock == undefined) {
-                item.goodDirectionBlock = 0;
-                item.goodDirection = false;
-            } else if (this.difficulty == 1 && item.goodDirectionBlock > this.level.time.totalElapsedSeconds()) {
-                item.goodDirection = true;
-            } else {
+            } else if (item.goodDirectionBlock < this.level.time.totalElapsedSeconds()) {
                 item.goodDirection = false;
             }
             
@@ -69,42 +61,31 @@ AI.prototype = {
 			
 		});
 		
-		if (this.difficulty == 1) {
-		    this.level.enemies.forEach(function(enemy) {
-		        if (!enemy.hitPlatform) return;
-		        
-		        if (enemy.myAiLines === undefined) {
-		            this.addLinesToEnemy(enemy)
-		        } else {		        
-		            enemy.myAiLines.right.setTo(enemy.x + enemy.width/2, 
-                                               enemy.y + enemy.height/2,
-                                               enemy.x + enemy.width/2 + 200,
-                                               enemy.y + enemy.height/2 - 128);
-                    enemy.myAiLines.left.setTo(enemy.x + enemy.width/2, 
-                                               enemy.y + enemy.height/2,
-                                               enemy.x + enemy.width/2 - 200,
-                                               enemy.y + enemy.height/2 - 128);
+		// Jumping
+		this.level.enemies.forEach(function(enemy) {
+		    if (!enemy.hitPlatform) return;
+		    
+		    this.updateLinesToEnemy(enemy);
+		    
+		    this.level.platforms.forEach(function(platform) {
+                if (platform.myAiLines === undefined) {
+		            this.addLinesToPlatform(platform)
+		        }
+                
+                var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
+                if (p !== null && this.level.rnd.frac() < this.walkRandomness) {
+                    enemy.body.velocity.y = -300;
+                    enemy.body.velocity.x = 150;
                 }
                 
-                this.level.platforms.forEach(function(platform) {
-                    if (platform.myAiLines === undefined) {
-		                this.addLinesToPlatform(platform)
-		            }
-                    
-                    var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
-                    if (p !== null && this.level.rnd.frac() < this.walkRandomness) {
-                        enemy.body.velocity.y = -300;
-                        enemy.body.velocity.x = 150;
-                    }
-                    
-                    p = enemy.myAiLines.left.intersects(platform.myAiLines.right);
-                    if (p !== null && this.level.rnd.frac() < this.walkRandomness) {
-                        enemy.body.velocity.y = -300;
-                        enemy.body.velocity.x = -150;
-                    }
-                }, this);
-		    }, this);
-        }
+                p = enemy.myAiLines.left.intersects(platform.myAiLines.right);
+                if (p !== null && this.level.rnd.frac() < this.walkRandomness) {
+                    enemy.body.velocity.y = -300;
+                    enemy.body.velocity.x = -150;
+                }
+            }, this);
+		}, this);
+		
     },
 	
 	collideEnemyPlatform: function(enemy, platform) {
@@ -137,6 +118,29 @@ AI.prototype = {
 		
 	},
 	
+	makeEnemy: function(x = false, y = false) {
+	    if (this.level === null) return false;
+	    
+		if (!x) { x = Math.random()*(this.level.world.width - 16); }		
+		if (!y) { y = Math.random()*(this.level.world.height - 100); }
+		
+		var enemy = this.level.enemies.create(x, y, this.enemyImage);
+		enemy.body.gravity.y = 300;
+		enemy.body.collideWorldBounds = true;
+		
+		enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+		enemy.goodDirection = true;
+		enemy.goodDirectionBlock = 0;
+		enemy.starsKilled = 0;
+		
+		
+		
+		enemy.animations.add('left', [0, 1, 2, 3], 10, true);
+		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
+	
+		return enemy;
+	},
+	
 	addLinesToEnemy: function(enemy) {
 	    enemy.myAiLines = {};
         
@@ -148,6 +152,17 @@ AI.prototype = {
                                                enemy.y + enemy.height/2,
                                                enemy.x + enemy.width/2 - 200,
                                                enemy.y + enemy.height/2 - 128); 
+	},
+	
+	updateLinesToEnemy: function(enemy) {
+	    enemy.myAiLines.right.setTo(enemy.x + enemy.width/2, 
+                                    enemy.y + enemy.height/2,
+                                    enemy.x + enemy.width/2 + 200,
+                                    enemy.y + enemy.height/2 - 128);
+        enemy.myAiLines.left.setTo(enemy.x + enemy.width/2, 
+                                   enemy.y + enemy.height/2,
+                                   enemy.x + enemy.width/2 - 200,
+                                   enemy.y + enemy.height/2 - 128);
 	},
 	
 	addLinesToPlatform: function(platform) {
