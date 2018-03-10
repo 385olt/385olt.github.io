@@ -31,20 +31,20 @@ Hrabrov.Level2.prototype = {
         
         this.lines = [];
         this.platforms.forEach(function(item) {
-            this.lines.push(new Phaser.Line(item.x, item.y, item.x + 32, item.y));
-            this.lines.push(new Phaser.Line(item.x + item.width - 32, item.y, item.x + item.width, item.y));
+            this.lines.push(new Phaser.Line(item.x, item.y, item.x + 64, item.y));
+            this.lines.push(new Phaser.Line(item.x + item.width - 64, item.y, item.x + item.width, item.y));
         }, this);
         
         console.log(this.lines.length);
         
         this.player.rightLine = new Phaser.Line(this.player.x + this.player.width/2, 
                                             this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 + 64,
-                                            this.player.y + this.player.height/2 - 64);
+                                            this.player.x + this.player.width/2 + 256,
+                                            this.player.y + this.player.height/2 - 256);
         this.player.leftLine = new Phaser.Line(this.player.x + this.player.width/2, 
                                             this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 - 64,
-                                            this.player.y + this.player.height/2 - 64);
+                                            this.player.x + this.player.width/2 - 256,
+                                            this.player.y + this.player.height/2 - 256);
     },
     
     update: function() {
@@ -55,12 +55,12 @@ Hrabrov.Level2.prototype = {
         for (let i = 0; i < this.lines.length; i++) {
             let p = this.player.rightLine.intersects(this.lines[i]);
             if (p !== null) {
-                console.log(p)
+                console.log(p.x + ' ' + p.y);
             }
             
             p = this.player.leftLine.intersects(this.lines[i]);
             if (p !== null) {
-                console.log(p)
+                console.log(p.x + ' ' + p.y);
             }
         }
         
