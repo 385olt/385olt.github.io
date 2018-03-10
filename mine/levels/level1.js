@@ -6,7 +6,9 @@ Hrabrov.Level1.prototype = {
 	    this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
+	    console.log('bfore');
 	    this.AI = new AI(this);
+	    console.log('after');
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 
