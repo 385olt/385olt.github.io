@@ -66,6 +66,7 @@ AI.prototype = {
                 }
                 
                 this.level.platforms.forEach(function(platform) {
+                    console.log('test');
                     if (platform.myAiLines === undefined) {
 		                this.addLinesToPlatform(platform)
 		            }
@@ -81,7 +82,7 @@ AI.prototype = {
                         enemy.body.velocity.y = -300;
                         enemy.body.velocity.x = -150;
                     }
-                });
+                }, this);
 		    }, this);
         }
     },
