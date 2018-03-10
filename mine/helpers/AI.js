@@ -1,6 +1,8 @@
 var AI = function(level, difficulty = 'patrol') {
     let DIFFICULTIES = ['patrol', 'walk'];
     
+    this.walkRandomness = 0.001;
+    
     this.level = level;    
     this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
 };
@@ -76,15 +78,15 @@ AI.prototype = {
 		            }
                     
                     var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
-                    if (p !== null && this.level.rnd.frac() < 0.001) {
+                    if (p !== null && this.level.rnd.frac() < this.walkRandomness) {
                         enemy.body.velocity.y = -300;
-                        enemy.body.velocity.x = 100;
+                        enemy.body.velocity.x = 150;
                     }
                     
                     p = enemy.myAiLines.left.intersects(platform.myAiLines.right);
-                    if (p !== null && this.level.rnd.frac() < 0.001) {
+                    if (p !== null && this.level.rnd.frac() < this.walkRandomness) {
                         enemy.body.velocity.y = -300;
-                        enemy.body.velocity.x = -100;
+                        enemy.body.velocity.x = -150;
                     }
                 }, this);
 		    }, this);
