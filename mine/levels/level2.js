@@ -50,6 +50,15 @@ Hrabrov.Level2.prototype = {
     update: function() {
         this.updateSakramar();
         
+        this.player.rightLine.setTo(this.player.x + this.player.width/2, 
+                                    this.player.y + this.player.height/2,
+                                    this.player.x + this.player.width/2 + 256,
+                                    this.player.y + this.player.height/2 - 256);
+        this.player.leftLine.setTo(this.player.x + this.player.width/2, 
+                                    this.player.y + this.player.height/2,
+                                    this.player.x + this.player.width/2 - 256,
+                                    this.player.y + this.player.height/2 - 256);
+        
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
         for (let i = 0; i < this.lines.length; i++) {
