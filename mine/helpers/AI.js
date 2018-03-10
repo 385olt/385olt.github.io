@@ -22,10 +22,10 @@ AI.prototype = {
         }, this);
 		
 	    this.level.physics.arcade.collide(this.level.enemies, this.level.platforms, 
-		            this.collideEnemyPlatform);
+		            this.collideEnemyPlatform, null, this);
 		            
 		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, 
-		            this.collideEnemyStar);
+		            this.collideEnemyStar, null, this);
 		
 		this.level.enemies.forEach(function(item) {
 		
