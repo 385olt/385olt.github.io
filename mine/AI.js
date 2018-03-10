@@ -82,7 +82,7 @@ AI.prototype = {
                         enemy.body.velocity.x = -150;
                     }
                 });
-		    });
+		    }, this);
         }
     },
 	
