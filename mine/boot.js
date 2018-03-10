@@ -17,6 +17,7 @@ Hrabrov.Boot.prototype = {
     	this.load.image('ground', 'assets/platform.png');
     	this.load.image('star', 'assets/star.png');
     	this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    	this.load.spritesheet('sakramar', 'assets/sakramar.png', 32, 48);
     	this.load.spritesheet('fem', 'assets/fem.png', 32, 48);
     
 	},
