@@ -32,7 +32,7 @@ Hrabrov.Level2.prototype = {
     update: function() {
         this.updateSakramar();
         
-        if (this.rnd.frac() < 0.01) this.spawnEnemy();
+        if (this.rnd.frac() < 0.001) this.spawnEnemy();
         
         // ----- std updates
         this.levelBuilder.updateCollisions();
@@ -73,8 +73,10 @@ Hrabrov.Level2.prototype = {
     },
     
     spawnEnemy: function() {
+        if (this.enemies.length > 10) return false;
+        
         x = this.sakramar.x;
-        y = this.sakramar.bottom + 32;
+        y = this.sakramar.y + this.sakramar.height + 32;
         this.levelBuilder.makeEnemy(x, y);
     }
     
