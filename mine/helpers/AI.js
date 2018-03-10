@@ -25,7 +25,7 @@ AI.prototype = {
 		            this.collideEnemyPlatform);
 		            
 		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, 
-		            this.collideEnemyStar, null, this.level);
+		            this.collideEnemyStar);
 		
 		this.level.enemies.forEach(function(item) {
 		
