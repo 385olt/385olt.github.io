@@ -32,7 +32,7 @@ Hrabrov.Level2.prototype = {
     update: function() {
         this.updateSakramar();
         
-        if (this.rnd.frac() < 0.001) this.spawnEnemy();
+        if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
         // ----- std updates
         this.levelBuilder.updateCollisions();
