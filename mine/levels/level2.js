@@ -26,6 +26,12 @@ Hrabrov.Level2.prototype = {
 	                     {x: 760, y: 216}];
         
         this.levelBuilder.createPlatform(platforms);
+        
+        for (let i = 0; i < 5; i++) this.levelBuilder.makeEnemy();
+        
+        this.platforms.forEach(function(item) {
+            new Phaser.Line(item.x, item.y, item.x + 32, item.y);
+        }, this);
             
     },
     
@@ -73,7 +79,7 @@ Hrabrov.Level2.prototype = {
     },
     
     spawnEnemy: function() {
-        if (this.enemies.length > 10) return false;
+        if (this.enemies.length > 20) return false;
         
         x = this.sakramar.x;
         y = this.sakramar.y + this.sakramar.height + 32;
