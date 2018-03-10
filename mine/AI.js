@@ -5,6 +5,7 @@ var AI = function(level, difficulty = 'patrol') {
     this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
     console.log('AI constructor');
     if (this.difficulty == 1) {
+        console.log('AI constructor difficulty 1');
         this.level.platforms.forEach(function(item) {
             item.myAiLines = {};
             
