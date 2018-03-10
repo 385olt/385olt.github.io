@@ -10,7 +10,13 @@ Hrabrov.Level2.prototype = {
 	    this.AI = new AI(this);
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
+	    
+	    let platforms = [{x: -120, y: this.world.height - 32},
+	                     {x: 280, y: this.world.height - 32},
+	                     {x: 680, y: this.world.height - 32}];
         
+        this.levelBuilder.createPlatform(platforms);
+            
     },
     
     update: function() {
