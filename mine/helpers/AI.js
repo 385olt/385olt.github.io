@@ -33,8 +33,10 @@ AI.prototype = {
 				}
 			}
 			
-			if (item.body.onWall()) {
-				item.myDirection = item.myDirection == 'left' ? 'right' : 'left';
+			if (item.body.touching.left) {
+				item.myDirection = 'right';
+			} else if (item.body.touching.right) {
+			    item.myDirection = 'left';
 			}
 						
 			if (item.myDirection == 'left') {
@@ -54,7 +56,6 @@ AI.prototype = {
 			
 		});
 		
-		// dificulty 1
 		if (this.difficulty == 1) {
 		    this.level.enemies.forEach(function(enemy) {
 		        if (!enemy.hitPlatform) return;
