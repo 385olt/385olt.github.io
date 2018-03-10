@@ -33,10 +33,12 @@ AI.prototype = {
 				}
 			}
 			
-			if (item.body.touching.left) {
-				item.myDirection = 'right';
-			} else if (item.body.touching.right) {
-			    item.myDirection = 'left';
+			if (item.body.onWall()) {
+				if (item.myDirection == 'left') {
+				    item.myDirection = 'right';
+				} else {
+				    item.myDirection = 'left';
+				}
 			}
 						
 			if (item.myDirection == 'left') {
