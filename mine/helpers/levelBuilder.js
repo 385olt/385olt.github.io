@@ -6,7 +6,6 @@ var LevelBuilder = function(level) {
     this.playerImage = 'dude';
     this.platformImage = 'ground';
     this.starImage = 'star';
-    this.enemyImage = 'fem';
     
     level.platforms = level.add.group();
 	level.platforms.enableBody = true;

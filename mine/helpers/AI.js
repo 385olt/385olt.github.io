@@ -1,5 +1,6 @@
 var AI = function(level) {    
     this.walkRandomness = 0.001;
+    this.enemyImage = 'fem';
     
     this.level = level;
 };
