@@ -30,8 +30,21 @@ Hrabrov.Level2.prototype = {
     },
     
     update: function() {
-        this.physics.arcade.collide(this.sakramar, this.platforms);
+        // ----- sakramar
+        var sakramar = this.sakramar;
+        this.physics.arcade.collide(sakramar, this.platforms);
         
+        if (sakramar.x < 32 || 
+                sakramar.x + sakramar.width > this.world.width - 32) {
+            
+            sakramar.myDirection = (sakramar.myDirection == 'right' ? 'left' : 'right');
+        }
+        
+        var myDr = (sakramar.myDirection == 'right' ? 1 : -1);
+        sakramar.body.velocity.x = myDr * 150;
+        sakramar.animations.play(myDr == 1 ? 'right' : 'left');
+        
+        // ----- std updates
         this.levelBuilder.updateCollisions();
         this.levelBuilder.updateControls();
         
@@ -48,6 +61,8 @@ Hrabrov.Level2.prototype = {
 
 		sakramar.animations.add('left', [0, 1, 2, 3], 10, true);
 		sakramar.animations.add('right', [5, 6, 7, 8], 10, true);
+		
+		sakramar.myDirection = 'left';
 				
 		this.sakramar = sakramar;    
     }
