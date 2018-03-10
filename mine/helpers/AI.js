@@ -15,7 +15,7 @@ AI.prototype = {
         this.level.enemies.forEach(function(item) {
             item.goodDirection = false;
             
-            if (this.difficulty == 1 && this.level.rnd.frac() < this.walkRandomness * 10) {
+            if (this.difficulty == 1 && this.level.rnd.frac() < this.walkRandomness * 100) {
                 item.goodDirection = true; 
             }
             
