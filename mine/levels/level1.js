@@ -22,10 +22,10 @@ Hrabrov.Level1.prototype = {
 		                {x: this.world.width - 200, y: 150}];
 		
 		this.levelBuilder.createPlatform(platforms);
-		
-		console.log('hello2');
-		
+				
 		for (var i = 0; i < 3; i++) this.levelBuilder.makeStar();
+		
+		console.log('hello3');
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
