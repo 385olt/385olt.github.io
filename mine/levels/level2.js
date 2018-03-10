@@ -30,7 +30,18 @@ Hrabrov.Level2.prototype = {
     },
     
     update: function() {
-        // ----- sakramar
+        this.updateSakramar();
+        
+        if (this.rnd.frac() < 0.01) this.spawnEnemy();
+        
+        // ----- std updates
+        this.levelBuilder.updateCollisions();
+        this.levelBuilder.updateControls();
+        
+        this.AI.update();
+    },
+    
+    updateSakramar: function() {
         var sakramar = this.sakramar;
         this.physics.arcade.collide(sakramar, this.platforms);
         
@@ -43,12 +54,6 @@ Hrabrov.Level2.prototype = {
         var myDr = (sakramar.myDirection == 'right' ? 1 : -1);
         sakramar.body.velocity.x = myDr * 300;
         sakramar.animations.play(myDr == 1 ? 'right' : 'left');
-        
-        // ----- std updates
-        this.levelBuilder.updateCollisions();
-        this.levelBuilder.updateControls();
-        
-        this.AI.update();
     },
     
     setSakramar: function(x, y) {        
@@ -65,6 +70,12 @@ Hrabrov.Level2.prototype = {
 		sakramar.myDirection = 'left';
 				
 		this.sakramar = sakramar;    
+    },
+    
+    spawnEnemy: function() {
+        x = this.sakramar.x;
+        y = this.sakramar.bottom + 32;
+        this.levelBuilder.makeEnemy(x, y);
     }
     
 };
