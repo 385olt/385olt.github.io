@@ -19,7 +19,7 @@ var AI = function(level, difficulty = 'patrol') {
                                                    item.x + item.width, 
                                                    item.y);
         }, this);
-        
+        console.log('AI constructor difficulty 1 pre enemies');
         this.level.enemies.forEach(function(item) {
             console.log('add myAiLines to enemies');
             item.myAiLines = {};
