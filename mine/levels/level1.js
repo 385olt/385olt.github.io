@@ -6,9 +6,8 @@ Hrabrov.Level1.prototype = {
 	    this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
-	    console.log('bfore');
+	    
 	    this.AI = new AI(this);
-	    console.log('after');
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 
@@ -44,6 +43,7 @@ Hrabrov.Level1.prototype = {
 		this.timeLeft = 10;
 		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { font: '16pt Arial', fill: '#000' });
 		
+		console.log('hello');
 	},
 	
 	update: function() {
