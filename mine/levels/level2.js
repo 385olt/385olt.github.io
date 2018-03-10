@@ -39,12 +39,12 @@ Hrabrov.Level2.prototype = {
         
         this.player.rightLine = new Phaser.Line(this.player.x + this.player.width/2, 
                                             this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 + 256,
-                                            this.player.y + this.player.height/2 - 256);
+                                            this.player.x + this.player.width/2 + 128,
+                                            this.player.y + this.player.height/2 - 128);
         this.player.leftLine = new Phaser.Line(this.player.x + this.player.width/2, 
                                             this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 - 256,
-                                            this.player.y + this.player.height/2 - 256);
+                                            this.player.x + this.player.width/2 - 128,
+                                            this.player.y + this.player.height/2 - 128);
     },
     
     update: function() {
@@ -52,12 +52,12 @@ Hrabrov.Level2.prototype = {
         
         this.player.rightLine.setTo(this.player.x + this.player.width/2, 
                                     this.player.y + this.player.height/2,
-                                    this.player.x + this.player.width/2 + 256,
-                                    this.player.y + this.player.height/2 - 256);
+                                    this.player.x + this.player.width/2 + 128,
+                                    this.player.y + this.player.height/2 - 128);
         this.player.leftLine.setTo(this.player.x + this.player.width/2, 
                                     this.player.y + this.player.height/2,
-                                    this.player.x + this.player.width/2 - 256,
-                                    this.player.y + this.player.height/2 - 256);
+                                    this.player.x + this.player.width/2 - 128,
+                                    this.player.y + this.player.height/2 - 128);
         
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
