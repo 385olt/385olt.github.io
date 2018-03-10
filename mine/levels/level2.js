@@ -31,11 +31,16 @@ Hrabrov.Level2.prototype = {
         
         this.lines = [];
         this.platforms.forEach(function(item) {
-            this.lines.push(new Phaser.Line(item.x, item.y, item.x + 64, item.y));
-            this.lines.push(new Phaser.Line(item.x + item.width - 64, item.y, item.x + item.width, item.y));
+            let line = new Phaser.Line(item.x, item.y, 
+                                       item.x + 64, item.y);
+            line.platformSide = 'left';
+            this.lines.push(line);
+            
+            let line = new Phaser.Line(item.x + item.width - 64, item.y, 
+                                       item.x + item.width, item.y);
+            line.platformSide = 'right';
+            this.lines.push(line);
         }, this);
-        
-        console.log(this.lines.length);
         
         this.player.rightLine = new Phaser.Line(this.player.x + this.player.width/2, 
                                             this.player.y + this.player.height/2,
@@ -63,12 +68,12 @@ Hrabrov.Level2.prototype = {
         
         for (let i = 0; i < this.lines.length; i++) {
             let p = this.player.rightLine.intersects(this.lines[i]);
-            if (p !== null) {
+            if (p !== null && this.lines[i].platformSide == 'left') {
                 console.log('RIGHT: ' + p.x + ' ' + p.y);
             }
             
             p = this.player.leftLine.intersects(this.lines[i]);
-            if (p !== null) {
+            if (p !== null && this.lines[i].platformSide == 'right') {
                 console.log('LEFT: ' + p.x + ' ' + p.y);
             }
         }
