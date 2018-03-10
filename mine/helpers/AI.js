@@ -111,7 +111,7 @@ AI.prototype = {
 	
 	collideEnemyStar: function(enemy, star) {
 		
-		if (this.rnd.frac() < 0.01) {
+		if (this.level.rnd.frac() < 0.01) {
 			star.kill();
 			enemy.starsKilled += 1;
 		}
@@ -131,7 +131,9 @@ AI.prototype = {
 		enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
 		enemy.goodDirection = true;
 		enemy.goodDirectionBlock = 0;
-		enemy.starsKilled = 0;		
+		enemy.starsKilled = 0;
+		
+		this.addLinesToEnemy(enemy);	
 		
 		enemy.animations.add('left', [0, 1, 2, 3], 10, true);
 		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
