@@ -1,4 +1,4 @@
-var AI = function(level, difficulty = 'patrol') {    
+var AI = function(level) {    
     this.walkRandomness = 0.001;
     
     this.level = level;
@@ -131,9 +131,7 @@ AI.prototype = {
 		enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
 		enemy.goodDirection = true;
 		enemy.goodDirectionBlock = 0;
-		enemy.starsKilled = 0;
-		
-		
+		enemy.starsKilled = 0;		
 		
 		enemy.animations.add('left', [0, 1, 2, 3], 10, true);
 		enemy.animations.add('right', [5, 6, 7, 8], 10, true);
