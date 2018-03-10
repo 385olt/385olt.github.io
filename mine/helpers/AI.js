@@ -12,9 +12,11 @@ AI.prototype = {
     update: function() {
         if (this.level === null) return false;
         
-        this.level.enemies.forEach(function(item) { 
+        this.level.enemies.forEach(function(item) {
+            item.goodDirection = false;
+            
             if (this.difficulty == 1 && this.level.rnd.frac() < this.walkRandomness) { 
-                item.goodDirection = false; 
+                item.goodDirection = true; 
             }
             
             item.hitPlatform = false; 
