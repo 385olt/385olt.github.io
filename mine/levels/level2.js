@@ -14,6 +14,9 @@ Hrabrov.Level2.prototype = {
 	    let platforms = [{x: -120, y: this.world.height - 32},
 	                     {x: 280, y: this.world.height - 32},
 	                     {x: 680, y: this.world.height - 32},
+	                     {x: -120, y: 100},
+	                     {x: 280, y: 100},
+	                     {x: 680, y: 100},
 	                     {x: 0, y: 400},
 	                     {x: 560, y: 400}];
         
