@@ -3,7 +3,7 @@ var AI = function(level, difficulty = 'patrol') {
     
     this.level = level;    
     this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
-    console.log('AI constructor');
+    console.log('AI constructor :' + this.difficulty);
     if (this.difficulty == 1) {
         console.log('AI constructor difficulty 1');
         this.level.platforms.forEach(function(item) {
