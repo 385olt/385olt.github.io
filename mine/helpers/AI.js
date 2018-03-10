@@ -36,7 +36,7 @@ AI.prototype = {
 			if (item.body.onWall()) {
 				if (item.myDirection == 'left') {
 				    item.myDirection = 'right';
-				} else {
+				} else if (item.myDirection == 'right'){
 				    item.myDirection = 'left';
 				}
 			}
