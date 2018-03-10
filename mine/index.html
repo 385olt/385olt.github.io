@@ -5,15 +5,16 @@
 	<title>Собираем на жену</title>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
 
-    <script src="utils.js"></script>
-    <script src="levelBuilder.js"></script>
-    <script src="AI.js"></script>
+    <script src="helpers/utils.js"></script>
+    <script src="helpers/levelBuilder.js"></script>
+    <script src="helpers/AI.js"></script>
     
     <script src="boot.js"></script>
     <script src="mainMenu.js"></script>
+    <script src="gameOver.js"></script>
+    
     <script src="levels/level1.js"></script>
     <script src="levels/level2.js"></script>
-    <script src="gameOver.js"></script>
 
     <style type="text/css">
         body {
@@ -45,8 +46,10 @@
 
     game.state.add('Hrabrov.Boot', Hrabrov.Boot);
     game.state.add('Hrabrov.MainMenu', Hrabrov.MainMenu);
+    
     game.state.add('Hrabrov.Level1', Hrabrov.Level1);
     game.state.add('Hrabrov.Level2', Hrabrov.Level2);
+    
     game.state.add('Hrabrov.GameOver', Hrabrov.GameOver);
 
     game.state.start('Hrabrov.Boot');
