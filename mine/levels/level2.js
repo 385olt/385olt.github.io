@@ -41,7 +41,7 @@ Hrabrov.Level2.prototype = {
 		    let bullet = this.add.sprite(this.player.x - 32, 
 		                                 this.player.y + this.player.height/2, 
 		                                 'star');
-		    bullet.scale(.5, .5);
+		    bullet.scale.setTo(.5, .5);
 		    bullet.body.velocity.x = -50;
 		}
         
