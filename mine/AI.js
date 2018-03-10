@@ -94,8 +94,8 @@ AI.prototype = {
     },
 	
 	collideEnemyPlatform: function(enemy, platform) {
-	    enemy.hitPlatform = true;
 		if (enemy.body.touching.down && platform.body.touching.up) {
+			enemy.hitPlatform = true;
 			
 			if (['left', 'right'].indexOf(enemy.myDirection) == -1) {
 				enemy.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
