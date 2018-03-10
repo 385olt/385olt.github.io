@@ -42,6 +42,7 @@ Hrabrov.Level2.prototype = {
 		                                 this.player.y + this.player.height/2, 
 		                                 'star');
 		    bullet.scale.setTo(.5, .5);
+		    this.physics.arcade.enable(bullet);
 		    bullet.body.velocity.x = -50;
 		}
         
