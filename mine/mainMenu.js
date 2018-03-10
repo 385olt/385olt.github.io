@@ -78,7 +78,7 @@ Hrabrov.MainMenu.prototype = {
 			this.start();
 		}
 		
-		if (this.input.keyboard.isDown(Phaser.Keyboard.O)) {
+		if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
 		    this.state.start('Hrabrov.Level2');
 		}
 		
