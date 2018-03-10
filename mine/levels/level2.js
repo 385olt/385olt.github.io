@@ -34,10 +34,10 @@ Hrabrov.Level2.prototype = {
         var sakramar = this.sakramar;
         this.physics.arcade.collide(sakramar, this.platforms);
         
-        if (sakramar.x < 32 || 
-                sakramar.x + sakramar.width > this.world.width - 32) {
-            
-            sakramar.myDirection = (sakramar.myDirection == 'right' ? 'left' : 'right');
+        if (sakramar.x < 32) {
+            sakramar.myDirection = 'right';
+        } else if (sakramar.x + sakramar.width > this.world.width - 32) {
+            sakramar.myDirection = 'left';
         }
         
         var myDr = (sakramar.myDirection == 'right' ? 1 : -1);
