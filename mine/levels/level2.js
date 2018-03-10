@@ -30,6 +30,8 @@ Hrabrov.Level2.prototype = {
     },
     
     update: function() {
+        this.physics.arcade.collide(this.sakramar, this.platforms);
+        
         this.levelBuilder.updateCollisions();
         this.levelBuilder.updateControls();
         
