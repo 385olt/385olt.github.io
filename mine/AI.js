@@ -3,9 +3,8 @@ var AI = function(level, difficulty = 'patrol') {
     
     this.level = level;    
     this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
-    console.log('AI constructor :' + this.difficulty);
+    
     if (this.difficulty == 1) {
-        console.log('AI constructor difficulty 1');
         this.level.platforms.forEach(function(item) {
             item.myAiLines = {};
             
@@ -19,19 +18,9 @@ var AI = function(level, difficulty = 'patrol') {
                                                    item.x + item.width, 
                                                    item.y);
         }, this);
-        console.log('AI constructor difficulty 1 pre enemies');
-        this.level.enemies.forEach(function(item) {
-            console.log('add myAiLines to enemies');
-            item.myAiLines = {};
-            
-            item.myAiLines.right = new Phaser.Line(this.player.x + this.player.width/2, 
-                                            this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 + 200,
-                                            this.player.y + this.player.height/2 - 128);
-            item.myAiLines.left = new Phaser.Line(this.player.x + this.player.width/2, 
-                                            this.player.y + this.player.height/2,
-                                            this.player.x + this.player.width/2 - 200,
-                                            this.player.y + this.player.height/2 - 128);         
+        
+        this.level.enemies.forEach(function(enemy) {
+            this.addLinesToEnemy(enemy)        
         });
     }
 };
@@ -83,14 +72,18 @@ AI.prototype = {
 		// dificulty 1
 		if (this.difficulty == 1) {
 		    this.level.enemies.forEach(function(enemy) {
-		        enemy.myAiLines.right.setTo(enemy.x + enemy.width/2, 
-                                           enemy.y + enemy.height/2,
-                                           enemy.x + enemy.width/2 + 200,
-                                           enemy.y + enemy.height/2 - 128);
-                enemy.myAiLines.left.setTo(enemy.x + enemy.width/2, 
-                                           enemy.y + enemy.height/2,
-                                           enemy.x + enemy.width/2 - 200,
-                                           enemy.y + enemy.height/2 - 128);
+		        if (enemy.myAiLines === undefined) {
+		            this.addLinesToEnemy(enemy)
+		        } else {		        
+		            enemy.myAiLines.right.setTo(enemy.x + enemy.width/2, 
+                                               enemy.y + enemy.height/2,
+                                               enemy.x + enemy.width/2 + 200,
+                                               enemy.y + enemy.height/2 - 128);
+                    enemy.myAiLines.left.setTo(enemy.x + enemy.width/2, 
+                                               enemy.y + enemy.height/2,
+                                               enemy.x + enemy.width/2 - 200,
+                                               enemy.y + enemy.height/2 - 128);
+                }
                 
                 this.level.platforms.forEach(function(platform) {
                     var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
@@ -136,6 +129,19 @@ AI.prototype = {
 			enemy.starsKilled += 1;
 		}
 		
+	},
+	
+	addLinesToEnemy: function(enemy) {
+	    enemy.myAiLines = {};
+        
+        enemy.myAiLines.right = new Phaser.Line(enemy.x + enemy.width/2, 
+                                                enemy.y + enemy.height/2,
+                                                enemy.x + enemy.width/2 + 200,
+                                                enemy.y + enemy.height/2 - 128);
+        enemy.myAiLines.left = new Phaser.Line(enemy.x + enemy.width/2, 
+                                               enemy.y + enemy.height/2,
+                                               enemy.x + enemy.width/2 - 200,
+                                               enemy.y + enemy.height/2 - 128); 
 	}
     
 };
