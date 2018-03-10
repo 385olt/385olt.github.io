@@ -3,26 +3,6 @@ var AI = function(level, difficulty = 'patrol') {
     
     this.level = level;    
     this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
-    
-    if (this.difficulty == 1) {
-        this.level.platforms.forEach(function(item) {
-            item.myAiLines = {};
-            
-            item.myAiLines.left = new Phaser.Line(item.x, 
-                                                  item.y, 
-                                                  item.x + 64, 
-                                                  item.y);
-                                                      
-            item.myAiLines.right = new Phaser.Line(item.x + item.width - 64, 
-                                                   item.y, 
-                                                   item.x + item.width, 
-                                                   item.y);
-        }, this);
-        
-        this.level.enemies.forEach(function(enemy) {
-            this.addLinesToEnemy(enemy)        
-        });
-    }
 };
 
 AI.prototype = {
@@ -86,6 +66,10 @@ AI.prototype = {
                 }
                 
                 this.level.platforms.forEach(function(platform) {
+                    if (platform.myAiLines === undefined) {
+		                this.addLinesToPlatform(platform)
+		            }
+                    
                     var p = enemy.myAiLines.right.intersects(platform.myAiLines.left);
                     if (p !== null) {
                         enemy.body.velocity.y = -300;
@@ -142,6 +126,20 @@ AI.prototype = {
                                                enemy.y + enemy.height/2,
                                                enemy.x + enemy.width/2 - 200,
                                                enemy.y + enemy.height/2 - 128); 
+	},
+	
+	addLinesToPlatform: function(platform) {
+	    platform.myAiLines = {};
+            
+        platform.myAiLines.left = new Phaser.Line(platform.x, 
+                                                  platform.y, 
+                                                  platform.x + 64, 
+                                                  platform.y);
+                                                  
+        platform.myAiLines.right = new Phaser.Line(platform.x + platform.width - 64, 
+                                                   platform.y, 
+                                                   platform.x + platform.width, 
+                                                   platform.y);
 	}
     
 };
