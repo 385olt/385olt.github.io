@@ -13,10 +13,16 @@ AI.prototype = {
         if (this.level === null) return false;
         
         this.level.enemies.forEach(function(item) {
-            item.goodDirection = false;
             
             if (this.difficulty == 1 && this.level.rnd.frac() < 1 - this.walkRandomness) {
-                item.goodDirection = true; 
+                item.goodDirectionBlock = this.level.time.totalElapsedSeconds() + 1; 
+            } else if (this.difficulty == 1 && item.goodDirectionBlock == undefined) {
+                item.goodDirectionBlock = 0;
+                item.goodDirection = false;
+            } else if (this.difficulty == 1 && item.goodDirectionBlock > this.level.time.totalElapsedSeconds()) {
+                item.goodDirection = true;
+            } else {
+                item.goodDirection = false;
             }
             
             item.hitPlatform = false; 
