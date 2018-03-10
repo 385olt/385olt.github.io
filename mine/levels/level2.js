@@ -32,15 +32,28 @@ Hrabrov.Level2.prototype = {
         this.lines = [];
         this.platforms.forEach(function(item) {
             this.lines.push(new Phaser.Line(item.x, item.y, item.x + 32, item.y));
+            this.lines.push(new Phaser.Line(item.x + item.width - 32, item.y, item.x + item.width, item.y));
         }, this);
         
         console.log(this.lines.length);
+        
+        this.player.line = new Phaser.Line(this.player.x + this.player.width/2, 
+                                            this.player.y + this.player.height/2,
+                                            this.player.x + this.player.width/2 + 64,
+                                            this.player.y + this.player.height/2 + 64);
     },
     
     update: function() {
         this.updateSakramar();
         
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
+        
+        for (let i = 0; i < this.lines.length; i++) {
+            let p = this.player.line.intersects(this.lines[i]);
+            if (p !== null) {
+                console.log(p)
+            }
+        }
         
         // ----- std updates
         this.levelBuilder.updateCollisions();
