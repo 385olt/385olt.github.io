@@ -10,9 +10,12 @@ AI.prototype = {
     update: function() {
         if (this.level === null) return false;
         
-        this.level.enemies.forEach(function(item) { item.goodDirection = false; });
+        this.level.enemies.forEach(function(item) { 
+            item.goodDirection = false; 
+            item.hitPlatform = false; 
+        });
 		
-		this.level.physics.arcade.collide(this.level.enemies, this.level.platforms, 
+	    this.level.physics.arcade.collide(this.level.enemies, this.level.platforms, 
 		            this.collideEnemyPlatform);
 		            
 		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, 
@@ -52,6 +55,8 @@ AI.prototype = {
 		// dificulty 1
 		if (this.difficulty == 1) {
 		    this.level.enemies.forEach(function(enemy) {
+		        if (!enemy.hitPlatform) return;
+		        
 		        if (enemy.myAiLines === undefined) {
 		            this.addLinesToEnemy(enemy)
 		        } else {		        
@@ -66,7 +71,6 @@ AI.prototype = {
                 }
                 
                 this.level.platforms.forEach(function(platform) {
-                    console.log('test');
                     if (platform.myAiLines === undefined) {
 		                this.addLinesToPlatform(platform)
 		            }
@@ -88,6 +92,7 @@ AI.prototype = {
     },
 	
 	collideEnemyPlatform: function(enemy, platform) {
+	    enemy.hitPlatform = true;
 		if (enemy.body.touching.down && platform.body.touching.up) {
 			
 			if (['left', 'right'].indexOf(enemy.myDirection) == -1) {
