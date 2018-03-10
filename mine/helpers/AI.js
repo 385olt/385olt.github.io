@@ -21,7 +21,7 @@ AI.prototype = {
             }
             
             item.hitPlatform = false; 
-        });
+        }, this);
 		
 	    this.level.physics.arcade.collide(this.level.enemies, this.level.platforms, 
 		            this.collideEnemyPlatform);
