@@ -31,12 +31,12 @@ Hrabrov.Level2.prototype = {
         
         this.lines = [];
         this.platforms.forEach(function(item) {
-            let line = new Phaser.Line(item.x, item.y, 
+            var line = new Phaser.Line(item.x, item.y, 
                                        item.x + 64, item.y);
             line.platformSide = 'left';
             this.lines.push(line);
             
-            let line = new Phaser.Line(item.x + item.width - 64, item.y, 
+            line = new Phaser.Line(item.x + item.width - 64, item.y, 
                                        item.x + item.width, item.y);
             line.platformSide = 'right';
             this.lines.push(line);
