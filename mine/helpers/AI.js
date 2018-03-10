@@ -1,7 +1,7 @@
 var AI = function(level, difficulty = 'patrol') {
     let DIFFICULTIES = ['patrol', 'walk'];
     
-    this.walkRandomness = 0.001;
+    this.walkRandomness = 0.1;
     
     this.level = level;    
     this.difficulty = Math.max(DIFFICULTIES.indexOf(difficulty), 0);
