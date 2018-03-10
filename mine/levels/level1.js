@@ -23,6 +23,8 @@ Hrabrov.Level1.prototype = {
 		
 		this.levelBuilder.createPlatform(platforms);
 		
+		console.log('hello2');
+		
 		for (var i = 0; i < 3; i++) this.levelBuilder.makeStar();
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
@@ -43,7 +45,6 @@ Hrabrov.Level1.prototype = {
 		this.timeLeft = 10;
 		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { font: '16pt Arial', fill: '#000' });
 		
-		console.log('hello');
 	},
 	
 	update: function() {
