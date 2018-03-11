@@ -38,6 +38,10 @@ Hrabrov.Level2.prototype = {
         this.shotRight = false;
         this.shotUp = false;
         this.shotDown = false;
+        this.input.keyboard.addKeyCapture(Phaser.Keyboard.W);
+        this.input.keyboard.addKeyCapture(Phaser.Keyboard.A);
+        this.input.keyboard.addKeyCapture(Phaser.Keyboard.S);
+        this.input.keyboard.addKeyCapture(Phaser.Keyboard.D);
     },
     
     update: function() {
