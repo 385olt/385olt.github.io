@@ -94,7 +94,7 @@ Hrabrov.Level2.prototype = {
             enemy.health -= this.bulletDamage;
         }
         
-        console.log(this.enemyMaxHealth);
+        console.log(this.enemyMaxHealth - this.bulletDamage);
         
         if (enemy.health <= 0) {
             enemy.kill();
