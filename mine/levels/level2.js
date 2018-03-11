@@ -111,8 +111,6 @@ Hrabrov.Level2.prototype = {
             case 'down':  offsets = {x: 0, y: 32};  break
         }
         
-        console.log(direction);
-        
         let bullet = this.bullets.create(this.player.x + this.player.width/2 + offsets.x, 
 		                                 this.player.y + this.player.height/2 + offsets.y, 
 		                                 'star');
@@ -145,6 +143,7 @@ Hrabrov.Level2.prototype = {
 		} else this.shotDown = false;
 		
 		if (this.input.keyboard.isDown(Phaser.Keyboard.D)) {
+		    console.log('D PRESSED');
             if (!this.shotRight) {
 		        this.shoot('right');
 		        this.shotRight = true;
