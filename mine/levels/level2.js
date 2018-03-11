@@ -34,7 +34,10 @@ Hrabrov.Level2.prototype = {
             this.AI.makeEnemy(false, 120 + this.rnd.frac() * (this.world.height - 200));
         }
         
-        this.Apressed = false;
+        this.shotLeft = false;
+        this.shotRight = false;
+        this.shotUp = false;
+        this.shotDown = false;
     },
     
     update: function() {
@@ -44,12 +47,7 @@ Hrabrov.Level2.prototype = {
         
         this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet);
         
-        if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
-            if (!this.Apressed) {
-		        this.shoot('left');
-		        this.Apressed = true;
-		    }
-		} else this.Apressed = false;
+        this.shootControls();
         
         // ----- std updates
         this.levelBuilder.updateCollisions();
@@ -75,16 +73,6 @@ Hrabrov.Level2.prototype = {
     
     collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
-        
-        if (enemy.body.touching.left) {
-            enemy.body.velocity.x = 500;
-        } else if (enemy.body.touching.right) {
-            enemy.body.velocity.x = -500;
-        } else if (enemy.body.touching.up) {
-            enemy.body.velocity.y = 500;
-        } else {
-            enemy.body.velocity.y = -500;
-        }
     },
     
     collidePlayerEnemy: function(player, enemy) {
@@ -130,6 +118,36 @@ Hrabrov.Level2.prototype = {
 	
 		bullet.body.velocity.x = 10 * offsets.x;
 		bullet.body.velocity.y = 10 * offsets.y;
+    },
+    
+    shootControls: function() {
+        if (this.input.keyboard.isDown(Phaser.Keyboard.W)) {
+            if (!this.shotUp) {
+		        this.shoot('up');
+		        this.shotUp = true;
+		    }
+		} else this.shotUp = false;
+		
+		if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
+            if (!this.shotLeft) {
+		        this.shoot('left');
+		        this.shotLeft = true;
+		    }
+		} else this.shotLeft = false;
+		
+		if (this.input.keyboard.isDown(Phaser.Keyboard.S)) {
+            if (!this.shotDown) {
+		        this.shoot('down');
+		        this.shotDown = true;
+		    }
+		} else this.shotDown = false;
+		
+		if (this.input.keyboard.isDown(Phaser.Keyboard.D)) {
+            if (!this.shotRight) {
+		        this.shoot('right');
+		        this.shotRight = true;
+		    }
+		} else this.shotRight = false;
     }
     
 };
