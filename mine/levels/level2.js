@@ -42,7 +42,9 @@ Hrabrov.Level2.prototype = {
         
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
-        this.physics.arcade.overlap(this.enemies, this.bullets, this.overlapEnemyBullet);
+        console.log('before');
+        this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet);
+        console.log('acter');
         
         if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
             if (!this.Apressed) {
@@ -78,7 +80,7 @@ Hrabrov.Level2.prototype = {
         sakramar.animations.play(myDr == 1 ? 'right' : 'left');
     },
     
-    overlapEnemyBullet: function(enemy, bullet) {
+    collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
     },
     
