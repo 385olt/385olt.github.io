@@ -38,10 +38,18 @@ Hrabrov.Level2.prototype = {
         this.shotRight = false;
         this.shotUp = false;
         this.shotDown = false;
-        this.input.keyboard.addKeyCapture(Phaser.Keyboard.W);
-        this.input.keyboard.addKeyCapture(Phaser.Keyboard.A);
-        this.input.keyboard.addKeyCapture(Phaser.Keyboard.S);
-        this.input.keyboard.addKeyCapture(Phaser.Keyboard.D);
+        
+        let W = game.input.keyboard.addKey(Phaser.Keyboard.W);
+        W.onDown.add(function() { console.log('W PRESSED') }, this);
+        
+        let A = game.input.keyboard.addKey(Phaser.Keyboard.A);
+        A.onDown.add(function() { console.log('A PRESSED') }, this);
+        
+        let S = game.input.keyboard.addKey(Phaser.Keyboard.S);
+        S.onDown.add(function() { console.log('S PRESSED') }, this);
+        
+        let D = game.input.keyboard.addKey(Phaser.Keyboard.D);
+        D.onDown.add(function() { console.log('D PRESSED') }, this);
     },
     
     update: function() {
@@ -147,7 +155,6 @@ Hrabrov.Level2.prototype = {
 		} else this.shotDown = false;
 		
 		if (this.input.keyboard.isDown(Phaser.Keyboard.D)) {
-		    console.log('D PRESSED');
             if (!this.shotRight) {
 		        this.shoot('right');
 		        this.shotRight = true;
