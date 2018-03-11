@@ -42,9 +42,7 @@ Hrabrov.Level2.prototype = {
         
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
-        console.log('before');
         this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet);
-        console.log('acter');
         
         if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
             if (!this.Apressed) {
@@ -82,6 +80,20 @@ Hrabrov.Level2.prototype = {
     
     collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
+        
+        if (enemy.body.touching.left) {
+            enemy.body.velocity.x = 50;
+        } else if (enemy.body.touching.right) {
+            enemy.body.velocity.x = -50;
+        } else if (enemy.body.touching.up) {
+            enemy.body.velocity.y = 50;
+        } else {
+            enemy.body.velocity.y = -50;
+        }
+    },
+    
+    collidePlayerEnemy: function(player, enemy) {
+        this.state.start('Hrabrov.GameOver', 0)
     },
     
     setSakramar: function(x, y) {        
