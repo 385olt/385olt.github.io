@@ -9,6 +9,9 @@ Hrabrov.Level2.prototype = {
 	    this.levelBuilder = new LevelBuilder(this);
 	    this.AI = new AI(this);
 	    
+	    this.bullets = this.add.group();
+	    this.bullets.enableBody = true;
+	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
 	    
 	    this.setSakramar(0, 0);
@@ -39,13 +42,14 @@ Hrabrov.Level2.prototype = {
         
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
+        this.physics.arcade.overlap(this.enemies, this.bullets, this.overlapEnemyBullet);
+        
         if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
             if (!this.Apressed) {
-		        let bullet = this.add.sprite(this.player.x - 32, 
+		        let bullet = this.bullets.add(this.player.x - 32, 
 		                                     this.player.y + this.player.height/2, 
 		                                     'star');
 		        bullet.scale.setTo(.5, .5);
-		        this.physics.arcade.enable(bullet);
 		        bullet.body.velocity.x = -300;
 		        
 		        this.Apressed = true;
@@ -72,6 +76,10 @@ Hrabrov.Level2.prototype = {
         var myDr = (sakramar.myDirection == 'right' ? 1 : -1);
         sakramar.body.velocity.x = myDr * 300;
         sakramar.animations.play(myDr == 1 ? 'right' : 'left');
+    },
+    
+    overlapEnemyBullet: function(enemy, bullet) {
+        bullet.kill();
     },
     
     setSakramar: function(x, y) {        
