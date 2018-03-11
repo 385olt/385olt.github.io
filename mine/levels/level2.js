@@ -58,6 +58,7 @@ Hrabrov.Level2.prototype = {
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
         this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet);
+        this.physics.arcade.collide(this.bullets, this.platforms, this.collideBulletPlatform);
                 
         // ----- std updates
         this.levelBuilder.updateCollisions();
@@ -87,6 +88,10 @@ Hrabrov.Level2.prototype = {
     
     collidePlayerEnemy: function(player, enemy) {
         this.state.start('Hrabrov.GameOver', 0)
+    },
+    
+    collideBulletPlatform: function(bullet, platform) {
+        bullet.kill();
     },
     
     setSakramar: function(x, y) {        
