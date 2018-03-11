@@ -118,7 +118,13 @@ Hrabrov.Level2.prototype = {
         
         x = this.sakramar.x;
         y = this.sakramar.y + this.sakramar.height + 32;
-        this.AI.makeEnemy(x, y);
+        
+        let enemy = this.AI.makeEnemy(x, y);
+        enemy.events.onKilled.add(this.enemyKilled, this);
+    },
+    
+    enemyKilled: function() {
+        console.log('good job!');
     },
     
     shoot: function(direction) {        
