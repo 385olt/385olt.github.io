@@ -131,8 +131,8 @@ Hrabrov.Level2.prototype = {
 		                                 'star');
 		bullet.scale.setTo(.5, .5);
 	
-		bullet.body.velocity.x = 10 * offsets.x;
-		bullet.body.velocity.y = 10 * offsets.y;
+		bullet.body.velocity.x = 30 * offsets.x;
+		bullet.body.velocity.y = 30 * offsets.y;
     }
     
 };
