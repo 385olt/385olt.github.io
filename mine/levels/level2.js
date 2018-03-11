@@ -48,7 +48,7 @@ Hrabrov.Level2.prototype = {
         
         if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
             if (!this.Apressed) {
-		        let bullet = this.bullets.add(this.player.x - 32, 
+		        let bullet = this.bullets.create(this.player.x - 32, 
 		                                     this.player.y + this.player.height/2, 
 		                                     'star');
 		        bullet.scale.setTo(.5, .5);
