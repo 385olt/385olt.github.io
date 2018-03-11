@@ -133,7 +133,7 @@ Hrabrov.Level2.prototype = {
 		                                 this.player.y + this.player.height/2 + offsets.y, 
 		                                 'star');
 		bullet.scale.setTo(.5, .5);
-		bullet.lifespan = 6;
+		bullet.lifespan = 60;
 	
 		bullet.body.velocity.x = 30 * offsets.x;
 		bullet.body.velocity.y = 30 * offsets.y;
