@@ -46,12 +46,7 @@ Hrabrov.Level2.prototype = {
         
         if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
             if (!this.Apressed) {
-		        let bullet = this.bullets.create(this.player.x - 32, 
-		                                     this.player.y + this.player.height/2, 
-		                                     'star');
-		        bullet.scale.setTo(.5, .5);
-		        bullet.body.velocity.x = -300;
-		        
+		        this.shoot('left');
 		        this.Apressed = true;
 		    }
 		} else this.Apressed = false;
@@ -82,13 +77,13 @@ Hrabrov.Level2.prototype = {
         bullet.kill();
         
         if (enemy.body.touching.left) {
-            enemy.body.velocity.x = 50;
+            enemy.body.velocity.x = 500;
         } else if (enemy.body.touching.right) {
-            enemy.body.velocity.x = -50;
+            enemy.body.velocity.x = -500;
         } else if (enemy.body.touching.up) {
-            enemy.body.velocity.y = 50;
+            enemy.body.velocity.y = 500;
         } else {
-            enemy.body.velocity.y = -50;
+            enemy.body.velocity.y = -500;
         }
     },
     
@@ -118,6 +113,23 @@ Hrabrov.Level2.prototype = {
         x = this.sakramar.x;
         y = this.sakramar.y + this.sakramar.height + 32;
         this.AI.makeEnemy(x, y);
+    },
+    
+    shoot: function(direction) {
+        switch (direction) {
+            case 'left':  offsets = {x: -32, y: 0}; break;
+            case 'right': offsets = {x: 32, y: 0};  break;
+            case 'up':    offsets = {x: 0, y: -32}; break;
+            case 'down':  offsets = {x: 0, y: 32};  break
+        }
+        
+        let bullet = this.bullets.create(this.player.x + this.player.width/2 + offsets.x, 
+		                                 this.player.y + this.player.height/2 + offsets.y, 
+		                                 'star');
+		bullet.scale.setTo(.5, .5);
+	
+		bullet.body.velocity.x = 10 * offsets.x;
+		bullet.body.velocity.y = 10 * offsets.y;
     }
     
 };
