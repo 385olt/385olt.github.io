@@ -60,8 +60,8 @@ Hrabrov.Level2.prototype = {
         
         if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
-        this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet);
-        this.physics.arcade.collide(this.bullets, this.platforms, this.collideBulletPlatform);
+        this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet, null, this);
+        this.physics.arcade.collide(this.bullets, this.platforms, this.collideBulletPlatform, null, this);
                 
         // ----- std updates
         this.levelBuilder.updateCollisions();
@@ -94,7 +94,7 @@ Hrabrov.Level2.prototype = {
             enemy.health -= this.bulletDamage;
         }
         
-        console.log(this.enemyMaxHealth - this.bulletDamage);
+        console.log(enemy.health);
         
         if (enemy.health <= 0) {
             enemy.kill();
