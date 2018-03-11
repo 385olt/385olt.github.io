@@ -95,7 +95,7 @@ Hrabrov.Level2.prototype = {
         }
         
         if (enemy.health <= 0) {
-            enemy.kil();
+            enemy.kill();
         }
     },
     
