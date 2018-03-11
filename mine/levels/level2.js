@@ -47,7 +47,9 @@ Hrabrov.Level2.prototype = {
 		        bullet.scale.setTo(.5, .5);
 		        this.physics.arcade.enable(bullet);
 		        bullet.body.velocity.x = -300;
-		    } else this.Apressed = true;
+		        
+		        this.Apressed = true;
+		    }
 		} else this.Apressed = false;
         
         // ----- std updates
