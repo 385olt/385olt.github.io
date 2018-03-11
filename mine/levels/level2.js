@@ -119,6 +119,8 @@ Hrabrov.Level2.prototype = {
     },
     
     shoot: function(direction) {
+        if (direction == 'down' && this.player.body.onFloor()) return;
+        
         switch (direction) {
             case 'left':  offsets = {x: -32, y: 0}; break;
             case 'right': offsets = {x: 32, y: 0};  break;
