@@ -118,14 +118,12 @@ Hrabrov.Level2.prototype = {
         this.AI.makeEnemy(x, y);
     },
     
-    shoot: function(direction) {
-        if (direction == 'down' && this.player.body.onFloor()) return;
-        
+    shoot: function(direction) {        
         switch (direction) {
-            case 'left':  offsets = {x: -32, y: 0}; break;
-            case 'right': offsets = {x: 32, y: 0};  break;
-            case 'up':    offsets = {x: 0, y: -32}; break;
-            case 'down':  offsets = {x: 0, y: 32};  break
+            case 'left':  offsets = {x: -16, y: 0}; break;
+            case 'right': offsets = {x: 16, y: 0};  break;
+            case 'up':    offsets = {x: 0, y: -16}; break;
+            case 'down':  offsets = {x: 0, y: 16};  break
         }
         
         let bullet = this.bullets.create(this.player.x + this.player.width/2 + offsets.x, 
