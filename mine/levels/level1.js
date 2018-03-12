@@ -1,5 +1,5 @@
 Hrabrov.Level1 = function() {
-this.scoreLabel = 'Собрано';
+this.donationGoal = 1000;
 };
 
 Hrabrov.Level1.prototype = {
@@ -135,22 +135,24 @@ Hrabrov.Level1.prototype = {
         foreground.drawRect(2, 2, 1, 26);
         foreground.endFill();
         this.graphics.addChild(foreground);
+        
+        this.add.text(10, 45, '0', { font: '12pt Arial', fill: '#fff' });
+        this.add.text(320, 45, this.donationGoal, { font: '12pt Arial', fill: '#fff' });
 	    
 	    this.score = initScore;
-		this.scoreText = this.add.text(0, 16, this.scoreLabel + ': ' + initScore + ' рублей', 
-		                              { font: '12pt Arial', fill: '#fff' });
+		this.scoreText = this.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
 	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
 	},
 	
 	changeScore: function(deltaScore) {	    
 	    this.score += deltaScore;
-	    this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
+	    this.scoreText.text = precisionRound(this.score, 2) + ' рублей';
 	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
 	    
 	    let foreground = this.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.7;
-        foreground.drawRect(2, 2, 350 * (this.score / 1000), 26);
+        foreground.drawRect(2, 2, 350 * (this.score / this.donationGoal), 26);
         foreground.endFill();
         
         this.graphics.removeChildAt(1);
