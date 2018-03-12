@@ -31,17 +31,9 @@ Hrabrov.Level1.prototype = {
 		
 		this.levelBuilder.createScore(0);
 		
-		// ------- timer		
-		this.nextStar = 1;
-		this.nextEnemy = 1;
-		
-		this.timeDelta = 1;
-		
-		this.timer = this.time.create(false);
-		this.timer.loop(10000, this.updateCounter, this);
-		this.timer.start();
-		this.timeLeft = 10;
-		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { font: '16pt Arial', fill: '#000' });
+		this.countDown = this.time.create(false);
+        this.countDown.add(Phaser.Timer.SECOND * 10, this.endCountDown, this);
+        this.countDown.start();
 		
 	},
 	
@@ -98,16 +90,19 @@ Hrabrov.Level1.prototype = {
 			this.state.start('Hrabrov.GameOver', true, false, this.score);
 		}
 	},
+	
+	endCountDown: function() {
+        console.log('Done!');
+    },
 
 	overlapPlayerStar: function(player, star) {
 		star.kill();
 		
-		console.log('BEFORE: ' + this.timer.duration);	
-		
-		this.timer.duration += 1000;
-	    
-	    console.log('AFTER: ' + this.timer.duration);		
-		
+		var duration = this.countDown.duration;
+        this.countDown.removeAll();
+        this.countDown.add(duration + (Phaser.Timer.SECOND * 5), this.endCountDown, this);
+        console.log('Added 5 seconds.');
+	    		
 		this.levelBuilder.changeScore(10 * this.timeDelta);
 		
 		this.timeLeft += this.timeDelta;
