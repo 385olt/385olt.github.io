@@ -136,8 +136,9 @@ Hrabrov.Level1.prototype = {
         foreground.endFill();
         this.graphics.addChild(foreground);
         
-        this.add.text(10, 45, '0', { font: '12pt Arial', fill: '#fff' });
-        this.add.text(320, 45, this.donationGoal, { font: '12pt Arial', fill: '#fff' });
+        this.add.text(10, 45, '0', { font: '10pt Arial', fill: '#fff' });
+        this.add.text(350 - this.donationGoal.toString().length * 5, 45, this.donationGoal, 
+                        { font: '10pt Arial', fill: '#fff' });
 	    
 	    this.score = initScore;
 		this.scoreText = this.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
