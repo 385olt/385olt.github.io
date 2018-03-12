@@ -146,7 +146,7 @@ Hrabrov.Level1.prototype = {
 	        this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
 	    }
 	    
-	    this.scoreText.x = 150 - this.scoreText.text.length * 6;
+	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
 	}
 	
 };
