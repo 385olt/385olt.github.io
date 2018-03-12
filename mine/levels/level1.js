@@ -29,21 +29,21 @@ Hrabrov.Level1.prototype = {
 		
 		// ------- score
 		
-		var graphics = this.add.graphics(10, 10);
+		this.graphics = this.add.graphics(10, 10);
 		
 		let background = this.add.graphics(0, 0);		
         background.beginFill(0xffffff);
         background.fillAlpha = 0.5;
         background.drawRect(0, 0, 304, 30);
         background.endFill();
-        graphics.addChild(background);
+        this.graphics.addChild(background);
         
         let foreground = this.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.5;
         foreground.drawRect(2, 2, 300, 26);
         foreground.endFill();
-        graphics.addChild(foreground);
+        this.graphics.addChild(foreground);
 		
 		this.score = 0;
 		this.scoreText = this.add.text(100, 16, 'Собрано: 0 рублей', { font: '12pt Arial', fill: '#000' });
@@ -116,6 +116,8 @@ Hrabrov.Level1.prototype = {
 
 	overlapPlayerStar: function(player, star) {
 		star.kill();
+		
+		this.graphics.children[2].width = 50;
 		
 		this.score += 10 * this.timeDelta;
 		this.scoreText.text = 'Собрано: ' + precisionRound(this.score, 2) + ' рублей';
