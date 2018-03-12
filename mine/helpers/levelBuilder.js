@@ -178,8 +178,8 @@ LevelBuilder.prototype = {
         foreground.drawRect(2, 2, 350 * (this.level.score / this.level.donationGoal), 26);
         foreground.endFill();
         
-        this.level.graphics.removeChildAt(1);
-        this.level.graphics.addChild(foreground);
+        this.level.scoreGraphics.removeChildAt(1);
+        this.level.scoreGraphics.addChild(foreground);
 	},
 	
 	setTime: function(initTime) {
