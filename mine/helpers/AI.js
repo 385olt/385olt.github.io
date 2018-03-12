@@ -133,6 +133,7 @@ AI.prototype = {
 		enemy.goodDirection = true;
 		enemy.goodDirectionBlock = 0;
 		enemy.starsKilled = 0;
+		enemy.data = {};
 		
 		this.addLinesToEnemy(enemy);	
 		
