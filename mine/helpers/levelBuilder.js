@@ -158,8 +158,8 @@ LevelBuilder.prototype = {
         foreground.endFill();
         this.level.graphics.addChild(foreground);
         
-        this.level.add.text(10, 35, '0', { font: '10pt Arial', fill: '#fff' });
-        this.level.add.text(350 - this.level.donationGoal.toString().length * 5, 35, this.level.donationGoal, 
+        this.level.add.text(10, 40, '0', { font: '10pt Arial', fill: '#fff' });
+        this.level.add.text(350 - this.level.donationGoal.toString().length * 4, 40, this.level.donationGoal, 
                         { font: '10pt Arial', fill: '#fff' });
         
         
