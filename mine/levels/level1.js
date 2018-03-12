@@ -38,7 +38,7 @@ Hrabrov.Level1.prototype = {
 		this.timeDelta = 1;
 		
 		this.timer = this.time.create(false);
-		this.timer.loop(100, this.updateCounter, this);
+		this.timer.loop(10000, this.updateCounter, this);
 		this.timer.start();
 		this.timeLeft = 10;
 		this.timeLeftText = this.add.text(this.world.width - 400, 16, 'Осталось: 0 секунд', { font: '16pt Arial', fill: '#000' });
@@ -53,6 +53,8 @@ Hrabrov.Level1.prototype = {
 	},
 	
 	updateCounter: function() {
+	    console.log('END');
+	    
 		if (this.timeLeft > 0) {
 			this.timeLeft += -0.1;
 			
@@ -98,7 +100,11 @@ Hrabrov.Level1.prototype = {
 	},
 
 	overlapPlayerStar: function(player, star) {
-		star.kill();		
+		star.kill();
+		
+		this.timer.duration += 1000;
+	    
+	    console.log('this.timer.duration');		
 		
 		this.levelBuilder.changeScore(10 * this.timeDelta);
 		
