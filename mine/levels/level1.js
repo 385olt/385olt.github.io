@@ -136,9 +136,9 @@ Hrabrov.Level1.prototype = {
         foreground.endFill();
         this.graphics.addChild(foreground);
         
-        let label = this.add.text(10, 40, '0', { font: '10pt Arial', fill: '#fff' });
+        let label = this.add.text(10, 35, '0', { font: '10pt Arial', fill: '#fff' });
         label.fontWeight = 'bold';
-        label = this.add.text(350 - this.donationGoal.toString().length * 5, 40, this.donationGoal, 
+        label = this.add.text(350 - this.donationGoal.toString().length * 5, 35, this.donationGoal, 
                         { font: '10pt Arial', fill: '#fff' });
 	    label.fontWeight = 'bold';
 	    
