@@ -28,24 +28,25 @@ Hrabrov.Level1.prototype = {
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
 		// ------- score
-		this.score = 0;
-		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { font: '16pt Arial', fill: '#000' });
 		
 		var graphics = this.add.graphics(10, 10);
 		
 		let background = this.add.graphics(0, 0);		
         background.beginFill(0xffffff);
         background.fillAlpha = 0.5;
-        background.drawRect(0, 0, 204, 28);
+        background.drawRect(0, 0, 254, 30);
         background.endFill();
         graphics.addChild(background);
         
         let foreground = this.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.5;
-        foreground.drawRect(2, 2, 200, 24);
+        foreground.drawRect(2, 2, 250, 26);
         foreground.endFill();
         graphics.addChild(foreground);
+		
+		this.score = 0;
+		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { font: '16pt Arial', fill: '#000' });
 		
 		// ------- timer		
 		this.nextStar = 1;
