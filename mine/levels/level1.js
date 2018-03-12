@@ -34,7 +34,7 @@ Hrabrov.Level1.prototype = {
 		let background = this.add.graphics(0, 0);		
         background.beginFill(0xffffff);
         background.fillAlpha = 0.5;
-        background.drawRect(0, 0, 304, 30);
+        background.drawRect(0, 0, 354, 30);
         background.endFill();
         this.graphics.addChild(background);
         
