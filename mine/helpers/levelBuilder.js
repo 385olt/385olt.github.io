@@ -201,7 +201,7 @@ LevelBuilder.prototype = {
         
         this.level.add.text(this.level.world.width - 364, 40, '0', { font: '10pt Arial', fill: '#fff' });
         
-        let maxTimeX = this.level.world.width - 10 - this.level.maxAchievedTime.toString().length * 4;
+        let maxTimeX = this.level.world.width - 10 - this.level.maxAchievedTime.toString().length * 6;
         let maxTimeSeconds = (this.level.maxAchievedTime / Phaser.Timer.SECOND).toFixed(2);
         this.level.maxTimeGraphics = this.level.add.text(maxTimeX, 40, maxTimeSeconds, 
                                                         { font: '10pt Arial', fill: '#fff' });
