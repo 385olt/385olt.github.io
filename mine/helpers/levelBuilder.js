@@ -139,6 +139,47 @@ LevelBuilder.prototype = {
 		if (cursors.up.isDown && player.body.touching.down && player.hitPlatform) {
 		    player.body.velocity.y = -300;
 		}
+	},
+	
+	createScore: function(initScore) {
+	    this.graphics = this.add.graphics(10, 10);
+		
+		let background = this.add.graphics(0, 0);		
+        background.beginFill(0x000000);
+        background.fillAlpha = 0.7;
+        background.drawRect(0, 0, 354, 30);
+        background.endFill();
+        this.graphics.addChild(background);
+        
+        let foreground = this.add.graphics(0, 0);
+        foreground.beginFill(0xff0000);
+        foreground.fillAlpha = 0.5;
+        foreground.drawRect(2, 2, 1, 26);
+        foreground.endFill();
+        this.graphics.addChild(foreground);
+        
+        this.add.text(10, 35, '0', { font: '10pt Arial', fill: '#fff' });
+        this.add.text(350 - this.donationGoal.toString().length * 5, 35, this.donationGoal, 
+                        { font: '10pt Arial', fill: '#fff' });
+	    
+	    this.score = initScore;
+		this.scoreText = this.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
+	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
+	},
+	
+	changeScore: function(deltaScore) {	    
+	    this.score += deltaScore;
+	    this.scoreText.text = this.score.toFixed(2) + ' рублей';
+	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
+	    
+	    let foreground = this.add.graphics(0, 0);
+        foreground.beginFill(0xff0000);
+        foreground.fillAlpha = 0.7;
+        foreground.drawRect(2, 2, 350 * (this.score / this.donationGoal), 26);
+        foreground.endFill();
+        
+        this.graphics.removeChildAt(1);
+        this.graphics.addChild(foreground);
 	}
     
 };

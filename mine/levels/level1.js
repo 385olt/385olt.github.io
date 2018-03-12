@@ -29,7 +29,7 @@ Hrabrov.Level1.prototype = {
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
-		this.createScore(0);
+		this.levelBuilder.createScore(0);
 		
 		// ------- timer		
 		this.nextStar = 1;
@@ -100,10 +100,10 @@ Hrabrov.Level1.prototype = {
 	overlapPlayerStar: function(player, star) {
 		star.kill();		
 		
-		this.changeScore(10 * this.timeDelta);
+		this.levelBuilder.changeScore(10 * this.timeDelta);
 		
 		this.timeLeft += this.timeDelta;
-		this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
+		this.timeLeftText.text = 'Осталось: ' + this.timeLeft.toFixed(2) + ' секунд';
 		
 		this.levelBuilder.makeStar();
 		
@@ -117,49 +117,6 @@ Hrabrov.Level1.prototype = {
 			this.nextStar += 1;
 			this.levelBuilder.makeStar();
 		}
-	},
-	
-	createScore: function(initScore) {
-	    this.graphics = this.add.graphics(10, 10);
-		
-		let background = this.add.graphics(0, 0);		
-        background.beginFill(0x000000);
-        background.fillAlpha = 0.7;
-        background.drawRect(0, 0, 354, 30);
-        background.endFill();
-        this.graphics.addChild(background);
-        
-        let foreground = this.add.graphics(0, 0);
-        foreground.beginFill(0xff0000);
-        foreground.fillAlpha = 0.5;
-        foreground.drawRect(2, 2, 1, 26);
-        foreground.endFill();
-        this.graphics.addChild(foreground);
-        
-        let label = this.add.text(10, 35, '0', { font: '10pt Arial', fill: '#fff' });
-        label.fontWeight = 'bold';
-        label = this.add.text(350 - this.donationGoal.toString().length * 5, 35, this.donationGoal, 
-                        { font: '10pt Arial', fill: '#fff' });
-	    label.fontWeight = 'bold';
-	    
-	    this.score = initScore;
-		this.scoreText = this.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
-	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
-	},
-	
-	changeScore: function(deltaScore) {	    
-	    this.score += deltaScore;
-	    this.scoreText.text = precisionRound(this.score, 2) + ' рублей';
-	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
-	    
-	    let foreground = this.add.graphics(0, 0);
-        foreground.beginFill(0xff0000);
-        foreground.fillAlpha = 0.7;
-        foreground.drawRect(2, 2, 350 * (this.score / this.donationGoal), 26);
-        foreground.endFill();
-        
-        this.graphics.removeChildAt(1);
-        this.graphics.addChild(foreground);
 	}
 	
 };
