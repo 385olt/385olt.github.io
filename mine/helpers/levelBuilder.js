@@ -142,7 +142,7 @@ LevelBuilder.prototype = {
 	},
 	
 	createScore: function(initScore) {
-	    console.log('CREATE SCORE'');
+	    console.log('CREATE SCORE');
 	    
 	    this.level.graphics = this.level.add.graphics(10, 10);
 		
