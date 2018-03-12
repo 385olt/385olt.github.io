@@ -211,12 +211,12 @@ LevelBuilder.prototype = {
 	},
 	
 	addTime: function(deltaTime) {
-	    console.log('Before: ' + this.level.countDown.duration);
 	    
 	    var duration = this.level.countDown.duration;
         this.level.countDown.removeAll();
-        this.level.countDown.add(duration + (Phaser.Timer.SECOND * this.deltaTime), this.endCountDown, this);
         
+        console.log('Before2: ' + this.level.countDown.duration);
+        this.level.countDown.add(duration + (Phaser.Timer.SECOND * this.deltaTime), this.endCountDown, this);        
         console.log('After: ' + this.level.countDown.duration);
         
         if (this.level.countDown.duration > this.level.maxAchievedTime) {
