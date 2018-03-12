@@ -231,7 +231,7 @@ LevelBuilder.prototype = {
     },
     
     updateTime: function() {
-        console.log(this.level.countDown.duration / this.level.maxAchievedTime);
+        console.log(this.level.countDown.duration);
         let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0x0000ff);
         foreground.fillAlpha = 0.7;
