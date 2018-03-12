@@ -46,22 +46,8 @@ Hrabrov.Level1.prototype = {
 		this.levelBuilder.updateControls();
 		
 		this.AI.update();
-	},
 	
-	updateCounter: function() {
-	    console.log('END');
-	    
-		if (this.timeLeft > 0) {
-			this.timeLeft += -0.1;
-			
-			if (this.timeLeft < 0) {
-				this.timeLeft = 0;
-			}
-			
-			this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
-		} else {
-			this.state.start('Hrabrov.GameOver', true, false, this.score);
-		}
+	    console.log(this.countDown.duration);
 	},
 	
 	collidePlayerEnemy: function(player, enemy) {
@@ -104,8 +90,7 @@ Hrabrov.Level1.prototype = {
 		
 		var duration = this.countDown.duration;
         this.countDown.removeAll();
-        this.countDown.add(duration + (Phaser.Timer.SECOND * 5), this.endCountDown, this);
-        console.log('Added 5 seconds.');
+        this.countDown.add(duration + (Phaser.Timer.SECOND * this.timeDelta), this.endCountDown, this);
 	    		
 		this.levelBuilder.changeScore(10 * this.timeDelta);
 		
