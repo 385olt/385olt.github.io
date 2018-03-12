@@ -47,8 +47,7 @@ Hrabrov.Level1.prototype = {
         foreground.endFill();
         this.graphics.addChild(foreground);
 		
-		this.score = 0;
-		this.scoreText = this.add.text(100, 16, this.scoreLabel + ': 0 рублей', { font: '12pt Arial', fill: '#000' });
+		this.changeScore(0);
 		
 		// ------- timer		
 		this.nextStar = 1;
@@ -119,8 +118,7 @@ Hrabrov.Level1.prototype = {
 	overlapPlayerStar: function(player, star) {
 		star.kill();		
 		
-		this.score += 10 * this.timeDelta;
-		this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
+		this.changeScore(10 * this.timeDelta);
 		
 		this.timeLeft += this.timeDelta;
 		this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
@@ -137,6 +135,18 @@ Hrabrov.Level1.prototype = {
 			this.nextStar += 1;
 			this.levelBuilder.makeStar();
 		}
+	},
+	
+	changeScore: function(deltaScore) {
+	    if (this.score == undefined) {
+	        this.score = deltaScore;
+		    this.scoreText = this.add.text(0, 16, this.scoreLabel + ': 0 рублей', { font: '12pt Arial', fill: '#000' });
+	    } else {
+	        this.score += deltaScore;
+	        this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
+	    }
+	    
+	    this.scoreText.x = 150 - this.scoreText.text.length * 6;
 	}
 	
 };
