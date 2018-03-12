@@ -159,23 +159,23 @@ LevelBuilder.prototype = {
         this.graphics.addChild(foreground);
         
         this.add.text(10, 35, '0', { font: '10pt Arial', fill: '#fff' });
-        this.add.text(350 - this.donationGoal.toString().length * 5, 35, this.donationGoal, 
+        this.add.text(350 - this.level.donationGoal.toString().length * 5, 35, this.level.donationGoal, 
                         { font: '10pt Arial', fill: '#fff' });
 	    
-	    this.score = initScore;
-		this.scoreText = this.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
-	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
+	    this.level.score = initScore;
+		this.level.scoreText = this.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
+	    this.level.scoreText.x = 200 - this.level.scoreText.text.length * 5;
 	},
 	
 	changeScore: function(deltaScore) {	    
-	    this.score += deltaScore;
-	    this.scoreText.text = this.score.toFixed(2) + ' рублей';
-	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
+	    this.level.score += deltaScore;
+	    this.level.scoreText.text = this.level.score.toFixed(2) + ' рублей';
+	    this.level.scoreText.x = 200 - this.level.scoreText.text.length * 5;
 	    
 	    let foreground = this.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.7;
-        foreground.drawRect(2, 2, 350 * (this.score / this.donationGoal), 26);
+        foreground.drawRect(2, 2, 350 * (this.level.score / this.level.donationGoal), 26);
         foreground.endFill();
         
         this.graphics.removeChildAt(1);
