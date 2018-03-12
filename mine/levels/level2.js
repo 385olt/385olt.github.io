@@ -86,7 +86,7 @@ Hrabrov.Level2.prototype = {
     
     render: function() {
         this.enemies.forEach(function(enemy) {
-            if (enemy.health < 1) {
+            if (enemy.health < 1 && enemy.data.healthBar == undefined) {
                 let healthBar = this.add.graphics(enemy.x, enemy.y - 10);
 		
 		        let background = this.add.graphics(0, 0);		
@@ -103,12 +103,18 @@ Hrabrov.Level2.prototype = {
                 foreground.endFill();
                 healthBar.addChild(foreground);
                 
-                if (enemy.data.healthBar != undefined) {
-                    enemy.data.healthBar.destroy(true);
-                }
+                enemy.data.healthBar = healthBar;                
+            } else if (enemy.health < 1) {
+                enemy.data.healthBar.x = enemy.x;
+                enemy.data.healthBar.y = enemy.y - 10;
                 
-                enemy.data.healthBar = healthBar;
-                
+                enemy.data.healthBar.removeChildAt(1);
+                let foreground = this.add.graphics(0, 0);
+                foreground.beginFill(0xff0000);
+                foreground.fillAlpha = 0.5;
+                foreground.drawRect(1, 1, 30 * enemy.health, 1);
+                foreground.endFill();
+                enemy.data.healthBar.addChild(foreground);
             }
         },this);
     },
@@ -151,11 +157,11 @@ Hrabrov.Level2.prototype = {
         y = this.sakramar.y + this.sakramar.height + 32;
         
         let enemy = this.AI.makeEnemy(x, y);
-        enemy.events.onKilled.add(this.enemyKilled, this);
+        enemy.events.onKilled.add(function () { this.enemyKilled(enemy); }, this);
     },
     
-    enemyKilled: function() {
-        console.log('good job!');
+    enemyKilled: function(enemy) {
+        enemy.data.healthBar.destroy();
     },
     
     shoot: function(direction) {        
