@@ -214,10 +214,8 @@ LevelBuilder.prototype = {
 	    
 	    var duration = this.level.countDown.duration;
         this.level.countDown.removeAll();
-        
-        console.log('Before2: ' + this.level.countDown.duration);
-        this.level.countDown.add(duration + (Phaser.Timer.SECOND * this.deltaTime), this.endCountDown, this);        
-        console.log('After: ' + this.level.countDown.duration);
+        this.level.countDown.add(duration + (Phaser.Timer.SECOND * this.level.deltaTime), 
+                                this.endCountDown, this);
         
         if (this.level.countDown.duration > this.level.maxAchievedTime) {
             this.level.maxAchievedTime = this.level.countDown.duration;
