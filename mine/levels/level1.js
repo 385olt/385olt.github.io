@@ -31,10 +31,14 @@ Hrabrov.Level1.prototype = {
 		
 		this.levelBuilder.createScore(0);
 		
+		this.nextStar = 1;
+		this.nextEnemy = 1;
+		
+		this.timeDelta = 1;
+		
 		this.countDown = this.time.create(false);
         this.countDown.add(Phaser.Timer.SECOND * 10, this.endCountDown, this);
         this.countDown.start();
-		
 	},
 	
 	update: function() {
@@ -105,8 +109,8 @@ Hrabrov.Level1.prototype = {
 	    		
 		this.levelBuilder.changeScore(10 * this.timeDelta);
 		
-		this.timeLeft += this.timeDelta;
-		this.timeLeftText.text = 'Осталось: ' + this.timeLeft.toFixed(2) + ' секунд';
+		//this.timeLeft += this.timeDelta;
+		//this.timeLeftText.text = 'Осталось: ' + this.timeLeft.toFixed(2) + ' секунд';
 		
 		this.levelBuilder.makeStar();
 		
