@@ -216,7 +216,9 @@ LevelBuilder.prototype = {
         if (this.level.countDown.duration > this.level.maxAchievedTime) {
             this.level.maxAchievedTime = this.level.countDown.duration;
             this.level.maxTimeGraphics.text = this.level.maxAchievedTime;
-        }	
+        }
+        
+        this.updateTime();	
 	},
 	
 	endCountDown: function() {
