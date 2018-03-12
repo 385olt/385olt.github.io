@@ -33,9 +33,11 @@ Hrabrov.Level1.prototype = {
 		
 		var graphics = this.add.graphics(100, 100);
 		
-		graphics.beginFill(0xff0000);
-        graphics.drawRect(10, 20, 10, 100);
+        graphics.beginFill(0xff0000);
         graphics.drawRect(8, 18, 14, 104);
+        graphics.endFill();
+        graphics.beginFill(0xff0000);
+        graphics.drawRect(10, 20, 10, 100);
         graphics.endFill();
 		
 		// ------- timer		
