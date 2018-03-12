@@ -118,7 +118,7 @@ Hrabrov.Level2.prototype = {
     },
     
     spawnEnemy: function() {
-        if (this.enemies.length > 20) return false;
+        if (this.enemies.countLiving() > 20) return false;
         
         x = this.sakramar.x;
         y = this.sakramar.y + this.sakramar.height + 32;

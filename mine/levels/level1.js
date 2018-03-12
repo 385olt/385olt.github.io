@@ -1,4 +1,6 @@
-Hrabrov.Level1 = function() {};
+Hrabrov.Level1 = function() {
+this.scoreLabel = 'Собрано';
+};
 
 Hrabrov.Level1.prototype = {
 	
@@ -46,7 +48,7 @@ Hrabrov.Level1.prototype = {
         this.graphics.addChild(foreground);
 		
 		this.score = 0;
-		this.scoreText = this.add.text(100, 16, 'Собрано: 0 рублей', { font: '12pt Arial', fill: '#000' });
+		this.scoreText = this.add.text(100, 16, this.scoreLabel + ': 0 рублей', { font: '12pt Arial', fill: '#000' });
 		
 		// ------- timer		
 		this.nextStar = 1;
@@ -118,7 +120,7 @@ Hrabrov.Level1.prototype = {
 		star.kill();		
 		
 		this.score += 10 * this.timeDelta;
-		this.scoreText.text = 'Собрано: ' + precisionRound(this.score, 2) + ' рублей';
+		this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
 		
 		this.timeLeft += this.timeDelta;
 		this.timeLeftText.text = 'Осталось: ' + precisionRound(this.timeLeft, 2) + ' секунд';
