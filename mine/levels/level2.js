@@ -1,7 +1,7 @@
 Hrabrov.Level2 = function() {
     this.bulletDamage = 0.1;
     this.donationGoal = 5000;
-    this.maxAchievedTime = 60;
+    this.maxAchievedTime = 60 * Phaser.Timer.SECOND;
 };
 
 Hrabrov.Level2.prototype = {
