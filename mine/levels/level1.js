@@ -102,9 +102,11 @@ Hrabrov.Level1.prototype = {
 	overlapPlayerStar: function(player, star) {
 		star.kill();
 		
+		console.log('BEFORE: ' + this.timer.duration);	
+		
 		this.timer.duration += 1000;
 	    
-	    console.log('this.timer.duration');		
+	    console.log('AFTER: ' + this.timer.duration);		
 		
 		this.levelBuilder.changeScore(10 * this.timeDelta);
 		
