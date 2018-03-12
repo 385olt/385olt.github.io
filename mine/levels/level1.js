@@ -34,9 +34,11 @@ Hrabrov.Level1.prototype = {
 		var graphics = this.add.graphics(100, 100);
 		
         graphics.beginFill(0xffffff);
+        graphics.fillAlpha = 0.5;
         graphics.drawRect(8, 18, 104, 14);
         graphics.endFill();
         graphics.beginFill(0xff0000);
+        graphics.fillAlpha = 0.5;
         graphics.drawRect(10, 20, 100, 10);
         graphics.endFill();
 		
