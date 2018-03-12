@@ -207,7 +207,7 @@ LevelBuilder.prototype = {
                                                         { font: '10pt Arial', fill: '#fff' });
 	    
 	    this.level.countDown = this.level.time.create(false);
-        this.level.countDown.add(Phaser.Timer.SECOND * 10, this.endCountDown, this);
+        this.level.countDown.add(Phaser.Timer.SECOND * initTime, this.endCountDown, this);
         this.level.countDown.start();
 	},
 	
