@@ -123,8 +123,8 @@ Hrabrov.Level1.prototype = {
 	    this.graphics = this.add.graphics(10, 10);
 		
 		let background = this.add.graphics(0, 0);		
-        background.beginFill(0xffffff);
-        background.fillAlpha = 0.5;
+        background.beginFill(0x000000);
+        background.fillAlpha = 0.7;
         background.drawRect(0, 0, 354, 30);
         background.endFill();
         this.graphics.addChild(background);
@@ -138,7 +138,7 @@ Hrabrov.Level1.prototype = {
 	    
 	    this.score = initScore;
 		this.scoreText = this.add.text(0, 16, this.scoreLabel + ': ' + initScore + ' рублей', 
-		                              { font: '12pt Arial', fill: '#000' });
+		                              { font: '12pt Arial', fill: '#fff' });
 	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
 	},
 	
@@ -149,7 +149,7 @@ Hrabrov.Level1.prototype = {
 	    
 	    let foreground = this.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
-        foreground.fillAlpha = 0.5;
+        foreground.fillAlpha = 0.7;
         foreground.drawRect(2, 2, 350 * (this.score / 1000), 26);
         foreground.endFill();
         
