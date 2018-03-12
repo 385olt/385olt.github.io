@@ -84,9 +84,34 @@ Hrabrov.Level2.prototype = {
         sakramar.animations.play(myDr == 1 ? 'right' : 'left');
     },
     
+    render: function() {
+        this.enemies.forEach(function(enemy) {
+            if (enemy.data.health < 1) {
+                let healthBar = this.add.graphics(enemy.x, enemy.y - 10);
+		
+		        let background = this.add.graphics(0, 0);		
+                background.beginFill(0xffffff);
+                background.fillAlpha = 0.5;
+                background.drawRect(0, 0, 32, 3);
+                background.endFill();
+                this.healthBar.addChild(background);
+                
+                let foreground = this.add.graphics(0, 0);
+                foreground.beginFill(0xff0000);
+                foreground.fillAlpha = 0.5;
+                foreground.drawRect(1, 1, 30 * enemy.health, 1);
+                foreground.endFill();
+                this.healthBar.addChild(foreground);
+                
+            }
+        });
+    },
+    
     collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
         enemy.damage(this.bulletDamage);
+        
+        
     },
     
     collidePlayerEnemy: function(player, enemy) {

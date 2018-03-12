@@ -115,19 +115,7 @@ Hrabrov.Level1.prototype = {
 	},
 
 	overlapPlayerStar: function(player, star) {
-		star.kill();
-		
-		
-		this.graphics.removeChildAt(1);
-		
-		let foreground = this.add.graphics(0, 0);
-        foreground.beginFill(0xff0000);
-        foreground.fillAlpha = 0.5;
-        foreground.drawRect(2, 2, this.score, 26);
-        foreground.endFill();
-        
-        this.graphics.addChild(foreground);
-		
+		star.kill();		
 		
 		this.score += 10 * this.timeDelta;
 		this.scoreText.text = 'Собрано: ' + precisionRound(this.score, 2) + ' рублей';
