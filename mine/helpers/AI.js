@@ -184,7 +184,9 @@ AI.prototype = {
 	},
     
     enemyKilled: function(enemy) {
-        enemy.data.healthBar.destroy(true);
+        if (enemy.data.healthBar != undefined) {
+            enemy.data.healthBar.destroy(true);
+        }
     },
 	
 	addLinesToEnemy: function(enemy) {
