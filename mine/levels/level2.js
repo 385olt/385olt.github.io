@@ -103,6 +103,12 @@ Hrabrov.Level2.prototype = {
                 foreground.endFill();
                 healthBar.addChild(foreground);
                 
+                if (enemy.data.healthBar != undefined) {
+                    enemy.data.healthBar.destroy(true);
+                }
+                
+                enemy.data.healthBar = healthBar;
+                
             }
         },this);
     },
