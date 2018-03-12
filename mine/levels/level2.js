@@ -104,7 +104,7 @@ Hrabrov.Level2.prototype = {
                 this.healthBar.addChild(foreground);
                 
             }
-        });
+        },this);
     },
     
     collideEnemyBullet: function(enemy, bullet) {
