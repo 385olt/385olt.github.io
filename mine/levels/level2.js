@@ -85,48 +85,12 @@ Hrabrov.Level2.prototype = {
     },
     
     render: function() {
-        this.enemies.forEach(function(enemy) {
-            if (enemy.health < 1 && enemy.data.healthBar == undefined) {
-                let healthBar = this.add.graphics(enemy.x, enemy.y - 10);
-		
-		        let background = this.add.graphics(0, 0);		
-                background.beginFill(0xffffff);
-                background.fillAlpha = 0.5;
-                background.drawRect(0, 0, 32, 3);
-                background.endFill();
-                healthBar.addChild(background);
-                
-                let foreground = this.add.graphics(0, 0);
-                foreground.beginFill(0xff0000);
-                foreground.fillAlpha = 0.5;
-                foreground.drawRect(1, 1, 30 * enemy.health, 1);
-                foreground.endFill();
-                healthBar.addChild(foreground);
-                
-                enemy.data.healthBar = healthBar;                
-            } else if (enemy.health < 1) {
-                enemy.data.healthBar.x = enemy.x;
-                enemy.data.healthBar.y = enemy.y - 10;
-                
-                if (enemy.data.healthBar.children[1] != undefined) {
-                    enemy.data.healthBar.removeChildAt(1);
-                
-                }
-                let foreground = this.add.graphics(0, 0);
-                foreground.beginFill(0xff0000);
-                foreground.fillAlpha = 0.5;
-                foreground.drawRect(1, 1, 30 * enemy.health, 1);
-                foreground.endFill();
-                enemy.data.healthBar.addChild(foreground);
-            }
-        },this);
-    },
+        this.AI.render();
+    }
     
     collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
         enemy.damage(this.bulletDamage);
-        
-        
     },
     
     collidePlayerEnemy: function(player, enemy) {
@@ -160,11 +124,6 @@ Hrabrov.Level2.prototype = {
         y = this.sakramar.y + this.sakramar.height + 32;
         
         let enemy = this.AI.makeEnemy(x, y);
-        enemy.events.onKilled.add(this.enemyKilled(enemy), this);
-    },
-    
-    enemyKilled: function(enemy) {
-        enemy.data.healthBar.destroy(true);
     },
     
     shoot: function(direction) {        

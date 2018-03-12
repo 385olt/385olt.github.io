@@ -88,6 +88,45 @@ AI.prototype = {
 		}, this);
 		
     },
+    
+    render: function() {
+        this.level.enemies.forEach(function(enemy) {
+            if (enemy.health < 1 && enemy.data.healthBar == undefined) {
+                let healthBar = this.level.add.graphics(enemy.x, enemy.y - 10);
+		
+		        let background = this.level.add.graphics(0, 0);		
+                background.beginFill(0xffffff);
+                background.fillAlpha = 0.5;
+                background.drawRect(0, 0, 32, 3);
+                background.endFill();
+                healthBar.addChild(background);
+                
+                let foreground = this.level.add.graphics(0, 0);
+                foreground.beginFill(0xff0000);
+                foreground.fillAlpha = 0.5;
+                foreground.drawRect(1, 1, 30 * enemy.health, 1);
+                foreground.endFill();
+                healthBar.addChild(foreground);
+                
+                enemy.data.healthBar = healthBar;                
+            } else if (enemy.health < 1) {
+                enemy.data.healthBar.x = enemy.x;
+                enemy.data.healthBar.y = enemy.y - 10;
+                
+                if (enemy.data.healthBar.children[1] != undefined) {
+                    enemy.data.healthBar.removeChildAt(1);
+                
+                }
+                
+                let foreground = this.level.add.graphics(0, 0);
+                foreground.beginFill(0xff0000);
+                foreground.fillAlpha = 0.5;
+                foreground.drawRect(1, 1, 30 * enemy.health, 1);
+                foreground.endFill();
+                enemy.data.healthBar.addChild(foreground);
+            }
+        },this);
+    },
 	
 	collideEnemyPlatform: function(enemy, platform) {
 		if (enemy.body.touching.down && platform.body.touching.up) {
@@ -134,6 +173,7 @@ AI.prototype = {
 		enemy.goodDirectionBlock = 0;
 		enemy.starsKilled = 0;
 		enemy.data = {};
+		enemy.events.onKilled.add(this.enemyKilled(enemy), this);
 		
 		this.addLinesToEnemy(enemy);	
 		
@@ -142,6 +182,10 @@ AI.prototype = {
 	
 		return enemy;
 	},
+    
+    enemyKilled: function(enemy) {
+        enemy.data.healthBar.destroy(true);
+    },
 	
 	addLinesToEnemy: function(enemy) {
 	    enemy.myAiLines = {};
