@@ -161,7 +161,7 @@ Hrabrov.Level2.prototype = {
     },
     
     enemyKilled: function(enemy) {
-        enemy.data.healthBar.destroy();
+        enemy.data.healthBar.destroy(true);
     },
     
     shoot: function(direction) {        
