@@ -29,24 +29,6 @@ Hrabrov.Level1.prototype = {
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
-		// ------- score
-		
-		this.graphics = this.add.graphics(10, 10);
-		
-		let background = this.add.graphics(0, 0);		
-        background.beginFill(0xffffff);
-        background.fillAlpha = 0.5;
-        background.drawRect(0, 0, 354, 30);
-        background.endFill();
-        this.graphics.addChild(background);
-        
-        let foreground = this.add.graphics(0, 0);
-        foreground.beginFill(0xff0000);
-        foreground.fillAlpha = 0.5;
-        foreground.drawRect(2, 2, 1, 26);
-        foreground.endFill();
-        this.graphics.addChild(foreground);
-		
 		this.createScore(0);
 		
 		// ------- timer		
@@ -138,17 +120,41 @@ Hrabrov.Level1.prototype = {
 	},
 	
 	createScore: function(initScore) {
+	    this.graphics = this.add.graphics(10, 10);
+		
+		let background = this.add.graphics(0, 0);		
+        background.beginFill(0xffffff);
+        background.fillAlpha = 0.5;
+        background.drawRect(0, 0, 354, 30);
+        background.endFill();
+        this.graphics.addChild(background);
+        
+        let foreground = this.add.graphics(0, 0);
+        foreground.beginFill(0xff0000);
+        foreground.fillAlpha = 0.5;
+        foreground.drawRect(2, 2, 1, 26);
+        foreground.endFill();
+        this.graphics.addChild(foreground);
+	    
 	    this.score = initScore;
 		this.scoreText = this.add.text(0, 16, this.scoreLabel + ': ' + initScore + ' рублей', 
 		                              { font: '12pt Arial', fill: '#000' });
 	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
 	},
 	
-	changeScore: function(deltaScore) {
+	changeScore: function(deltaScore) {	    
 	    this.score += deltaScore;
 	    this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
 	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
 	    
+	    let foreground = this.add.graphics(0, 0);
+        foreground.beginFill(0xff0000);
+        foreground.fillAlpha = 0.5;
+        foreground.drawRect(2, 2, 350 * (this.score / 1000), 26);
+        foreground.endFill();
+        
+        this.graphics.removeChildAt(1);
+        this.graphics.addChild(foreground);
 	}
 	
 };
