@@ -220,7 +220,7 @@ LevelBuilder.prototype = {
             this.level.maxTimeGraphics.text = this.level.maxAchievedTime;
         }
         
-        this.updateTime();	
+        //this.updateTime();	
 	},
 	
 	endCountDown: function() {
