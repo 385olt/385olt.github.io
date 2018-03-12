@@ -108,7 +108,10 @@ Hrabrov.Level2.prototype = {
                 enemy.data.healthBar.x = enemy.x;
                 enemy.data.healthBar.y = enemy.y - 10;
                 
-                enemy.data.healthBar.removeChildAt(1);
+                if (enemy.data.healthBar.children[1] != undefined) {
+                    enemy.data.healthBar.removeChildAt(1);
+                
+                }
                 let foreground = this.add.graphics(0, 0);
                 foreground.beginFill(0xff0000);
                 foreground.fillAlpha = 0.5;
