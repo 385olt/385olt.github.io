@@ -138,8 +138,9 @@ Hrabrov.Level1.prototype = {
 	},
 	
 	createScore: function(initScore) {
-	    this.score = deltaScore;
-		this.scoreText = this.add.text(0, 16, this.scoreLabel + ': 0 рублей', { font: '12pt Arial', fill: '#000' });
+	    this.score = initScore;
+		this.scoreText = this.add.text(0, 16, this.scoreLabel + ': ' + initScore + ' рублей', 
+		                              { font: '12pt Arial', fill: '#000' });
 	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
 	},
 	
