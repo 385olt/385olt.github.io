@@ -29,7 +29,9 @@ Hrabrov.Level1.prototype = {
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
+		console.log('before');
 		this.levelBuilder.createScore(0);
+		console.log('after');
 		
 		// ------- timer		
 		this.nextStar = 1;
