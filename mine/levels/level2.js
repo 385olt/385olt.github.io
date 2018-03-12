@@ -36,11 +36,10 @@ Hrabrov.Level2.prototype = {
             this.AI.makeEnemy(false, 120 + this.rnd.frac() * (this.world.height - 200));
         }
         
-        this.shotLeft = false;
-        this.shotRight = false;
-        this.shotUp = false;
-        this.shotDown = false;
-        
+        this.levelBuilder.setScore(1000);
+		
+		this.levelBuilder.setTime(10);
+                
         let W = game.input.keyboard.addKey(Phaser.Keyboard.W);
         W.onDown.add(function() { this.shoot('up') }, this);
         
@@ -86,6 +85,8 @@ Hrabrov.Level2.prototype = {
     
     render: function() {
         this.AI.render();
+        
+        this.levelBuilder.updateTime();
     },
     
     collideEnemyBullet: function(enemy, bullet) {
@@ -126,7 +127,11 @@ Hrabrov.Level2.prototype = {
         let enemy = this.AI.makeEnemy(x, y);
     },
     
-    shoot: function(direction) {        
+    shoot: function(direction) {  
+        if (this.score <= 0) return;
+        
+        this.levelBuilder.addScore(-1);
+              
         switch (direction) {
             case 'left':  offsets = {x: -16, y: 0}; break;
             case 'right': offsets = {x: 16, y: 0};  break;
