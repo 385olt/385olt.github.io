@@ -46,7 +46,7 @@ Hrabrov.Level1.prototype = {
         graphics.addChild(foreground);
 		
 		this.score = 0;
-		this.scoreText = this.add.text(16, 16, 'Собрано: 0 рублей', { font: '16pt Arial', fill: '#000' });
+		this.scoreText = this.add.text(48, 16, 'Собрано: 0 рублей', { font: '12pt Arial', fill: '#000' });
 		
 		// ------- timer		
 		this.nextStar = 1;
