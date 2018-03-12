@@ -200,8 +200,10 @@ LevelBuilder.prototype = {
         this.level.timeGraphics.addChild(foreground);
         
         this.level.add.text(this.level.world.width - 364, 40, '0', { font: '10pt Arial', fill: '#fff' });
-        this.level.maxTimeGraphics = this.level.add.text(350 - this.level.maxAchievedTime.toString().length * 4, 40, 
-                            this.level.maxAchievedTime, { font: '10pt Arial', fill: '#fff' });
+        
+        let maxTimeX = this.level.world.width - 364 - this.level.maxAchievedTime.toString().length * 4;
+        this.level.maxTimeGraphics = this.level.add.text(maxTimeX, 40, this.level.maxAchievedTime, 
+                                                        { font: '10pt Arial', fill: '#fff' });
 	    
 	    this.level.countDown = this.level.time.create(false);
         this.level.countDown.add(Phaser.Timer.SECOND * 10, this.endCountDown, this);
