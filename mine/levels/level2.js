@@ -86,7 +86,7 @@ Hrabrov.Level2.prototype = {
     
     render: function() {
         this.enemies.forEach(function(enemy) {
-            if (enemy.data.health < 1) {
+            if (enemy.health < 1) {
                 let healthBar = this.add.graphics(enemy.x, enemy.y - 10);
 		
 		        let background = this.add.graphics(0, 0);		
