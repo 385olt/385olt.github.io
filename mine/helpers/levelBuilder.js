@@ -154,7 +154,7 @@ LevelBuilder.prototype = {
         let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.7;
-        foreground.drawRect(2, 2, 1, 26);
+        foreground.drawRect(2, 2, 350 * (initScore / this.level.donationGoal), 26);
         foreground.endFill();
         this.level.scoreGraphics.addChild(foreground);
         
@@ -195,7 +195,7 @@ LevelBuilder.prototype = {
         let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0x0000ff);
         foreground.fillAlpha = 0.7;
-        foreground.drawRect(2, 2, 1, 26);
+        foreground.drawRect(2, 2, 350, 26);
         foreground.endFill();
         this.level.timeGraphics.addChild(foreground);
         
