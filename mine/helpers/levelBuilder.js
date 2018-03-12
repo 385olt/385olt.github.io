@@ -161,6 +161,8 @@ LevelBuilder.prototype = {
         this.level.add.text(10, 35, '0', { font: '12pt Arial', fill: '#fff' });
         this.level.add.text(350 - this.level.donationGoal.toString().length * 5, 35, this.level.donationGoal, 
                         { font: '12pt Arial', fill: '#fff' });
+        
+        console.log('test');
 	    
 	    this.level.score = initScore;
 		this.level.scoreText = this.level.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
