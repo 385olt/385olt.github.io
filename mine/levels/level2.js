@@ -1,5 +1,7 @@
 Hrabrov.Level2 = function() {
     this.bulletDamage = 0.1;
+    this.donationGoal = 5000;
+    this.maxAchievedTime = 60;
 };
 
 Hrabrov.Level2.prototype = {
@@ -38,7 +40,7 @@ Hrabrov.Level2.prototype = {
         
         this.levelBuilder.setScore(1000);
 		
-		this.levelBuilder.setTime(10);
+		this.levelBuilder.setTime(this.maxAchievedTime);
                 
         let W = game.input.keyboard.addKey(Phaser.Keyboard.W);
         W.onDown.add(function() { this.shoot('up') }, this);
