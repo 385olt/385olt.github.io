@@ -142,28 +142,28 @@ LevelBuilder.prototype = {
 	},
 	
 	createScore: function(initScore) {
-	    this.graphics = this.add.graphics(10, 10);
+	    this.level.graphics = this.level.add.graphics(10, 10);
 		
-		let background = this.add.graphics(0, 0);		
+		let background = this.level.add.graphics(0, 0);		
         background.beginFill(0x000000);
         background.fillAlpha = 0.7;
         background.drawRect(0, 0, 354, 30);
         background.endFill();
-        this.graphics.addChild(background);
+        this.level.graphics.addChild(background);
         
-        let foreground = this.add.graphics(0, 0);
+        let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.5;
         foreground.drawRect(2, 2, 1, 26);
         foreground.endFill();
-        this.graphics.addChild(foreground);
+        this.level.graphics.addChild(foreground);
         
-        this.add.text(10, 35, '0', { font: '10pt Arial', fill: '#fff' });
-        this.add.text(350 - this.level.donationGoal.toString().length * 5, 35, this.level.donationGoal, 
+        this.level.add.text(10, 35, '0', { font: '10pt Arial', fill: '#fff' });
+        this.level.add.text(350 - this.level.donationGoal.toString().length * 5, 35, this.level.donationGoal, 
                         { font: '10pt Arial', fill: '#fff' });
 	    
 	    this.level.score = initScore;
-		this.level.scoreText = this.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
+		this.level.scoreText = this.level.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
 	    this.level.scoreText.x = 200 - this.level.scoreText.text.length * 5;
 	},
 	
@@ -172,14 +172,14 @@ LevelBuilder.prototype = {
 	    this.level.scoreText.text = this.level.score.toFixed(2) + ' рублей';
 	    this.level.scoreText.x = 200 - this.level.scoreText.text.length * 5;
 	    
-	    let foreground = this.add.graphics(0, 0);
+	    let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.7;
         foreground.drawRect(2, 2, 350 * (this.level.score / this.level.donationGoal), 26);
         foreground.endFill();
         
-        this.graphics.removeChildAt(1);
-        this.graphics.addChild(foreground);
+        this.level.graphics.removeChildAt(1);
+        this.level.graphics.addChild(foreground);
 	}
     
 };
