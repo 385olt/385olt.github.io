@@ -41,7 +41,7 @@ Hrabrov.Level1.prototype = {
         let foreground = this.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
         foreground.fillAlpha = 0.5;
-        foreground.drawRect(2, 2, 300, 26);
+        foreground.drawRect(2, 2, 1, 26);
         foreground.endFill();
         this.graphics.addChild(foreground);
 		
@@ -117,7 +117,7 @@ Hrabrov.Level1.prototype = {
 	overlapPlayerStar: function(player, star) {
 		star.kill();
 		
-		console.log(this.graphics.children[1].width);
+		this.graphics.children[1].width += 10 * this.timeDelta;
 		
 		this.score += 10 * this.timeDelta;
 		this.scoreText.text = 'Собрано: ' + precisionRound(this.score, 2) + ' рублей';
