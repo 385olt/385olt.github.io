@@ -94,14 +94,14 @@ Hrabrov.Level2.prototype = {
                 background.fillAlpha = 0.5;
                 background.drawRect(0, 0, 32, 3);
                 background.endFill();
-                this.healthBar.addChild(background);
+                healthBar.addChild(background);
                 
                 let foreground = this.add.graphics(0, 0);
                 foreground.beginFill(0xff0000);
                 foreground.fillAlpha = 0.5;
                 foreground.drawRect(1, 1, 30 * enemy.health, 1);
                 foreground.endFill();
-                this.healthBar.addChild(foreground);
+                healthBar.addChild(foreground);
                 
             }
         },this);
