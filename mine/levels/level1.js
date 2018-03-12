@@ -47,7 +47,7 @@ Hrabrov.Level1.prototype = {
         foreground.endFill();
         this.graphics.addChild(foreground);
 		
-		this.changeScore(0);
+		this.createScore(0);
 		
 		// ------- timer		
 		this.nextStar = 1;
@@ -137,16 +137,17 @@ Hrabrov.Level1.prototype = {
 		}
 	},
 	
-	changeScore: function(deltaScore) {
-	    if (this.score == undefined) {
-	        this.score = deltaScore;
-		    this.scoreText = this.add.text(0, 16, this.scoreLabel + ': 0 рублей', { font: '12pt Arial', fill: '#000' });
-	    } else {
-	        this.score += deltaScore;
-	        this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
-	    }
-	    
+	createScore: function(initScore) {
+	    this.score = deltaScore;
+		this.scoreText = this.add.text(0, 16, this.scoreLabel + ': 0 рублей', { font: '12pt Arial', fill: '#000' });
 	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
+	},
+	
+	changeScore: function(deltaScore) {
+	    this.score += deltaScore;
+	    this.scoreText.text = this.scoreLabel + ': ' + precisionRound(this.score, 2) + ' рублей';
+	    this.scoreText.x = 200 - this.scoreText.text.length * 5;
+	    
 	}
 	
 };
