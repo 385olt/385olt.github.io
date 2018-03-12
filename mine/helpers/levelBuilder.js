@@ -142,6 +142,8 @@ LevelBuilder.prototype = {
 	},
 	
 	createScore: function(initScore) {
+	    console.log('CREATE SCORE'');
+	    
 	    this.level.graphics = this.level.add.graphics(10, 10);
 		
 		let background = this.level.add.graphics(0, 0);		
