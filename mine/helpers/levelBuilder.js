@@ -230,9 +230,7 @@ LevelBuilder.prototype = {
         this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
     },
     
-    updateTime: function() {
-        console.log(this.level.countDown.duration);
-        
+    updateTime: function() {        
         let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0x0000ff);
         foreground.fillAlpha = 0.7;
