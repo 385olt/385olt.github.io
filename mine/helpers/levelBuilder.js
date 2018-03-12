@@ -215,7 +215,7 @@ LevelBuilder.prototype = {
 	    
 	    var duration = this.level.countDown.duration;
         this.level.countDown.removeAll();
-        this.level.countDown.add(duration + (Phaser.Timer.SECOND * this.level.deltaTime), 
+        this.level.countDown.add(duration + (Phaser.Timer.SECOND * deltaTime), 
                                 this.endCountDown, this);
         
         if (this.level.countDown.duration > this.level.maxAchievedTime) {
@@ -227,7 +227,7 @@ LevelBuilder.prototype = {
 	},
 	
 	endCountDown: function() {
-        this.level.state.start('Hrabrov.GameOver', true, false, this.score);
+        this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
     },
     
     updateTime: function() {
