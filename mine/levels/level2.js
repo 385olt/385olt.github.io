@@ -86,7 +86,7 @@ Hrabrov.Level2.prototype = {
     
     render: function() {
         this.AI.render();
-    }
+    },
     
     collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
