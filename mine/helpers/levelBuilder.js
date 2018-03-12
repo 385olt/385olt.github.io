@@ -201,7 +201,7 @@ LevelBuilder.prototype = {
         
         this.level.add.text(this.level.world.width - 364, 40, '0', { font: '10pt Arial', fill: '#fff' });
         
-        let maxTimeX = this.level.world.width - 364 - this.level.maxAchievedTime.toString().length * 4;
+        let maxTimeX = this.level.world.width - 10 - this.level.maxAchievedTime.toString().length * 4;
         this.level.maxTimeGraphics = this.level.add.text(maxTimeX, 40, this.level.maxAchievedTime, 
                                                         { font: '10pt Arial', fill: '#fff' });
 	    
@@ -228,6 +228,8 @@ LevelBuilder.prototype = {
     },
     
     updateTime: function() {
+        console.log(this.level.countDown.duration);
+        
         let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0x0000ff);
         foreground.fillAlpha = 0.7;
