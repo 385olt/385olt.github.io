@@ -1,5 +1,6 @@
 Hrabrov.Level1 = function() {
 this.donationGoal = 1000;
+this.maxAchievedTime = 10 * Phaser.Timer.SECOND;
 };
 
 Hrabrov.Level1.prototype = {
@@ -31,14 +32,12 @@ Hrabrov.Level1.prototype = {
 		
 		this.levelBuilder.createScore(0);
 		
+		this.levelBuilder.setTime(10);
+		
 		this.nextStar = 1;
 		this.nextEnemy = 1;
 		
-		this.timeDelta = 1;
-		
-		this.countDown = this.time.create(false);
-        this.countDown.add(Phaser.Timer.SECOND * 10, this.endCountDown, this);
-        this.countDown.start();
+		this.timeDelta = 1;		
 	},
 	
 	update: function() {
@@ -46,8 +45,10 @@ Hrabrov.Level1.prototype = {
 		this.levelBuilder.updateControls();
 		
 		this.AI.update();
+	},
 	
-	    console.log(this.countDown.duration);
+	render: function() {
+	    this.levelBuilder.updateTime();
 	},
 	
 	collidePlayerEnemy: function(player, enemy) {
@@ -80,22 +81,13 @@ Hrabrov.Level1.prototype = {
 			this.state.start('Hrabrov.GameOver', true, false, this.score);
 		}
 	},
-	
-	endCountDown: function() {
-        console.log('Done!');
-    },
 
 	overlapPlayerStar: function(player, star) {
 		star.kill();
 		
-		var duration = this.countDown.duration;
-        this.countDown.removeAll();
-        this.countDown.add(duration + (Phaser.Timer.SECOND * this.timeDelta), this.endCountDown, this);
+		this.levelBuilder.addTime(this.timeDelta);
 	    		
-		this.levelBuilder.changeScore(10 * this.timeDelta);
-		
-		//this.timeLeft += this.timeDelta;
-		//this.timeLeftText.text = 'Осталось: ' + this.timeLeft.toFixed(2) + ' секунд';
+		this.levelBuilder.addScore(10 * this.timeDelta);
 		
 		this.levelBuilder.makeStar();
 		

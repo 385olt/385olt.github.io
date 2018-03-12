@@ -141,35 +141,33 @@ LevelBuilder.prototype = {
 		}
 	},
 	
-	createScore: function(initScore) {	    
-	    this.level.graphics = this.level.add.graphics(10, 10);
+	setScore: function(initScore) {	    
+	    this.level.scoreGraphics = this.level.add.graphics(10, 10);
 		
 		let background = this.level.add.graphics(0, 0);		
         background.beginFill(0x000000);
         background.fillAlpha = 0.7;
         background.drawRect(0, 0, 354, 30);
         background.endFill();
-        this.level.graphics.addChild(background);
+        this.level.scoreGraphics.addChild(background);
         
         let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0xff0000);
-        foreground.fillAlpha = 0.5;
+        foreground.fillAlpha = 0.7;
         foreground.drawRect(2, 2, 1, 26);
         foreground.endFill();
-        this.level.graphics.addChild(foreground);
+        this.level.scoreGraphics.addChild(foreground);
         
         this.level.add.text(10, 40, '0', { font: '10pt Arial', fill: '#fff' });
         this.level.add.text(350 - this.level.donationGoal.toString().length * 4, 40, this.level.donationGoal, 
                         { font: '10pt Arial', fill: '#fff' });
-        
-        
 	    
 	    this.level.score = initScore;
 		this.level.scoreText = this.level.add.text(0, 16, initScore + ' рублей', { font: '12pt Arial', fill: '#fff' });
 	    this.level.scoreText.x = 200 - this.level.scoreText.text.length * 5;
 	},
 	
-	changeScore: function(deltaScore) {	    
+	addScore: function(deltaScore) {	    
 	    this.level.score += deltaScore;
 	    this.level.scoreText.text = this.level.score.toFixed(2) + ' рублей';
 	    this.level.scoreText.x = 200 - this.level.scoreText.text.length * 5;
@@ -182,6 +180,53 @@ LevelBuilder.prototype = {
         
         this.level.graphics.removeChildAt(1);
         this.level.graphics.addChild(foreground);
-	}
+	},
+	
+	setTime: function(initTime) {
+	    this.level.timeGraphics = this.level.add.graphics(this.level.world.width - 364, 10);
+		
+		let background = this.level.add.graphics(0, 0);		
+        background.beginFill(0x000000);
+        background.fillAlpha = 0.7;
+        background.drawRect(0, 0, 354, 30);
+        background.endFill();
+        this.level.timeGraphics.addChild(background);
+        
+        let foreground = this.level.add.graphics(0, 0);
+        foreground.beginFill(0x0000ff);
+        foreground.fillAlpha = 0.7;
+        foreground.drawRect(2, 2, 1, 26);
+        foreground.endFill();
+        this.level.timeGraphics.addChild(foreground);
+	    
+	    this.level.countDown = this.level.time.create(false);
+        this.level.countDown.add(Phaser.Timer.SECOND * 10, this.endCountDown, this);
+        this.level.countDown.start();
+	},
+	
+	addTime: function(deltaTime) {
+	    var duration = this.level.countDown.duration;
+        this.level.countDown.removeAll();
+        this.level.countDown.add(duration + (Phaser.Timer.SECOND * this.deltaTime), this.endCountDown, this);
+        
+        if (this.level.countDown.duration > this.level.maxAchievedTime) {
+            this.level.maxAchievedTime = this.level.countDown.duration;
+        }	
+	},
+	
+	endCountDown: function() {
+        this.level.state.start('Hrabrov.GameOver', true, false, this.score);
+    },
+    
+    updateTime: function() {
+        let foreground = this.level.add.graphics(0, 0);
+        foreground.beginFill(0x0000ff);
+        foreground.fillAlpha = 0.7;
+        foreground.drawRect(2, 2, 350 * (this.level.countDown.duration / this.level.maxAchievedTime), 26);
+        foreground.endFill();
+        
+        this.level.timeGraphics.removeChildAt(1);
+        this.level.timeGraphics.addChild(foreground);
+    }
     
 };
