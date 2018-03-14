@@ -16,7 +16,7 @@ Hrabrov.Level2.prototype = {
 	    this.bullets = this.add.group();
 	    this.bullets.enableBody = true;
 	    
-	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 100);
+	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 150);
 	    
 	    this.setSakramar(0, 0);
 	    
@@ -36,6 +36,10 @@ Hrabrov.Level2.prototype = {
         
         for (let i = 0; i < 5; i++) {
             this.AI.makeEnemy(false, 120 + this.rnd.frac() * (this.world.height - 200));
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            this.levelBuilder.makeStar(false, 120 + this.rnd.frac() * (this.world.height - 200));
         }
         
         this.levelBuilder.setScore(1000);
