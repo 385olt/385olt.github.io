@@ -57,6 +57,11 @@ Hrabrov.Level2.prototype = {
         
         let D = game.input.keyboard.addKey(Phaser.Keyboard.D);
         D.onDown.add(function() { this.shoot('right') }, this);
+        
+        this.nextStar = 1;
+		this.nextEnemy = 1;
+		
+		this.timeDelta = 1;	
     },
     
     update: function() {
