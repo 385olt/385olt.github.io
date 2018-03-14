@@ -249,9 +249,9 @@ LevelBuilder.prototype = {
 	overlapPlayerStar: function(player, star) {
 		star.kill();
 		
-		this.addTime(this.timeDelta);
+		this.addTime(this.level.timeDelta);
 	    		
-		this.addScore(10 * this.timeDelta);
+		this.addScore(10 * this.level.timeDelta);
 		
 		this.makeStar();
 		
