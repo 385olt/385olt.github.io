@@ -208,13 +208,16 @@ LevelBuilder.prototype = {
 	    
 	    if (this.level.countDown == undefined) {
 	        this.level.countDown = this.level.time.create(false);
-	        console.log('hello');
+	        console.log('CREATE');
 	    } else {
 	        this.level.countDown.removeAll();
+	        console.log('CLEAR TIMERS');
 	    }
 	    
         this.level.countDown.add(initTime, this.endCountDown, this);
+        console.log('ADD TIMER ' + this.level.countDown.duration);
         this.level.countDown.start();
+        console.log('START TIMER ' + this.level.countDown.duration);
 	},
 	
 	addTime: function(deltaTime) {
