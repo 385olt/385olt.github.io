@@ -249,7 +249,7 @@ LevelBuilder.prototype = {
         this.level.timeGraphics.addChild(foreground);
         
         this.level.timeText.text = this.level.countDown.duration.toFixed(2) + ' секунд';
-	    this.level.timeText.x = 200 - this.level.timeText.text.length * 5;
+	    this.level.timeText.x = this.level.world.width - 200 - this.level.timeText.text.length * 5;
     },
 
 	overlapPlayerStar: function(player, star) {
