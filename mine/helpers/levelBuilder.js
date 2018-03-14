@@ -206,7 +206,12 @@ LevelBuilder.prototype = {
         this.level.maxTimeGraphics = this.level.add.text(maxTimeX, 40, maxTimeSeconds, 
                                                         { font: '10pt Arial', fill: '#fff' });
 	    
-	    this.level.countDown = this.level.time.create(false);
+	    if (this.level.countDown == undefined) {
+	        this.level.countDown = this.level.time.create(false);
+	    } else {
+	        this.level.countDown.removeAll();
+	    }
+	    
         this.level.countDown.add(initTime, this.endCountDown, this);
         this.level.countDown.start();
 	},
