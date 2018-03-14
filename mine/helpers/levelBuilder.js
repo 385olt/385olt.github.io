@@ -208,21 +208,16 @@ LevelBuilder.prototype = {
 	    
 	    if (this.level.countDown == undefined) {
 	        this.level.countDown = this.level.time.create(true);
-	        console.log('CREATE');
 	    } else {
 	        this.level.countDown.destroy();
 	        this.level.countDown = this.level.time.create(true);
-	        console.log('RECREATE TIMERS');
 	    }
 	    
         this.level.countDown.add(initTime, this.endCountDown, this);
-        console.log('ADD TIMER ' + this.level.countDown.duration);
         this.level.countDown.start();
-        console.log('START TIMER ' + this.level.countDown.duration);
 	},
 	
 	addTime: function(deltaTime) {
-	    
 	    var duration = this.level.countDown.duration;
         this.level.countDown.removeAll();
         this.level.countDown.add(duration + (Phaser.Timer.SECOND * deltaTime), 
@@ -241,7 +236,6 @@ LevelBuilder.prototype = {
     },
     
     updateTime: function() {
-        console.log(this.level.countDown.duration);
         let foreground = this.level.add.graphics(0, 0);
         foreground.beginFill(0x0000ff);
         foreground.fillAlpha = 0.7;
