@@ -161,8 +161,6 @@ AI.prototype = {
 	collidePlayerEnemy: function(player, enemy) {
 		var playerBounceX = 400;
 		var playerBounceY = 300;
-		var starBounceX = 200;
-		var starBounceY = 300;
 		
 		if (player.body.touching.down && enemy.body.touching.up) {
 			
@@ -211,6 +209,9 @@ AI.prototype = {
     
     throwStars: function(enemy, amount = false) {
         if (!amount) amount = enemy.starsKilled;
+        
+        var starBounceX = 200;
+		var starBounceY = 300;
         
         var starsNumber = Math.min(amount, enemy.starsKilled);
 		for (var i = 0; i < starsNumber; i++) {
