@@ -208,6 +208,7 @@ LevelBuilder.prototype = {
 	    
 	    if (this.level.countDown == undefined) {
 	        this.level.countDown = this.level.time.create(false);
+	        console.log('hello');
 	    } else {
 	        this.level.countDown.removeAll();
 	    }
