@@ -102,10 +102,10 @@ LevelBuilder.prototype = {
 		this.level.physics.arcade.collide(this.level.stars, this.level.platforms);
 		
 		this.level.physics.arcade.overlap(this.level.player, this.level.stars, 
-		            this.level.overlapPlayerStar, null, this.level);
+		            this.overlapPlayerStar, null, this);
 		            
 		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
-		            this.level.collidePlayerEnemy, null, this.level);
+		            this.level.AI.collidePlayerEnemy, null, this.level.AI);
 		
 	},
 	
@@ -244,6 +244,27 @@ LevelBuilder.prototype = {
         
         this.level.timeGraphics.removeChildAt(1);
         this.level.timeGraphics.addChild(foreground);
-    }
+    },
+
+	overlapPlayerStar: function(player, star) {
+		star.kill();
+		
+		this.addTime(this.timeDelta);
+	    		
+		this.addScore(10 * this.timeDelta);
+		
+		this.makeStar();
+		
+		if (this.level.score > this.level.nextEnemy * 500) {
+			this.level.nextEnemy += 1;
+			this.level.AI.makeEnemy();
+		}
+		
+		if (this.level.score > this.level.nextStar * 50 * (1 - this.level.timeDelta)) {
+			this.level.timeDelta += -0.01;	
+			this.level.nextStar += 1;
+			this.makeStar();
+		}
+	}
     
 };

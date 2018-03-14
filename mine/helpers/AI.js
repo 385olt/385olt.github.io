@@ -158,6 +158,38 @@ AI.prototype = {
 		
 	},
 	
+	collidePlayerEnemy: function(player, enemy) {
+		var playerBounceX = 400;
+		var playerBounceY = 300;
+		var starBounceX = 200;
+		var starBounceY = 300;
+		
+		if (player.body.touching.down && enemy.body.touching.up) {
+			
+			player.body.velocity.y = -playerBounceY * this.level.rnd.frac();
+			player.body.velocity.x = playerBounceX * (this.level.rnd.frac() - 0.5);
+			
+			var starsNumber = Math.min(5, enemy.starsKilled);
+			for (var i = 0; i < starsNumber; i++) {
+				var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
+				
+				var star = this.level.levelBuilder.makeStar(enemy.x + enemy.width/2 + rndDirection, 
+				                                            enemy.y + enemy.height/2)
+				star.body.velocity.y = -starBounceY * this.level.rnd.frac();
+				
+				if (rndDirection > 0) {
+					star.body.velocity.x = starBounceX * this.level.rnd.frac();
+				} else {
+					star.body.velocity.x = -starBounceX * this.level.rnd.frac();
+				}
+			}
+			
+			enemy.starsKilled -= starsNumber;
+		} else {
+			this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
+		}
+	},
+	
 	makeEnemy: function(x = false, y = false) {
 	    if (this.level === null) return false;
 	    

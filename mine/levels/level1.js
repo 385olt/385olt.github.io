@@ -50,58 +50,6 @@ Hrabrov.Level1.prototype = {
 	
 	render: function() {
 	    this.levelBuilder.updateTime();
-	},
-	
-	collidePlayerEnemy: function(player, enemy) {
-		var playerBounceX = 400;
-		var playerBounceY = 300;
-		var starBounceX = 200;
-		var starBounceY = 300;
-		
-		if (player.body.touching.down && enemy.body.touching.up) {
-			
-			player.body.velocity.y = -playerBounceY * this.rnd.frac();
-			player.body.velocity.x = playerBounceX * (this.rnd.frac() - 0.5);
-			
-			var starsNumber = Math.min(5, enemy.starsKilled);
-			for (var i = 0; i < starsNumber; i++) {
-				var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
-				
-				var star = this.levelBuilder.makeStar(enemy.x + enemy.width/2 + rndDirection, enemy.y + enemy.height/2)
-				star.body.velocity.y = -starBounceY * this.rnd.frac();
-				
-				if (rndDirection > 0) {
-					star.body.velocity.x = starBounceX * this.rnd.frac();
-				} else {
-					star.body.velocity.x = -starBounceX * this.rnd.frac();
-				}
-			}
-			
-			enemy.starsKilled -= starsNumber;
-		} else {
-			this.state.start('Hrabrov.GameOver', true, false, this.score);
-		}
-	},
-
-	overlapPlayerStar: function(player, star) {
-		star.kill();
-		
-		this.levelBuilder.addTime(this.timeDelta);
-	    		
-		this.levelBuilder.addScore(10 * this.timeDelta);
-		
-		this.levelBuilder.makeStar();
-		
-		if (this.score > this.nextEnemy * 500) {
-			this.nextEnemy += 1;
-			this.AI.makeEnemy();
-		}
-		
-		if (this.score > this.nextStar * 50 * (1 - this.timeDelta)) {
-			this.timeDelta += -0.01;	
-			this.nextStar += 1;
-			this.levelBuilder.makeStar();
-		}
 	}
 	
 };
