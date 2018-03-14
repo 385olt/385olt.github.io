@@ -102,7 +102,8 @@ Hrabrov.Level2.prototype = {
     
     collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
-        enemy.damage(this.bulletDamage);
+        enemy.damage(this.bulletDamage * (0.5 + this.rnd.frac()));
+        enemy.starsKilled += 1;
     },
     
     collidePlayerEnemy: function(player, enemy) {
