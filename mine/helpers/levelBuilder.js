@@ -207,11 +207,12 @@ LevelBuilder.prototype = {
                                                         { font: '10pt Arial', fill: '#fff' });
 	    
 	    if (this.level.countDown == undefined) {
-	        this.level.countDown = this.level.time.create(false);
+	        this.level.countDown = this.level.time.create(true);
 	        console.log('CREATE');
 	    } else {
-	        this.level.countDown.reset();
-	        console.log('RESET TIMERS');
+	        this.level.countDown.destroy();
+	        this.level.countDown = this.level.time.create(true);
+	        console.log('RECREATE TIMERS');
 	    }
 	    
         this.level.countDown.add(initTime, this.endCountDown, this);
