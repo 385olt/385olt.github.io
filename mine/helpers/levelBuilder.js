@@ -205,6 +205,9 @@ LevelBuilder.prototype = {
         let maxTimeSeconds = (this.level.maxAchievedTime / Phaser.Timer.SECOND).toFixed(2);
         this.level.maxTimeGraphics = this.level.add.text(maxTimeX, 40, maxTimeSeconds, 
                                                         { font: '10pt Arial', fill: '#fff' });
+        
+        this.level.timeText = this.level.add.text(0, 16, initTime + ' секунд', { font: '12pt Arial', fill: '#fff' });
+	    this.level.timeText.x = this.level.world.width - 200 - this.level.timeText.text.length * 5;
 	    
 	    if (this.level.countDown == undefined) {
 	        this.level.countDown = this.level.time.create(true);
@@ -244,6 +247,9 @@ LevelBuilder.prototype = {
         
         this.level.timeGraphics.removeChildAt(1);
         this.level.timeGraphics.addChild(foreground);
+        
+        this.level.timeText.text = this.level.countDown.duration.toFixed(2) + ' секунд';
+	    this.level.timeText.x = 200 - this.level.timeText.text.length * 5;
     },
 
 	overlapPlayerStar: function(player, star) {
