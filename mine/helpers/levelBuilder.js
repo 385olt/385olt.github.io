@@ -210,8 +210,8 @@ LevelBuilder.prototype = {
 	        this.level.countDown = this.level.time.create(false);
 	        console.log('CREATE');
 	    } else {
-	        this.level.countDown.removeAll();
-	        console.log('CLEAR TIMERS');
+	        this.level.countDown.reset();
+	        console.log('RESET TIMERS');
 	    }
 	    
         this.level.countDown.add(initTime, this.endCountDown, this);
