@@ -169,22 +169,8 @@ AI.prototype = {
 			player.body.velocity.y = -playerBounceY * this.level.rnd.frac();
 			player.body.velocity.x = playerBounceX * (this.level.rnd.frac() - 0.5);
 			
-			var starsNumber = Math.min(5, enemy.starsKilled);
-			for (var i = 0; i < starsNumber; i++) {
-				var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
-				
-				var star = this.level.levelBuilder.makeStar(enemy.x + enemy.width/2 + rndDirection, 
-				                                            enemy.y + enemy.height/2)
-				star.body.velocity.y = -starBounceY * this.level.rnd.frac();
-				
-				if (rndDirection > 0) {
-					star.body.velocity.x = starBounceX * this.level.rnd.frac();
-				} else {
-					star.body.velocity.x = -starBounceX * this.level.rnd.frac();
-				}
-			}
+			this.throwStars(enemy, 5);
 			
-			enemy.starsKilled -= starsNumber;
 		} else {
 			this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
 		}
@@ -218,7 +204,30 @@ AI.prototype = {
     enemyKilled: function(enemy) {
         if (enemy.data.healthBar != undefined) {
             enemy.data.healthBar.destroy(true);
+            
+            this.throwStars(enemy);
         }
+    },
+    
+    throwStars: function(enemy, amount = false) {
+        if (!amount) amount = enemy.starsKilled;
+        
+        var starsNumber = Math.min(amount, enemy.starsKilled);
+		for (var i = 0; i < starsNumber; i++) {
+			var rndDirection = Phaser.ArrayUtils.getRandomItem([-1, 1]) * (enemy.width/2);
+			
+			var star = this.level.levelBuilder.makeStar(enemy.x + enemy.width/2 + rndDirection, 
+			                                            enemy.y + enemy.height/2)
+			star.body.velocity.y = -starBounceY * this.level.rnd.frac();
+			
+			if (rndDirection > 0) {
+				star.body.velocity.x = starBounceX * this.level.rnd.frac();
+			} else {
+				star.body.velocity.x = -starBounceX * this.level.rnd.frac();
+			}
+		}
+		
+		enemy.starsKilled -= starsNumber;
     },
 	
 	addLinesToEnemy: function(enemy) {
