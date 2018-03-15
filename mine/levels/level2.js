@@ -3,7 +3,7 @@ Hrabrov.Level2 = function() {
     this.donationGoal = 5000;
     this.maxAchievedTime = 60 * Phaser.Timer.SECOND;
     this.lastShot = 0;
-    this.shootInterval = 1000;
+    this.shootInterval = 100;
 };
 
 Hrabrov.Level2.prototype = {
