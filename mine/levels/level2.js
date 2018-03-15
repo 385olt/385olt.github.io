@@ -63,7 +63,7 @@ Hrabrov.Level2.prototype = {
 		
 		this.ratio = 1;
 		this.timeDelta = 1;
-		this.scoreDelta = 10;
+		this.scoreDelta = 2;
     },
     
     update: function() {
