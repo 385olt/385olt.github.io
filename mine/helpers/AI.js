@@ -1,5 +1,5 @@
-var AI = function(level) {    
-    this.walkRandomness = 0.001;
+var AI = function(level, walkRandomness = 0.001) {    
+    this.walkRandomness = walkRandomness;
     this.enemyImage = 'fem';
     
     this.level = level;

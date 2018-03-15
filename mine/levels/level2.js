@@ -16,7 +16,7 @@ Hrabrov.Level2.prototype = {
         this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
-	    this.AI = new AI(this);
+	    this.AI = new AI(this, 0.01);
 	    
 	    this.bullets = this.add.group();
 	    this.bullets.enableBody = true;
