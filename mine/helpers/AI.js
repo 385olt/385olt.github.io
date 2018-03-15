@@ -1,6 +1,7 @@
 var AI = function(level) {    
     this.walkRandomness = 0.001;
     this.starSaveChance = 1;
+    this.bulletDamage = 0.1;
     this.enemyImage = 'fem';
     
     this.enemySpawnRegion = {x1: 0, x2: level.world.width,
