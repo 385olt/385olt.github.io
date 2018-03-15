@@ -46,10 +46,10 @@ Hrabrov.Level1.prototype = {
 	update: function() {
 	    console.log('update begin');
 		this.levelBuilder.updateCollisions();
+		console.log('after collisions');
 		this.levelBuilder.updateControls();
 		
 		this.AI.update();
-		console.log('update end');
 	},
 	
 	render: function() {
