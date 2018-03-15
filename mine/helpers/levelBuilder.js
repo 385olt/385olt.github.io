@@ -109,36 +109,62 @@ LevelBuilder.prototype = {
 		
 	},
 	
-	updateControls: function() {
-		
+	updateControls: function() {		
 		var cursors = this.level.input.keyboard.createCursorKeys();
 		var player = this.level.player;
 		
 		player.body.velocity.x = 0;
 
-		if (cursors.left.isDown) {
-		
+		if (cursors.left.isDown) {		
 		    player.body.velocity.x = -150;
-
-		    player.animations.play('left');
-		    
-		} else if (cursors.right.isDown) {
-		
+		    player.animations.play('left');		    
+		} else if (cursors.right.isDown) {		
 		    player.body.velocity.x = 150;
-
-		    player.animations.play('right');
-		    
-		} else {
-		
+		    player.animations.play('right');		    
+		} else {		
 		    player.animations.stop();
-
-		    player.frame = 4;
-		    
+		    player.frame = 4;		    
 		}
 
 		if (cursors.up.isDown && player.body.touching.down && player.hitPlatform) {
 		    player.body.velocity.y = -300;
 		}
+		
+		if (this.level.shoot != undefined) {
+		    this.updateShootControls();
+		}
+	},
+	
+	updateShootControls: function() {
+	    var directions = [];
+	    
+	    if (this.level.input.keyboard.isDown(Phaser.Keyboard.W)) {
+	        directions.push('up');
+	    }
+	    	    
+	    if (this.level.input.keyboard.isDown(Phaser.Keyboard.A)) {
+	        directions.push('left');
+	    }
+	    	    
+	    if (this.level.input.keyboard.isDown(Phaser.Keyboard.S)) {
+	        directions.push('down');
+	    }
+	    	    
+	    if (this.level.input.keyboard.isDown(Phaser.Keyboard.D)) {
+	        directions.push('right');
+	    }
+	    
+	    if (directions.indexOf('left') >= 0 && directions.indexOf('right') >= 0) {
+	        directions.splice(directions.indexOf('left'), 1);
+	        directions.splice(directions.indexOf('right'), 1);
+	    }
+	    
+	    if (directions.indexOf('up') >= 0 && directions.indexOf('down') >= 0) {
+	        directions.splice(directions.indexOf('up'), 1);
+	        directions.splice(directions.indexOf('down'), 1);
+	    }
+	    
+	    this.level.shoot(directions);	    
 	},
 	
 	setScore: function(initScore) {	    

@@ -45,18 +45,6 @@ Hrabrov.Level2.prototype = {
         this.levelBuilder.setScore(1000);
 		
 		this.levelBuilder.setTime(this.maxAchievedTime);
-                
-        let W = game.input.keyboard.addKey(Phaser.Keyboard.W);
-        W.onDown.add(function() { this.shoot('up') }, this);
-        
-        let A = game.input.keyboard.addKey(Phaser.Keyboard.A);
-        A.onDown.add(function() { this.shoot('left') }, this);
-        
-        let S = game.input.keyboard.addKey(Phaser.Keyboard.S);
-        S.onDown.add(function() { this.shoot('down') }, this);
-        
-        let D = game.input.keyboard.addKey(Phaser.Keyboard.D);
-        D.onDown.add(function() { this.shoot('right') }, this);
         
         this.nextStar = 1;
 		this.nextEnemy = 1;
@@ -143,26 +131,32 @@ Hrabrov.Level2.prototype = {
         let enemy = this.AI.makeEnemy(x, y);
     },
     
-    shoot: function(direction) {  
+    shoot: function(directions) {  
         if (this.score <= 0) return;
         
         this.levelBuilder.addScore(-1);
-              
-        switch (direction) {
-            case 'left':  offsets = {x: -16, y: 0}; break;
-            case 'right': offsets = {x: 16, y: 0};  break;
-            case 'up':    offsets = {x: 0, y: -16}; break;
-            case 'down':  offsets = {x: 0, y: 16};  break
+        
+        let offsets = {
+                'up': {x: 0, y: -16},
+                'left': {x: -16, y: 0},
+                'down': {x: 0, y: 16},
+                'right': {x: 16, y: 0}
+            };
+        
+        let offset = {x: 0, y: 0};
+        for (let i = 0; i < directions.length; i++) {
+            offset.x += offsets[directions[i]].x;
+            offset.y += offsets[directions[i]].y;
         }
         
-        let bullet = this.bullets.create(this.player.x + this.player.width/2 + offsets.x, 
-		                                 this.player.y + this.player.height/2 + offsets.y, 
+        let bullet = this.bullets.create(this.player.x + this.player.width/2 + offset.x, 
+		                                 this.player.y + this.player.height/2 + offset.y, 
 		                                 'star');
 		bullet.scale.setTo(.5, .5);
 		bullet.lifespan = 6000;
 	
-		bullet.body.velocity.x = 30 * offsets.x;
-		bullet.body.velocity.y = 30 * offsets.y;
+		bullet.body.velocity.x = 30 * offset.x;
+		bullet.body.velocity.y = 30 * offset.y;
     }
     
 };
