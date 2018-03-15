@@ -18,9 +18,6 @@ Hrabrov.Level2.prototype = {
 	    this.levelBuilder = new LevelBuilder(this);
 	    this.AI = new AI(this, 0.01);
 	    
-	    this.bullets = this.add.group();
-	    this.bullets.enableBody = true;
-	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 150);
 	    
 	    this.setSakramar(0, 0);
@@ -43,6 +40,7 @@ Hrabrov.Level2.prototype = {
             this.AI.makeEnemy(false, 120 + this.rnd.frac() * (this.world.height - 200));
         }
         
+        this.levelBuilder.starSpawnRegion.y1 = 150;        
         for (var i = 0; i < 3; i++) {
             this.levelBuilder.makeStar(false, 120 + this.rnd.frac() * (this.world.height - 200));
         }
@@ -59,8 +57,6 @@ Hrabrov.Level2.prototype = {
     
     update: function() {
         this.updateSakramar();
-        
-        if (this.rnd.frac() < 0.005) this.spawnEnemy();
         
         this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet, null, this);
         this.physics.arcade.collide(this.bullets, this.platforms, this.collideBulletPlatform, null, this);
@@ -85,6 +81,10 @@ Hrabrov.Level2.prototype = {
         var myDr = (sakramar.myDirection == 'right' ? 1 : -1);
         sakramar.body.velocity.x = myDr * 300;
         sakramar.animations.play(myDr == 1 ? 'right' : 'left');
+        
+        if (this.rnd.frac() < 0.005 && this.enemies.countLiving() < 20) {
+            this.AI.makeEnemy(this.sakramar.x, this.sakramar.y + this.sakramar.height + 32);
+        }
     },
     
     render: function() {
@@ -123,15 +123,6 @@ Hrabrov.Level2.prototype = {
 		sakramar.myDirection = 'left';
 				
 		this.sakramar = sakramar;    
-    },
-    
-    spawnEnemy: function() {
-        if (this.enemies.countLiving() > 20) return false;
-        
-        x = this.sakramar.x;
-        y = this.sakramar.y + this.sakramar.height + 32;
-        
-        let enemy = this.AI.makeEnemy(x, y);
     },
     
     shoot: function(directions) {  
