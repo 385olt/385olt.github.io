@@ -116,10 +116,10 @@ LevelBuilder.prototype = {
 		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
 		            this.level.AI.collidePlayerEnemy, null, this.level.AI);
 		
-		this.level.physics.arcade.collide(this.enemies, this.bullets, 
+		this.level.physics.arcade.collide(this.level.enemies, this.level.bullets, 
 		            this.collideEnemyBullet, null, this);
         
-        this.level.physics.arcade.collide(this.bullets, this.platforms, 
+        this.level.physics.arcade.collide(this.level.bullets, this.level.platforms, 
                     this.collideBulletPlatform, null, this);
 		
 	},
