@@ -153,15 +153,13 @@ AI.prototype = {
 		}
 	},
 	
-	collideEnemyStar: function(enemy, star) {
-		
+	collideEnemyStar: function(enemy, star) {		
 		if (this.level.rnd.frac() < 0.01) {
 			star.kill();
-			if (this.level.rnd.frac() < this.starSaveChance) {
+			if (this.level.rnd.frac() < 1) {
 			    enemy.starsKilled += 1;
 			}
-		}
-		
+		}		
 	},
 	
 	collidePlayerEnemy: function(player, enemy) {
