@@ -296,7 +296,7 @@ LevelBuilder.prototype = {
 		}
 		
 		if (this.level.score > this.level.nextStar * 50 * (1 - this.level.ratio)) {
-			this.level.ratio -= 0.01;	
+			this.level.ratio -= this.level.ratioDelta;	
 			this.level.nextStar += 1;
 			this.makeStar();
 		}

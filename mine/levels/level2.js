@@ -4,6 +4,9 @@ Hrabrov.Level2 = function() {
     this.maxAchievedTime = 60 * Phaser.Timer.SECOND;
     this.lastShot = 0;
     this.shootInterval = 50;
+    this.timeDelta = 1;
+	this.scoreDelta = 2;
+	this.ratioDelta = 0.005;
 };
 
 Hrabrov.Level2.prototype = {
@@ -52,8 +55,6 @@ Hrabrov.Level2.prototype = {
 		this.nextEnemy = 1;
 		
 		this.ratio = 1;
-		this.timeDelta = 1;
-		this.scoreDelta = 2;
     },
     
     update: function() {
