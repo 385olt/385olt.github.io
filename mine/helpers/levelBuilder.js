@@ -256,9 +256,9 @@ LevelBuilder.prototype = {
 	overlapPlayerStar: function(player, star) {
 		star.kill();
 		
-		this.addTime(this.level.timeDelta);
+		this.addTime(this.level.timeDelta * this.level.ratio);
 	    		
-		this.addScore(10 * this.level.timeDelta);
+		this.addScore(10 * this.level.scoreDelta * this.level.ratio);
 		
 		this.makeStar();
 		
@@ -267,8 +267,8 @@ LevelBuilder.prototype = {
 			this.level.AI.makeEnemy();
 		}
 		
-		if (this.level.score > this.level.nextStar * 50 * (1 - this.level.timeDelta)) {
-			this.level.timeDelta += -0.01;	
+		if (this.level.score > this.level.nextStar * 50 * (1 - this.level.ratio)) {
+			this.level.ratio -= 0.01;	
 			this.level.nextStar += 1;
 			this.makeStar();
 		}

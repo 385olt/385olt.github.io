@@ -38,7 +38,9 @@ Hrabrov.Level1.prototype = {
 		this.nextStar = 1;
 		this.nextEnemy = 1;
 		
-		this.timeDelta = 1;		
+		this.ratio = 1;
+		this.timeDelta = 1;
+		this.scoreDelta = 1;	
 	},
 	
 	update: function() {
