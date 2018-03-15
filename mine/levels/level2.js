@@ -36,6 +36,7 @@ Hrabrov.Level2.prototype = {
         
         this.levelBuilder.createPlatform(platforms);
         
+        this.AI.enemySpawnRegion.y1 = 150;
         for (let i = 0; i < 5; i++) {
             this.AI.makeEnemy(false, 120 + this.rnd.frac() * (this.world.height - 200));
         }

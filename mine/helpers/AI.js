@@ -2,6 +2,9 @@ var AI = function(level, walkRandomness = 0.001) {
     this.walkRandomness = walkRandomness;
     this.enemyImage = 'fem';
     
+    this.enemySpawnRegion = {x1: 0, x2: level.world.width,
+                             y1: 0, y2: level.world.height - 32};
+    
     this.level = level;
 };
 
@@ -177,8 +180,15 @@ AI.prototype = {
 	makeEnemy: function(x = false, y = false) {
 	    if (this.level === null) return false;
 	    
-		if (!x) { x = Math.random()*(this.level.world.width - 16); }		
-		if (!y) { y = Math.random()*(this.level.world.height - 100); }
+		if (!x) { 
+		    x = this.enemySpawnRegion.x1; 
+		    x += this.level.rnd.frac() * (this.enemySpawnRegion.x2 - this.enemySpawnRegion.x1 - 16);  
+		}		
+		
+		if (!y) { 
+		    y = this.enemySpawnRegion.y1; 
+		    y += this.level.rnd.frac() * (this.enemySpawnRegion.y2 - this.enemySpawnRegion.y1 - 16); 
+		}
 		
 		var enemy = this.level.enemies.create(x, y, this.enemyImage);
 		enemy.body.gravity.y = 300;

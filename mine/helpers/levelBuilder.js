@@ -3,8 +3,8 @@ var LevelBuilder = function(level) {
     
     this.gravityConstant = 300;
     
-    this.starSpawnRegion = {x1: 0, x2: this.level.world.width, 
-                                  y1: 0, y2: this.level.world.height - 32}
+    this.starSpawnRegion = {x1: 0, x2: level.world.width, 
+                            y1: 0, y2: level.world.height - 32}
     
     this.playerImage = 'dude';
     this.platformImage = 'ground';
