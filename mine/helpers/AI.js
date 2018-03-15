@@ -31,6 +31,12 @@ AI.prototype = {
 		this.level.physics.arcade.collide(this.level.enemies, this.level.stars, 
 		            this.collideEnemyStar, null, this);
 		
+		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
+		            this.collidePlayerEnemy, null, this);
+		
+		this.level.physics.arcade.collide(this.level.enemies, this.level.bullets, 
+		            this.collideEnemyBullet, null, this);
+		
 		this.level.enemies.forEach(function(item) {
 		
 			if (!item.goodDirection) {
@@ -156,7 +162,7 @@ AI.prototype = {
 	collideEnemyStar: function(enemy, star) {
 		if (this.level.rnd.frac() < 0.01) {
 			star.kill();
-			if (this.level.rnd.frac() < 1) {
+			if (this.level.rnd.frac() < this.starSaveChance) {
 			    enemy.starsKilled += 1;
 			}
 		}		
@@ -177,6 +183,14 @@ AI.prototype = {
 			this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
 		}
 	},
+	
+	collideEnemyBullet: function(enemy, bullet) {
+        bullet.kill();
+        enemy.damage(this.bulletDamage * (0.5 + this.level.rnd.frac()));
+        if (this.level.rnd.frac() < 0.2) {
+            enemy.starsKilled += 1;
+        }
+    },
 	
 	makeEnemy: function(x = false, y = false) {
 	    if (this.level === null) return false;

@@ -112,12 +112,6 @@ LevelBuilder.prototype = {
 		
 		this.level.physics.arcade.overlap(this.level.player, this.level.stars, 
 		            this.overlapPlayerStar, null, this);
-		            
-		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
-		            this.level.AI.collidePlayerEnemy, null, this.level.AI);
-		
-		this.level.physics.arcade.collide(this.level.enemies, this.level.bullets, 
-		            this.collideEnemyBullet, null, this);
         
         this.level.physics.arcade.collide(this.level.bullets, this.level.platforms, 
                     this.collideBulletPlatform, null, this);
@@ -316,14 +310,6 @@ LevelBuilder.prototype = {
 			this.makeStar();
 		}
 	},
-	
-	collideEnemyBullet: function(enemy, bullet) {
-        bullet.kill();
-        enemy.damage(this.bulletDamage * (0.5 + this.level.rnd.frac()));
-        if (this.level.rnd.frac() < 0.2) {
-            enemy.starsKilled += 1;
-        }
-    },
     
     collideBulletPlatform: function(bullet, platform) {
         bullet.kill();
