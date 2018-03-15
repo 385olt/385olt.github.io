@@ -28,13 +28,11 @@ Hrabrov.Level1.prototype = {
 		
 		this.levelBuilder.createPlatform(platforms);
 		
-		console.log('before');
-		
 		for (var i = 0; i < 3; i++) this.levelBuilder.makeStar();
-		console.log('middle');
+		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
-		console.log('after');
+		console.log('after generation');
 		
 		this.maxAchievedTime = 10 * Phaser.Timer.SECOND;
 		
@@ -45,6 +43,8 @@ Hrabrov.Level1.prototype = {
 		this.nextStar = 1;
 		this.nextEnemy = 1;
 		this.ratio = 1;	
+		
+		console.log('end of create');
 	},
 	
 	update: function() {
