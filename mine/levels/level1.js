@@ -32,8 +32,6 @@ Hrabrov.Level1.prototype = {
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
-		console.log('after generation');
-		
 		this.maxAchievedTime = 10 * Phaser.Timer.SECOND;
 		
 		this.levelBuilder.setScore(0);
@@ -43,15 +41,15 @@ Hrabrov.Level1.prototype = {
 		this.nextStar = 1;
 		this.nextEnemy = 1;
 		this.ratio = 1;	
-		
-		console.log('end of create');
 	},
 	
 	update: function() {
+	    console.log('update begin');
 		this.levelBuilder.updateCollisions();
 		this.levelBuilder.updateControls();
 		
 		this.AI.update();
+		console.log('update end');
 	},
 	
 	render: function() {
