@@ -155,13 +155,13 @@ LevelBuilder.prototype = {
 	    }
 	    
 	    if (directions.indexOf('left') >= 0 && directions.indexOf('right') >= 0) {
-	        directions.splice(directions.indexOf('left'), 1);
-	        directions.splice(directions.indexOf('right'), 1);
+	        directions = directions.splice(directions.indexOf('left'), 1);
+	        directions = directions.splice(directions.indexOf('right'), 1);
 	    }
 	    
 	    if (directions.indexOf('up') >= 0 && directions.indexOf('down') >= 0) {
-	        directions.splice(directions.indexOf('up'), 1);
-	        directions.splice(directions.indexOf('down'), 1);
+	        directions = directions.splice(directions.indexOf('up'), 1);
+	        directions = directions.splice(directions.indexOf('down'), 1);
 	    }
 	    
 	    this.level.shoot(directions);	    
