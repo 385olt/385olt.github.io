@@ -1,5 +1,4 @@
 Hrabrov.Level2 = function() {
-    this.bulletDamage = 0.1;
     this.donationGoal = 5000;
     this.maxAchievedTime = 60 * Phaser.Timer.SECOND;
     this.lastShot = 0;
@@ -16,7 +15,12 @@ Hrabrov.Level2.prototype = {
         this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
-	    this.AI = new AI(this, 0.01);
+	    this.levelBuilder.starSpawnRegion.y1 = 150;
+	    
+	    this.AI = new AI(this);
+	    this.AI.walkRandomness = 0.01;
+	    this.AI.enemySpawnRegion.y1 = 150;
+	    this.AI.starSaveChance = 0.5;
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 150);
 	    
@@ -36,14 +40,12 @@ Hrabrov.Level2.prototype = {
         
         this.levelBuilder.createPlatform(platforms);
         
-        this.AI.enemySpawnRegion.y1 = 150;
-        for (let i = 0; i < 5; i++) {
-            this.AI.makeEnemy(false, 120 + this.rnd.frac() * (this.world.height - 200));
-        }
-        
-        this.levelBuilder.starSpawnRegion.y1 = 150;        
+        //for (let i = 0; i < 5; i++) {
+        //    this.AI.makeEnemy();
+        //}
+                
         for (var i = 0; i < 3; i++) {
-            this.levelBuilder.makeStar(false, 120 + this.rnd.frac() * (this.world.height - 200));
+            this.levelBuilder.makeStar();
         }
         
         this.levelBuilder.setScore(1000);
@@ -57,12 +59,8 @@ Hrabrov.Level2.prototype = {
     },
     
     update: function() {
-        this.updateSakramar();
+        this.updateSakramar();                
         
-        this.physics.arcade.collide(this.enemies, this.bullets, this.collideEnemyBullet, null, this);
-        this.physics.arcade.collide(this.bullets, this.platforms, this.collideBulletPlatform, null, this);
-                
-        // ----- std updates
         this.levelBuilder.updateCollisions();
         this.levelBuilder.updateControls();
         
@@ -92,22 +90,6 @@ Hrabrov.Level2.prototype = {
         this.AI.render();
         
         this.levelBuilder.updateTime();
-    },
-    
-    collideEnemyBullet: function(enemy, bullet) {
-        bullet.kill();
-        enemy.damage(this.bulletDamage * (0.5 + this.rnd.frac()));
-        if (this.rnd.frac() < 0.2) {
-            enemy.starsKilled += 1;
-        }
-    },
-    
-    collidePlayerEnemy: function(player, enemy) {
-        this.state.start('Hrabrov.GameOver', 0)
-    },
-    
-    collideBulletPlatform: function(bullet, platform) {
-        bullet.kill();
     },
     
     setSakramar: function(x, y) {        

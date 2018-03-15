@@ -1,5 +1,6 @@
-var AI = function(level, walkRandomness = 0.001) {    
-    this.walkRandomness = walkRandomness;
+var AI = function(level) {    
+    this.walkRandomness = 0.001;
+    this.starSaveChance = 1;
     this.enemyImage = 'fem';
     
     this.enemySpawnRegion = {x1: 0, x2: level.world.width,
@@ -156,7 +157,9 @@ AI.prototype = {
 		
 		if (this.level.rnd.frac() < 0.01) {
 			star.kill();
-			enemy.starsKilled += 1;
+			if (this.level.rnd.frac() < this.starSaveChance) {
+			    enemy.starsKilled += 1;
+			}
 		}
 		
 	},

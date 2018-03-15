@@ -2,6 +2,7 @@ var LevelBuilder = function(level) {
     this.level = level;
     
     this.gravityConstant = 300;
+    this.bulletDamage = 0.1;
     
     this.starSpawnRegion = {x1: 0, x2: level.world.width, 
                             y1: 0, y2: level.world.height - 32}
@@ -114,6 +115,12 @@ LevelBuilder.prototype = {
 		            
 		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
 		            this.level.AI.collidePlayerEnemy, null, this.level.AI);
+		
+		this.level.physics.arcade.collide(this.enemies, this.bullets, 
+		            this.collideEnemyBullet, null, this);
+        
+        this.level.physics.arcade.collide(this.bullets, this.platforms, 
+                    this.collideBulletPlatform, null, this);
 		
 	},
 	
@@ -308,6 +315,18 @@ LevelBuilder.prototype = {
 			this.level.nextStar += 1;
 			this.makeStar();
 		}
-	}
+	},
+	
+	collideEnemyBullet: function(enemy, bullet) {
+        bullet.kill();
+        enemy.damage(this.bulletDamage * (0.5 + this.level.rnd.frac()));
+        if (this.level.rnd.frac() < 0.2) {
+            enemy.starsKilled += 1;
+        }
+    },
+    
+    collideBulletPlatform: function(bullet, platform) {
+        bullet.kill();
+    }
     
 };
