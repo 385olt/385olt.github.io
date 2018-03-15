@@ -27,10 +27,14 @@ Hrabrov.Level1.prototype = {
 		                {x: this.world.width - 200, y: 150}];
 		
 		this.levelBuilder.createPlatform(platforms);
-				
-		for (var i = 0; i < 3; i++) this.levelBuilder.makeStar();
 		
+		console.log('before');
+		
+		for (var i = 0; i < 3; i++) this.levelBuilder.makeStar();
+		console.log('middle');
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
+		
+		console.log('after');
 		
 		this.maxAchievedTime = 10 * Phaser.Timer.SECOND;
 		
