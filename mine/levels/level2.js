@@ -2,6 +2,8 @@ Hrabrov.Level2 = function() {
     this.bulletDamage = 0.1;
     this.donationGoal = 5000;
     this.maxAchievedTime = 60 * Phaser.Timer.SECOND;
+    this.lastShot = 0;
+    this.shootInterval = 0.1;
 };
 
 Hrabrov.Level2.prototype = {
@@ -133,8 +135,10 @@ Hrabrov.Level2.prototype = {
     
     shoot: function(directions) {  
         if (this.score <= 0) return;
+        if (this.time.now - this.lastShot < this.shootInterval) return;
         
         this.levelBuilder.addScore(-1);
+        this.lastShot = this.time.now;
         
         let offsets = {
                 'up': {x: 0, y: -16},
