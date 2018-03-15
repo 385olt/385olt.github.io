@@ -164,7 +164,9 @@ LevelBuilder.prototype = {
 	        directions = directions.splice(directions.indexOf('down'), 1);
 	    }
 	    
-	    this.level.shoot(directions);	    
+	    if (directions.length > 0) {
+	        this.level.shoot(directions);	    
+	    }
 	},
 	
 	setScore: function(initScore) {	    
