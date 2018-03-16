@@ -2,7 +2,7 @@ var Sakramar = function(level, x, y) {
     this.level = level;
     
     this.gunDistance = 32;
-    this.bulletSpeed = 300;
+    this.bulletSpeed = 400;
     
     var sprite = this.level.add.sprite(x, y, 'sakramar');
     
