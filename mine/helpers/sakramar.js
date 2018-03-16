@@ -33,19 +33,19 @@ Sakramar.prototype = {
         
         let dir2int = {'left': -1, 'right': 1, 'stop': 0};
         
-        let myDr = dir2int[sakramar.myDirection];
+        let myDr = dir2int[this.direction];
         
-        sakramar.body.velocity.x = myDr * 300;
+        this.sprite.body.velocity.x = myDr * 300;
         
         if (myDr == 0) {
-            sakramar.animations.stop();
-		    sakramar.frame = 4;
+            this.sprite.animations.stop();
+		    this.sprite.frame = 4;
         } else {
-            sakramar.animations.play(sakramar.myDirection);
+            this.sprite.animations.play(this.direction);
         }
         
-        if (this.rnd.frac() < 0.005 && this.enemies.countLiving() < 20) {
-            this.AI.makeEnemy(this.sakramar.x, this.sakramar.y + this.sakramar.height + 32);
+        if (this.level.rnd.frac() < 0.005 && this.level.enemies.countLiving() < 20) {
+            this.level.AI.makeEnemy(this.sprite.x, this.sprite.y + this.sprite.height + 32);
         }
     },
     
