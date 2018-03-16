@@ -99,7 +99,7 @@ Sakramar.prototype = {
     shoot: function() {
         let bullet_x = this.sprite.width/2 + (Math.cos(this.aimLine.angle) * (this.gunDistance + 32));
         let bullet_y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * (this.gunDistance + 32));
-        let bullet = this.level.add.sprite(0, 0, 'star');
+        let bullet = this.level.add.sprite(bullet_x, bullet_y, 'star');
         
         this.level.physics.arcade.enable(bullet);
         
