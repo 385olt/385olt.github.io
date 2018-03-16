@@ -1,5 +1,8 @@
 Hrabrov.Level1 = function() {
     this.donationGoal = 1000;
+    this.initScore = 0;
+    this.initTime = 10 * Phaser.Timer.SECOND;
+    
     this.timeDelta = 1;
 	this.scoreDelta = 1;
 	this.ratioDelta = 0.01;
@@ -32,11 +35,7 @@ Hrabrov.Level1.prototype = {
 		
 		for (var i = 0; i < 3; i++) this.AI.makeEnemy();
 		
-		this.maxAchievedTime = 10 * Phaser.Timer.SECOND;
-		
-		this.levelBuilder.setScore(0);
-		
-		this.levelBuilder.setTime(10 * Phaser.Timer.SECOND);
+		this.levelBuilder.setUI();
 		
 		this.nextStar = 1;
 		this.nextEnemy = 1;

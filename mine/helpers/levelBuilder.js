@@ -4,7 +4,7 @@ var LevelBuilder = function(level) {
     this.gravityConstant = 300;
     
     this.starSpawnRegion = {x1: 0, x2: level.world.width, 
-                            y1: 0, y2: level.world.height - 32};
+                            y1: 0, y2: level.world.height - 64};
     
     this.playerImage = 'dude';
     this.platformImage = 'ground';
@@ -65,6 +65,11 @@ LevelBuilder.prototype = {
 		player.hitPlatform = false;
 		
 		this.level.player = player;
+    },
+    
+    setUI: function() {
+        this.setScore(this.level.initScore);
+        this.setTime(this.level.initTime);
     },
 	
 	makeStar: function(x = false, y = false) {
@@ -235,6 +240,8 @@ LevelBuilder.prototype = {
         foreground.endFill();
         this.level.timeGraphics.addChild(foreground);
         
+        this.level.maxAchievedTime = initTime;
+        
         this.level.add.text(this.level.world.width - 364, 40, '0', { font: '10pt Arial', fill: '#fff' });
         
         let maxTimeX = this.level.world.width - 10 - this.level.maxAchievedTime.toString().length * 6;
@@ -312,6 +319,36 @@ LevelBuilder.prototype = {
     
     collideBulletPlatform: function(bullet, platform) {
         bullet.kill();
+    },
+    
+    shoot: function(directions) {  
+        if (this.level.score <= 0) return;
+        if (this.level.time.now - this.level.lastShot < this.level.shootInterval) return;
+        
+        this.addScore(-1);
+        this.level.lastShot = this.level.time.now;
+        
+        let offsets = {
+                'up': {x: 0, y: -16},
+                'left': {x: -16, y: 0},
+                'down': {x: 0, y: 16},
+                'right': {x: 16, y: 0}
+            };
+        
+        let offset = {x: 0, y: 0};
+        for (let i = 0; i < directions.length; i++) {
+            offset.x += offsets[directions[i]].x;
+            offset.y += offsets[directions[i]].y;
+        }
+        
+        let bullet = this.level.bullets.create(this.level.player.x + this.level.player.width/2 + offset.x, 
+		                                       this.level.player.y + this.level.player.height/2 + offset.y, 
+		                                       'star');
+		bullet.scale.setTo(.5, .5);
+		bullet.lifespan = 6000;
+	
+		bullet.body.velocity.x = 60 * offset.x;
+		bullet.body.velocity.y = 60 * offset.y;
     }
     
 };

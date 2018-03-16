@@ -78,8 +78,12 @@ Hrabrov.MainMenu.prototype = {
 			this.start();
 		}
 		
-		if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
+		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO)) {
 		    this.state.start('Hrabrov.Level2');
+		}
+		
+		if (this.input.keyboard.isDown(Phaser.Keyboard.THREE)) {
+		    this.state.start('Hrabrov.Level3');
 		}
 		
 	},

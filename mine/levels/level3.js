@@ -1,13 +1,13 @@
-Hrabrov.Level2 = function() {
+Hrabrov.Level3 = function() {
     this.donationGoal = 5000;
-    this.initScore = 1000;
-    this.initTime = 30 * Phaser.Timer.SECOND;
+    this.initScore = 0;
+    this.initTime = 10 * Phaser.Timer.SECOND;
     
     this.lastShot = 0;
     this.shootInterval = 50;
-    this.timeDelta = 1;
-	this.scoreDelta = 2;
-	this.ratioDelta = 0.005;
+    this.timeDelta = 0;
+	this.scoreDelta = 0;
+	this.ratioDelta = 0;
 };
 
 Hrabrov.Level2.prototype = {
@@ -17,33 +17,24 @@ Hrabrov.Level2.prototype = {
         this.add.sprite(0, 0, 'sky');
 	    
 	    this.levelBuilder = new LevelBuilder(this);
-	    this.levelBuilder.starSpawnRegion.y1 = 150;
 	    
 	    this.AI = new AI(this);
 	    this.AI.walkRandomness = 0.01;
-	    this.AI.enemySpawnRegion.y1 = 150;
-	    this.AI.starSaveChance = 0.5;
+	    this.AI.enemySpawnRegion.y1 = 0;
+	    this.AI.starSaveChance = 0;
 	    
-	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 150);
+	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 32);
 	    
-	    this.setSakramar(0, 0);
+	    this.setSakramar(64, this.world.height - 120);
 	    
 	    let platforms = [{x: -120, y: this.world.height - 16},
 	                     {x: 280, y: this.world.height - 16},
-	                     {x: 680, y: this.world.height - 16},
-	                     {x: -120, y: 116},
-	                     {x: 280, y: 116},
-	                     {x: 680, y: 116},
-	                     {x: 0, y: 416},
-	                     {x: 560, y: 416},
-	                     {x: 280, y: 316},
-	                     {x: -200, y: 216},
-	                     {x: 760, y: 216}];
+	                     {x: 680, y: this.world.height - 16}];
         
         this.levelBuilder.createPlatform(platforms);
-                
-        for (var i = 0; i < 3; i++) {
-            this.levelBuilder.makeStar();
+        
+        for (let i = 0; i < 5; i++) {
+            this.AI.makeEnemy();
         }
         
         this.levelBuilder.setUI();

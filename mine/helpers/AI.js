@@ -5,7 +5,7 @@ var AI = function(level) {
     this.enemyImage = 'fem';
     
     this.enemySpawnRegion = {x1: 0, x2: level.world.width,
-                             y1: 0, y2: level.world.height - 32};
+                             y1: 0, y2: level.world.height - 64};
     
     this.level = level;
 };
