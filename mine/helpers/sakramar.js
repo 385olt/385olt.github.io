@@ -67,7 +67,7 @@ Sakramar.prototype = {
         gun.y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * this.gun_distance);
         gun.rotation = this.aimLine.angle;
         
-        if (Math.abs(gun.rotation) > Math.PI && gun.scale.y > 0) {
+        if (Math.abs(gun.rotation) > Math.PI) {
             gun.scale.y = -1;
         } else {
             gun.scale.y = 1;
