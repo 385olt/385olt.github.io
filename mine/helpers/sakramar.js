@@ -39,8 +39,8 @@ Sakramar.prototype = {
         this.level.physics.arcade.collide(this.bullet, this.level.player,
                                           this.collideBulletPlayer, null, this);
         
-        this.level.physics.arcade.collide(this.bullet, this.level.platforms,
-                                          this.collideBulletPlatform, null, this);
+        this.level.physics.arcade.overlap(this.bullet, this.level.platforms,
+                                          this.overlapBulletPlatform, null, this);
                 
         if (this.sprite.x < 32) {
             this.direction = 'right';
@@ -132,7 +132,9 @@ Sakramar.prototype = {
         this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
     },
     
-    collideBulletPlatform: function(bullet, platform) {
+    overlapBulletPlatform: function(bullet, platform) {
+        if (this.level.rnd.frac() < 0.5) return;
+        
         this.level.AI.makeEnemy(bullet.x, platform.y - 48);
         
         bullet.kill();
