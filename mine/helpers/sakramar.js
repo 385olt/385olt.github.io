@@ -1,7 +1,8 @@
 var Sakramar = function(level, x, y) {
     this.level = level;
     
-    this.gun_distance = 32;
+    this.gunDistance = 32;
+    this.bulletSpeed = 100;
     
     var sprite = this.level.add.sprite(x, y, 'sakramar');
     
@@ -13,7 +14,7 @@ var Sakramar = function(level, x, y) {
 	sprite.animations.add('left', [0, 1, 2, 3], 10, true);
 	sprite.animations.add('right', [5, 6, 7, 8], 10, true);
 	
-	let gun = this.level.add.sprite(this.gun_distance, sprite.height/2, 'sakramar_gun');
+	let gun = this.level.add.sprite(this.gunDistance, sprite.height/2, 'sakramar_gun');
 	gun.kill();
 	
 	sprite.addChild(gun);
@@ -69,8 +70,8 @@ Sakramar.prototype = {
                                this.sprite.y + this.sprite.height/2);
         this.aimLine.end.set(target_x, target_y);
         
-        gun.x = this.sprite.width/2 + (Math.cos(this.aimLine.angle) * this.gun_distance);
-        gun.y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * this.gun_distance);
+        gun.x = this.sprite.width/2 + (Math.cos(this.aimLine.angle) * this.gunDistance);
+        gun.y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * this.gunDistance);
         gun.rotation = this.aimLine.angle;
         
         if (Math.abs(gun.rotation) > Math.PI/2) {
@@ -80,6 +81,7 @@ Sakramar.prototype = {
         }
         
         if (this.level.rnd.frac() < 0.01) {
+            this.shoot();
             this.run();
         }
     },
@@ -94,8 +96,31 @@ Sakramar.prototype = {
         this.sprite.children[0].kill();
     },
     
+    shoot: function() {
+        let bullet_x = this.sprite.width/2 + (Math.cos(this.aimLine.angle) * (this.gunDistance + 32));
+        let bullet_y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * (this.gunDistance + 32))
+        var bullet = this.level.add.sprite(0, 0, 'star');
+    
+        bullet.velocity.x = Math.cos(this.aimLine.angle) * this.bulletSpeed;
+        bullet.velocity.y = Math.sin(this.aimLine.angle) * this.bulletSpeed;
+        bullet.rotation = this.aimLine.angle;
+        bullet.lifespan = 6000;
+    },
+    
     collideSakramarPlayer: function(sakramar, player) {
         this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
     }
     
 };
+
+
+
+
+
+
+
+
+
+
+
+
