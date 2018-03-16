@@ -3,6 +3,7 @@ var Sakramar = function(level, x, y) {
     
     this.gunDistance = 32;
     this.bulletSpeed = 400;
+    this.spawnChance = 0.005;
     
     var sprite = this.level.add.sprite(x, y, 'sakramar');
     
@@ -37,6 +38,9 @@ Sakramar.prototype = {
         this.level.physics.arcade.collide(this.bullet, this.level.player,
                                           this.collideBulletPlayer, null, this);
         
+        this.level.physics.arcade.collide(this.bullet, this.level.platforms,
+                                          this.collideBulletPlatform, null, this);
+                
         if (this.sprite.x < 32) {
             this.direction = 'right';
         } else if (this.sprite.x + this.sprite.width > this.level.world.width - 32) {
@@ -57,7 +61,7 @@ Sakramar.prototype = {
             this.sprite.animations.play(this.direction);
         }
         
-        if (this.level.rnd.frac() < 0.005 && this.level.enemies.countLiving() < 20) {
+        if (this.level.rnd.frac() < this.spawnChance && this.level.enemies.countLiving() < 20) {
             this.level.AI.makeEnemy(this.sprite.x, this.sprite.y + this.sprite.height + 32);
         }
         
@@ -125,6 +129,12 @@ Sakramar.prototype = {
     
     collideBulletPlayer: function(bullet, player) {
         this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
+    },
+    
+    collideBulletPlatform: function(bullet, platform) {
+        this.level.levelBuilder.makeEnemy(bullet.x, platform.y - 48);
+        
+        bullet.kill();
     }
     
 };

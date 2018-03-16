@@ -27,10 +27,12 @@ Hrabrov.Level3.prototype = {
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 32);
 	    
 	    this.sakramar = new Sakramar(this, 64, this.world.height - 120);
+	    this.sakramar.spawnChance = 0;
 	    
 	    let platforms = [{x: -120, y: this.world.height - 16},
 	                     {x: 280, y: this.world.height - 16},
-	                     {x: 680, y: this.world.height - 16}];
+	                     {x: 680, y: this.world.height - 16},
+	                     {x: this.world.width/2, y: 48}];
         
         this.levelBuilder.createPlatform(platforms);
         
@@ -63,12 +65,6 @@ Hrabrov.Level3.prototype = {
     
     shoot: function(directions) {  
         this.levelBuilder.shoot(directions);
-        
-        if (this.sakramar.direction != 'stop') {
-            this.sakramar.stop();
-        } else {
-            this.sakramar.run();
-        }
     }
     
 };
