@@ -1,6 +1,7 @@
 var AI = function(level) {    
     this.walkRandomness = 0.001;
     this.starSaveChance = 1;
+    this.bulletSaveChance = 0.2;
     this.bulletDamage = 0.1;
     this.enemyImage = 'fem';
     
@@ -188,7 +189,7 @@ AI.prototype = {
 	collideEnemyBullet: function(enemy, bullet) {
         bullet.kill();
         enemy.damage(this.bulletDamage * (0.5 + this.level.rnd.frac()));
-        if (this.level.rnd.frac() < 0.2) {
+        if (this.level.rnd.frac() < this.bulletSaveChance) {
             enemy.starsKilled += 1;
         }
     },
