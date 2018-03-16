@@ -62,6 +62,8 @@ Hrabrov.Level3.prototype = {
     render: function() {
         this.AI.render();
         
+        this.sakramar.render();
+        
         this.levelBuilder.updateTime();
     },
     

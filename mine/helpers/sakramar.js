@@ -97,6 +97,42 @@ Sakramar.prototype = {
         }
     },
     
+    render: function() {
+        if (this.sprite.health < 1 && this.healthBar == undefined) {
+            let healthBar = this.level.add.graphics(this.sprite.x, this.sprite.y - 16);
+		    
+		    let background = this.level.add.graphics(0, 0);		
+            background.beginFill(0xffffff);
+            background.fillAlpha = 0.5;
+            background.drawRect(0, 0, 32, 3);
+            background.endFill();
+            healthBar.addChild(background);
+            
+            let foreground = this.level.add.graphics(0, 0);
+            foreground.beginFill(0xff0000);
+            foreground.fillAlpha = 0.5;
+            foreground.drawRect(1, 1, 64 * this.sprite.health, 1);
+            foreground.endFill();
+            healthBar.addChild(foreground);
+            
+            this.healthBar = healthBar;                
+        } else if (this.sprite.health < 1) {
+            this.healthBar.x = this.sprite.x;
+            this.healthBar.y = this.sprite.y - 16;
+            
+            if (this.healthBar.children[1] != undefined) {
+                this.healthBar.removeChildAt(1);
+            }
+            
+            let foreground = this.level.add.graphics(0, 0);
+            foreground.beginFill(0xff0000);
+            foreground.fillAlpha = 0.5;
+            foreground.drawRect(1, 1, 64 * this.sprite.health, 1);
+            foreground.endFill();
+            this.healthBar.addChild(foreground);
+        }
+    },
+    
     stop: function() {
         this.direction = 'stop';
         this.sprite.children[0].revive();
