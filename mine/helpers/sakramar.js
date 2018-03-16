@@ -27,6 +27,8 @@ Sakramar.prototype = {
     
     update: function() {
         this.level.physics.arcade.collide(this.sprite, this.level.platforms);
+        this.level.physics.arcade.collide(this.sprite, this.level.player, 
+                                          this.collideSakramarPlayer, null, this);
         
         if (this.sprite.x < 32) {
             this.direction = 'right';
@@ -51,6 +53,10 @@ Sakramar.prototype = {
         if (this.level.rnd.frac() < 0.005 && this.level.enemies.countLiving() < 20) {
             this.level.AI.makeEnemy(this.sprite.x, this.sprite.y + this.sprite.height + 32);
         }
+        
+        if (this.level.rnd.frac() < 0.01 && this.direction != 'stop') {
+            this.stop();
+        }
     },
     
     updateGun: function() {
@@ -72,6 +78,10 @@ Sakramar.prototype = {
         } else {
             gun.scale.y = 1;
         }
+        
+        if (this.level.rnd.frac() < 0.01) {
+            this.run();
+        }
     },
     
     stop: function() {
@@ -82,6 +92,10 @@ Sakramar.prototype = {
     run: function() {
         this.direction = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
         this.sprite.children[0].kill();
+    },
+    
+    collideSakramarPlayer: function(sakramar, player) {
+        this.level.start('Hrabrov.GameOver', this.level.score);
     }
     
 };
