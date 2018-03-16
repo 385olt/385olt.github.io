@@ -98,11 +98,13 @@ Sakramar.prototype = {
     
     shoot: function() {
         let bullet_x = this.sprite.width/2 + (Math.cos(this.aimLine.angle) * (this.gunDistance + 32));
-        let bullet_y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * (this.gunDistance + 32))
-        var bullet = this.level.add.sprite(0, 0, 'star');
-    
-        bullet.velocity.x = Math.cos(this.aimLine.angle) * this.bulletSpeed;
-        bullet.velocity.y = Math.sin(this.aimLine.angle) * this.bulletSpeed;
+        let bullet_y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * (this.gunDistance + 32));
+        let bullet = this.level.add.sprite(0, 0, 'star');
+        
+        this.level.physics.arcade.enable(bullet);
+        
+        bullet.body.velocity.x = Math.cos(this.aimLine.angle) * this.bulletSpeed;
+        bullet.body.velocity.y = Math.sin(this.aimLine.angle) * this.bulletSpeed;
         bullet.rotation = this.aimLine.angle;
         bullet.lifespan = 6000;
     },
