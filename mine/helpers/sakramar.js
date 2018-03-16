@@ -59,11 +59,12 @@ Sakramar.prototype = {
         target_x = this.level.player.x + this.level.player.width/2;
         target_y = this.level.player.y + this.level.player.height/2;
         
-        this.aimLine.start.set(this.sprite.x, this.sprite.y);
+        this.aimLine.start.set(this.sprite.x + this.sprite.width/2, 
+                               this.sprite.y + this.sprite.height/2);
         this.aimLine.end.set(target_x, target_y);
         
-        gun.x = (Math.cos(this.aimLine.angle) * this.gun_distance);
-        gun.y = (Math.sin(this.aimLine.angle) * this.gun_distance);
+        gun.x = this.sprite.width/2 + (Math.cos(this.aimLine.angle) * this.gun_distance);
+        gun.y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * this.gun_distance);
     },
     
     stop: function() {
