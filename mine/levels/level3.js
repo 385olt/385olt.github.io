@@ -113,12 +113,21 @@ Hrabrov.Level3.prototype = {
     shoot: function(directions) {  
         this.levelBuilder.shoot(directions);
         
-        this.stopSakramar();
+        if (this.sakramar.myDirection != 'stop') {
+            this.stopSakramar();
+        } else {
+            this.runSakramar();
+        }
     },
     
     stopSakramar: function() {
         this.sakramar.myDirection = 'stop';
         this.sakramar.children[0].revive();
+    },
+    
+    runSakramar: function() {
+        this.sakramar.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
+        this.sakramar.children[0].kill();
     }
     
 };
