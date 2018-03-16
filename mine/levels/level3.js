@@ -26,7 +26,7 @@ Hrabrov.Level3.prototype = {
 	    
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 32);
 	    
-	    this.setSakramar(64, this.world.height - 120);
+	    this.sakramar = new Sakramar(this, 64, this.world.height - 120);
 	    
 	    let platforms = [{x: -120, y: this.world.height - 16},
 	                     {x: 280, y: this.world.height - 16},
@@ -47,40 +47,12 @@ Hrabrov.Level3.prototype = {
     },
     
     update: function() {
-        this.updateSakramar();                
+        this.sakramar.update();                
         
         this.levelBuilder.updateCollisions();
         this.levelBuilder.updateControls();
         
         this.AI.update();
-    },
-    
-    updateSakramar: function() {
-        var sakramar = this.sakramar;
-        this.physics.arcade.collide(sakramar, this.platforms);
-        
-        if (sakramar.x < 32) {
-            sakramar.myDirection = 'right';
-        } else if (sakramar.x + sakramar.width > this.world.width - 32) {
-            sakramar.myDirection = 'left';
-        }
-        
-        let dir2int = {'left': -1, 'right': 1, 'stop': 0};
-        
-        let myDr = dir2int[sakramar.myDirection];
-        
-        sakramar.body.velocity.x = myDr * 300;
-        
-        if (myDr == 0) {
-            sakramar.animations.stop();
-		    sakramar.frame = 4;
-        } else {
-            sakramar.animations.play(sakramar.myDirection);
-        }
-        
-        if (this.rnd.frac() < 0.005 && this.enemies.countLiving() < 20) {
-            this.AI.makeEnemy(this.sakramar.x, this.sakramar.y + this.sakramar.height + 32);
-        }
     },
     
     render: function() {
@@ -89,45 +61,14 @@ Hrabrov.Level3.prototype = {
         this.levelBuilder.updateTime();
     },
     
-    setSakramar: function(x, y) {        
-        var sakramar = this.add.sprite(x, y, 'sakramar');
-
-		this.physics.arcade.enable(sakramar);
-
-		sakramar.body.gravity.y = 300;
-		sakramar.body.collideWorldBounds = true;
-
-		sakramar.animations.add('left', [0, 1, 2, 3], 10, true);
-		sakramar.animations.add('right', [5, 6, 7, 8], 10, true);
-		
-		sakramar.myDirection = 'left';
-		
-		let gun = this.add.sprite(64, sakramar.height/2, 'sakramar_gun');
-		gun.kill();
-		
-		sakramar.addChild(gun);
-		
-		this.sakramar = sakramar;    
-    },
-    
     shoot: function(directions) {  
         this.levelBuilder.shoot(directions);
         
-        if (this.sakramar.myDirection != 'stop') {
-            this.stopSakramar();
+        if (this.sakramar.direction != 'stop') {
+            this.sakramar.stop();
         } else {
-            this.runSakramar();
+            this.sakramar.run();
         }
-    },
-    
-    stopSakramar: function() {
-        this.sakramar.myDirection = 'stop';
-        this.sakramar.children[0].revive();
-    },
-    
-    runSakramar: function() {
-        this.sakramar.myDirection = Phaser.ArrayUtils.getRandomItem(['left', 'right']);
-        this.sakramar.children[0].kill();
     }
     
 };
