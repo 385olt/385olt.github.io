@@ -101,13 +101,22 @@ Hrabrov.Level3.prototype = {
 		sakramar.animations.add('right', [5, 6, 7, 8], 10, true);
 		
 		sakramar.myDirection = 'left';
-				
+		
+		sakramar.gun = this.add.sprite(x + 64, y + sakramar.height/2, 'sakramar_gun');
+		sakramar.gun.kill();
+						
 		this.sakramar = sakramar;    
     },
     
     shoot: function(directions) {  
         this.levelBuilder.shoot(directions);
+        
+        this.stopSakramar();
+    },
+    
+    stopSakramar: function() {
         this.sakramar.myDirection = 'stop';
+        this.sakramar.gun.revive();
     }
     
 };
