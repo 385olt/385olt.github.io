@@ -19,8 +19,6 @@ Hrabrov.Level3.prototype = {
 	    this.levelBuilder = new LevelBuilder(this);
 	    
 	    this.AI = new AI(this);
-	    this.AI.walkRandomness = 0.01;
-	    this.AI.enemySpawnRegion.y1 = 0;
 	    this.AI.starSaveChance = 0;
 	    this.AI.bulletSaveChance = 0;
 	    
