@@ -121,6 +121,10 @@ Sakramar.prototype = {
     
     collideSakramarPlayer: function(sakramar, player) {
         this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
+    },
+    
+    collideBulletPlayer: function(bullet, player) {
+        this.level.state.start('Hrabrov.GameOver', true, false, this.level.score);
     }
     
 };
