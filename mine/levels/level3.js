@@ -1,7 +1,7 @@
 Hrabrov.Level3 = function() {
     this.donationGoal = 5000;
-    this.initScore = 0;
-    this.initTime = 10 * Phaser.Timer.SECOND;
+    this.initScore = 5000;
+    this.initTime = 300 * Phaser.Timer.SECOND;
     
     this.lastShot = 0;
     this.shootInterval = 50;
@@ -64,9 +64,18 @@ Hrabrov.Level3.prototype = {
             sakramar.myDirection = 'left';
         }
         
-        var myDr = (sakramar.myDirection == 'right' ? 1 : -1);
+        let dir2int = {'left': -1, 'right': 1, 'stop': 0};
+        
+        let myDr = dir2int[sakramar.myDirection];
+        
         sakramar.body.velocity.x = myDr * 300;
-        sakramar.animations.play(myDr == 1 ? 'right' : 'left');
+        
+        if (myDr == 0) {
+            sakramar.animations.stop();
+		    sakramar.frame = 4;
+        } else {
+            sakramar.animations.play(sakramar.myDirection);
+        }
         
         if (this.rnd.frac() < 0.005 && this.enemies.countLiving() < 20) {
             this.AI.makeEnemy(this.sakramar.x, this.sakramar.y + this.sakramar.height + 32);
@@ -97,6 +106,7 @@ Hrabrov.Level3.prototype = {
     
     shoot: function(directions) {  
         this.levelBuilder.shoot(directions);
+        this.sakramar.myDirection = 'stop';
     }
     
 };
