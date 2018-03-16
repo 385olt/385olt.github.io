@@ -22,14 +22,20 @@ var Sakramar = function(level, x, y) {
 	this.direction = 'left';
 	this.sprite = sprite;
 	this.aimLine = new Phaser.Line(0, 0, 0, 0);
+	this.bullet = this.level.add.sprite(0, 0, 'shit');
+	this.bullet.kill();
 };
 
 Sakramar.prototype = {
     
     update: function() {
         this.level.physics.arcade.collide(this.sprite, this.level.platforms);
+        
         this.level.physics.arcade.collide(this.sprite, this.level.player, 
                                           this.collideSakramarPlayer, null, this);
+        
+        this.level.physics.arcade.collide(this.bullet, this.level.player,
+                                          this.collideBulletPlayer, null, this);
         
         if (this.sprite.x < 32) {
             this.direction = 'right';
@@ -109,6 +115,8 @@ Sakramar.prototype = {
         bullet.body.velocity.y = Math.sin(this.aimLine.angle) * this.bulletSpeed;
         bullet.rotation = this.aimLine.angle;
         bullet.lifespan = 6000;
+        
+        this.bullet = bullet;
     },
     
     collideSakramarPlayer: function(sakramar, player) {
