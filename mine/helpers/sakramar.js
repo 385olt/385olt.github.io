@@ -1,7 +1,7 @@
 var Sakramar = function(level, x, y) {
     this.level = level;
     
-    this.gun_distance = 64;
+    this.gun_distance = 32;
     
     var sprite = this.level.add.sprite(x, y, 'sakramar');
     
@@ -63,9 +63,10 @@ Sakramar.prototype = {
                                this.sprite.y + this.sprite.height/2);
         this.aimLine.end.set(target_x, target_y);
         
-        gun.x = this.sprite.width/2 - 20 + (Math.cos(this.aimLine.angle) * this.gun_distance);
+        gun.x = this.sprite.width/2 - 10 + (Math.cos(this.aimLine.angle) * this.gun_distance);
         gun.y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * this.gun_distance);
         gun.rotation = this.aimLine.angle;
+        console.log(gun.rotation);
     },
     
     stop: function() {
