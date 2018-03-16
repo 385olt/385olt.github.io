@@ -10,7 +10,7 @@ Hrabrov.Level3 = function() {
 	this.ratioDelta = 0;
 };
 
-Hrabrov.Level2.prototype = {
+Hrabrov.Level3.prototype = {
     
     create: function() {
         
