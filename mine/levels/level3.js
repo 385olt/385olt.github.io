@@ -102,9 +102,11 @@ Hrabrov.Level3.prototype = {
 		
 		sakramar.myDirection = 'left';
 		
-		sakramar.gun = this.add.sprite(x + 64, y + sakramar.height/2, 'sakramar_gun');
-		sakramar.gun.kill();
-						
+		let gun = this.add.sprite(64, sakramar.height/2, 'sakramar_gun');
+		gun.kill();
+		
+		sakramar.addChild(gun);
+		
 		this.sakramar = sakramar;    
     },
     
@@ -116,7 +118,7 @@ Hrabrov.Level3.prototype = {
     
     stopSakramar: function() {
         this.sakramar.myDirection = 'stop';
-        this.sakramar.gun.revive();
+        this.sakramar.children[0].revive();
     }
     
 };
