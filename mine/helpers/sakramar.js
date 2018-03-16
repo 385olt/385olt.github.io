@@ -1,5 +1,7 @@
 var Sakramar = function(level, x, y) {
-    this.level = level;    
+    this.level = level;
+    
+    this.gun_distance = 64;
     
     var sprite = this.level.add.sprite(x, y, 'sakramar');
     
@@ -11,13 +13,14 @@ var Sakramar = function(level, x, y) {
 	sprite.animations.add('left', [0, 1, 2, 3], 10, true);
 	sprite.animations.add('right', [5, 6, 7, 8], 10, true);
 	
-	let gun = this.level.add.sprite(64, sprite.height/2, 'sakramar_gun');
+	let gun = this.level.add.sprite(this.gun_distance, sprite.height/2, 'sakramar_gun');
 	gun.kill();
 	
 	sprite.addChild(gun);
 	
 	this.direction = 'left';
-	this.sprite = sprite; 
+	this.sprite = sprite;
+	this.aimLine = new Phaser.Line(0, 0, 0, 0);
 };
 
 Sakramar.prototype = {
@@ -38,6 +41,7 @@ Sakramar.prototype = {
         this.sprite.body.velocity.x = myDr * 300;
         
         if (myDr == 0) {
+            this.updateGun();
             this.sprite.animations.stop();
 		    this.sprite.frame = 4;
         } else {
@@ -47,6 +51,19 @@ Sakramar.prototype = {
         if (this.level.rnd.frac() < 0.005 && this.level.enemies.countLiving() < 20) {
             this.level.AI.makeEnemy(this.sprite.x, this.sprite.y + this.sprite.height + 32);
         }
+    },
+    
+    updateGun: function() {
+        var gun = this.sprite.children[0];
+        
+        target_x = this.level.player.x + this.level.player.width/2;
+        target_y = this.level.player.y + this.level.player.height/2;
+        
+        this.aimLine.start.set(this.sprite.x, this.sprite.y);
+        this.aimLine.end.set(target_x, target_y);
+        
+        gun.x = (Math.cos(this.aimLine.angle) * this.gun_distance);
+        gun.y = (Math.sin(this.aimLine.angle) * this.gun_distance);
     },
     
     stop: function() {
