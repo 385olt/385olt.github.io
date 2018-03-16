@@ -63,10 +63,15 @@ Sakramar.prototype = {
                                this.sprite.y + this.sprite.height/2);
         this.aimLine.end.set(target_x, target_y);
         
-        gun.x = this.sprite.width/2 - 10 + (Math.cos(this.aimLine.angle) * this.gun_distance);
+        gun.x = this.sprite.width/2 + (Math.cos(this.aimLine.angle) * this.gun_distance);
         gun.y = this.sprite.height/2 + (Math.sin(this.aimLine.angle) * this.gun_distance);
         gun.rotation = this.aimLine.angle;
-        console.log(gun.rotation);
+        
+        if (Math.abs(gun.rotation) > Math.PI && gun.scale.y > 0) {
+            gun.scale.y = -1;
+        } else {
+            gun.scale.y = 1;
+        }
     },
     
     stop: function() {
