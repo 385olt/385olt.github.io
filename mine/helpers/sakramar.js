@@ -4,6 +4,7 @@ var Sakramar = function(level, x, y) {
     this.gunDistance = 32;
     this.bulletSpeed = 400;
     this.spawnChance = 0.005;
+    this.shootChance = 0.01;
     
     var sprite = this.level.add.sprite(x, y, 'sakramar');
     
@@ -65,7 +66,7 @@ Sakramar.prototype = {
             this.level.AI.makeEnemy(this.sprite.x, this.sprite.y + this.sprite.height + 32);
         }
         
-        if (this.level.rnd.frac() < 0.01 && this.direction != 'stop') {
+        if (this.level.rnd.frac() < this.shootChance && this.direction != 'stop') {
             this.stop();
         }
     },
@@ -132,7 +133,7 @@ Sakramar.prototype = {
     },
     
     collideBulletPlatform: function(bullet, platform) {
-        this.level.levelBuilder.makeEnemy(bullet.x, platform.y - 48);
+        this.level.AI.makeEnemy(bullet.x, platform.y - 48);
         
         bullet.kill();
     }

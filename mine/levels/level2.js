@@ -27,6 +27,7 @@ Hrabrov.Level2.prototype = {
 	    this.levelBuilder.setPlayer(this.world.width/2 - 16, 150);
 	    
 	    this.sakramar = new Sakramar(this, 0, 0);
+	    this.sakramar.shootChance = 0;
 	    
 	    let platforms = [{x: -120, y: this.world.height - 16},
 	                     {x: 280, y: this.world.height - 16},
