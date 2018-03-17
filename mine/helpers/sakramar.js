@@ -175,7 +175,7 @@ Sakramar.prototype = {
     },
     
     overlapBulletPlatform: function(bullet, platform) {
-        if (this.level.rnd.frac() < 0.5) return;
+        if (this.level.rnd.frac() < 0.05) return;
         
         this.level.AI.makeEnemy(bullet.x, platform.y - 48);
         
@@ -183,7 +183,9 @@ Sakramar.prototype = {
     },
     
     collideBulletSakramar: function(bullet, sakramar) {
-        sakramar.damage(this.bulletDamage * this.level.rnd.frac());
+        let dmg = this.bulletDamage * this.level.rnd.frac();
+        console.log(dmg);
+        sakramar.damage(dmg);
         bullet.kill();
     },
     
