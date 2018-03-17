@@ -186,9 +186,9 @@ Sakramar.prototype = {
     
     collideBulletSakramar: function(bullet, sakramar) {
         let dmg = this.bulletDamage * this.level.rnd.frac();
-        console.log(dmg + ' ' + sakramar.health);
-        sakramar.damage(dmg);
-        console.log(sakramar.health);
+        console.log(dmg + ' ' + this.sprite.health);
+        this.sprite.damage(dmg);
+        console.log(this.sprite.health);
         //bullet.kill();
     },
     
