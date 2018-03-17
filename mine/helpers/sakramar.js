@@ -34,6 +34,8 @@ var Sakramar = function(level, x, y) {
 Sakramar.prototype = {
     
     update: function() {
+        if (!this.sprite.alive) return;
+        
         this.level.physics.arcade.collide(this.sprite, this.level.platforms);
         
         this.level.physics.arcade.collide(this.sprite, this.level.player, 
@@ -104,6 +106,8 @@ Sakramar.prototype = {
     },
     
     render: function() {
+        if (!this.sprite.alive) return;
+        
         console.log(this.sprite.health);
         
         if (this.sprite.health < 1 && this.healthBar == undefined) {
@@ -185,15 +189,13 @@ Sakramar.prototype = {
     },
     
     collideBulletSakramar: function(bullet, sakramar) {
-        let dmg = this.bulletDamage * this.level.rnd.frac();
-        console.log(dmg + ' ' + this.sprite.health);
-        this.sprite.damage(dmg);
-        console.log(this.sprite.health);
-        //bullet.kill();
+        this.sprite.damage(this.bulletDamage * this.level.rnd.frac());
+        bullet.kill();
     },
     
     onKilled: function(sakramar) {
         console.log('CONGRATS!!!');
+        this.healthBar.destroy();
     }
 };
 
