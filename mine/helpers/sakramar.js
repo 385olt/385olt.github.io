@@ -5,6 +5,7 @@ var Sakramar = function(level, x, y) {
     this.bulletSpeed = 400;
     this.spawnChance = 0.005;
     this.shootChance = 0.01;
+    this.bulletDamage = 0.01;
     
     var sprite = this.level.add.sprite(x, y, 'sakramar');
     
@@ -20,6 +21,8 @@ var Sakramar = function(level, x, y) {
 	gun.kill();
 	
 	sprite.addChild(gun);
+	
+	sprite.events.onKilled.add(this.onKilled, this);
 	
 	this.direction = 'left';
 	this.sprite = sprite;
@@ -41,6 +44,9 @@ Sakramar.prototype = {
         
         this.level.physics.arcade.overlap(this.bullet, this.level.platforms,
                                           this.overlapBulletPlatform, null, this);
+        
+        this.level.physics.arcade.collide(this.level.bullets, this.sprite,
+                                          this.collideBulletSakramar, null, this);
                 
         if (this.sprite.x < 32) {
             this.direction = 'right';
@@ -174,8 +180,16 @@ Sakramar.prototype = {
         this.level.AI.makeEnemy(bullet.x, platform.y - 48);
         
         bullet.kill();
-    }
+    },
     
+    collideBulletSakramar: function(bullet, sakramar) {
+        sakramar.damage(this.bulletDamage * this.level.rnd.frac());
+        bullet.kill();
+    },
+    
+    onKilled: function(sakramar) {
+        console.log('CONGRATS!!!');
+    }
 };
 
 
