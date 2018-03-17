@@ -188,9 +188,9 @@ Sakramar.prototype = {
         bullet.kill();
     },
     
-    collideBulletSakramar: function(bullet, sakramar) {
-        this.sprite.damage(this.bulletDamage * this.level.rnd.frac());
-        sakramar.kill();
+    collideBulletSakramar: function(sakramar, bullet) {
+        sakramar.damage(this.bulletDamage * this.level.rnd.frac());
+        bullet.kill();
     },
     
     onKilled: function(sakramar) {
