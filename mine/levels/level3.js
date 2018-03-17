@@ -35,7 +35,7 @@ Hrabrov.Level3.prototype = {
 	                     {x: this.world.width - 200, y: 200},
 	                     {x: 0, y: 300},
 	                     {x: this.world.width - 400, y: 300},
-	                     {x: this.world.width/2 - 200, y: 375}];
+	                     {x: this.world.width/2 - 200, y: 380}];
         
         this.levelBuilder.createPlatform(platforms);
         
