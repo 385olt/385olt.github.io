@@ -189,7 +189,7 @@ Sakramar.prototype = {
         console.log(dmg + ' ' + sakramar.health);
         sakramar.damage(dmg);
         console.log(sakramar.health);
-        bullet.kill();
+        //bullet.kill();
     },
     
     onKilled: function(sakramar) {
