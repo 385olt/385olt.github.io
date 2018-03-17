@@ -104,20 +104,22 @@ Sakramar.prototype = {
     },
     
     render: function() {
+        console.log(this.sprite.health);
+        
         if (this.sprite.health < 1 && this.healthBar == undefined) {
             let healthBar = this.level.add.graphics(this.sprite.x, this.sprite.y - 16);
 		    
 		    let background = this.level.add.graphics(0, 0);		
             background.beginFill(0xffffff);
             background.fillAlpha = 0.5;
-            background.drawRect(0, 0, 32, 3);
+            background.drawRect(0, 0, 64, 3);
             background.endFill();
             healthBar.addChild(background);
             
             let foreground = this.level.add.graphics(0, 0);
             foreground.beginFill(0xff0000);
             foreground.fillAlpha = 0.5;
-            foreground.drawRect(1, 1, 64 * this.sprite.health, 1);
+            foreground.drawRect(1, 1, 62 * this.sprite.health, 1);
             foreground.endFill();
             healthBar.addChild(foreground);
             
