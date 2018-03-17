@@ -108,8 +108,6 @@ Sakramar.prototype = {
     render: function() {
         if (!this.sprite.alive) return;
         
-        console.log(this.sprite.health);
-        
         if (this.sprite.health < 1 && this.healthBar == undefined) {
             let healthBar = this.level.add.graphics(this.sprite.x, this.sprite.y - 16);
 		    
