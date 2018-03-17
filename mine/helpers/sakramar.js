@@ -47,8 +47,8 @@ Sakramar.prototype = {
         this.level.physics.arcade.overlap(this.bullet, this.level.platforms,
                                           this.overlapBulletPlatform, null, this);
         
-        this.level.physics.arcade.collide(this.level.bullets, this.sprite,
-                                          this.collideBulletSakramar, null, this);
+        this.level.physics.arcade.overlap(this.level.bullets, this.sprite,
+                                          this.overlapBulletSakramar, null, this);
                 
         if (this.sprite.x < 32) {
             this.direction = 'right';
@@ -186,7 +186,7 @@ Sakramar.prototype = {
         bullet.kill();
     },
     
-    collideBulletSakramar: function(sakramar, bullet) {
+    overlapBulletSakramar: function(sakramar, bullet) {
         sakramar.damage(this.bulletDamage * this.level.rnd.frac());
         bullet.kill();
     },

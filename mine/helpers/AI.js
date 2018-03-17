@@ -36,8 +36,8 @@ AI.prototype = {
 		this.level.physics.arcade.collide(this.level.player, this.level.enemies, 
 		            this.collidePlayerEnemy, null, this);
 		
-		this.level.physics.arcade.collide(this.level.enemies, this.level.bullets, 
-		            this.collideEnemyBullet, null, this);
+		this.level.physics.arcade.overlap(this.level.enemies, this.level.bullets, 
+		            this.overlapEnemyBullet, null, this);
 		
 		this.level.enemies.forEach(function(item) {
 		
@@ -186,7 +186,7 @@ AI.prototype = {
 		}
 	},
 	
-	collideEnemyBullet: function(enemy, bullet) {
+	overlapEnemyBullet: function(enemy, bullet) {
         bullet.kill();
         enemy.damage(this.bulletDamage * (0.5 + this.level.rnd.frac()));
         if (this.level.rnd.frac() < this.bulletSaveChance) {
